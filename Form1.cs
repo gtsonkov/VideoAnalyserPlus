@@ -13,8 +13,9 @@ namespace VideoAnalyserPlus
 
             string file = string.Empty;
 
-            DialogResult result = openFileDialog1.ShowDialog(Owner); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
+            DialogResult result = openFileDialog1.ShowDialog(Owner); // Show Explorer browser dialog.
+
+            if (result == DialogResult.OK) // Get result after click OK
             {
                 file = openFileDialog1.FileName;
             }
