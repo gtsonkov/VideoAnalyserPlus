@@ -1,4 +1,6 @@
 using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
 
 namespace VideoAnalyserPlus
 {
@@ -46,5 +48,19 @@ namespace VideoAnalyserPlus
         {
 
         }
+
+        private void TrackColor()
+        {
+            while (!stopThread)
+            {
+                _capture.Read(_frame);
+                if (_frame.IsEmpty) break;
+
+                Mat hsv = new Mat();
+                CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
+
+                var lower = new ScalarArray(new MCvScalar(100, 100, 150));
+                var upper = new ScalarArray(new MCvScalar(200, 255, 255));
+            }
+        }
     }
-}
