@@ -61,6 +61,13 @@ namespace VideoAnalyserPlus
 
                 var lower = new ScalarArray(new MCvScalar(100, 100, 150));
                 var upper = new ScalarArray(new MCvScalar(200, 255, 255));
+
+                Mat mask = new Mat();
+
+                CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
+                CvInvoke.InRange(hsv, lower, upper, mask);
+
+                //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
             }
         }
     }
