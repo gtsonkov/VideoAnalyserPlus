@@ -61,6 +61,7 @@ namespace VideoAnalyserPlus
                 _capture.Read(_frame);
                 if (_frame.IsEmpty) break;
 
+                //To Do: Use RGB
                 Mat hsv = new Mat();
                 CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
 
@@ -75,7 +76,7 @@ namespace VideoAnalyserPlus
                 CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
                 CvInvoke.InRange(hsv, lower, upper, mask);
 
-                screenBox.Image = BitmapExtension.ToBitmap(this._frame);
+                this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
             }
         }
     }
