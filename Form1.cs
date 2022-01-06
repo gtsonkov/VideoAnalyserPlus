@@ -70,6 +70,8 @@ namespace VideoAnalyserPlus
 
                 Mat mask = new Mat();
 
+                //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
+
                 CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
                 CvInvoke.InRange(hsv, lower, upper, mask);
 
