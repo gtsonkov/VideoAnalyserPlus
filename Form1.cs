@@ -10,7 +10,12 @@ namespace VideoAnalyserPlus
 
         private Mat _frame;
 
+        private bool stopThread;
+
+        //To Do: Make it dynamic
         private int _frameRate = 30;
+
+
 
         public MainForm()
         {
@@ -34,9 +39,9 @@ namespace VideoAnalyserPlus
 
             this._frame = new Mat();
 
-            this.ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
+            this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
 
-            this.ImageViewer.Show();
+            this.screenBox.Show();
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -59,7 +64,7 @@ namespace VideoAnalyserPlus
                 Mat hsv = new Mat();
                 CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
 
-                //To Do: Make it dynamic
+                //To Do: Make it dynamic 
                 var lower = new ScalarArray(new MCvScalar(0, 0, 0));
                 var upper = new ScalarArray(new MCvScalar(200, 255, 255));
 
@@ -68,7 +73,8 @@ namespace VideoAnalyserPlus
                 CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
                 CvInvoke.InRange(hsv, lower, upper, mask);
 
-                ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
+                screenBox.Image = BitmapExtension.ToBitmap(this._frame);
             }
         }
     }
+}
