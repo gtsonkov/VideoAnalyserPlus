@@ -81,6 +81,7 @@ namespace VideoAnalyserPlus
 
                 for (int i = 0; i < contours.Size; i++)
                 {
+                    //To Do: ignor small areas
                     Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
                     CvInvoke.Rectangle(_frame, rect, new MCvScalar(0, 255, 0), 2);
                 }
