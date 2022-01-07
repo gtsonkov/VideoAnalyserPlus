@@ -79,6 +79,12 @@ namespace VideoAnalyserPlus
                 Mat hierarchy = new Mat();
                 CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
 
+                for (int i = 0; i < contours.Size; i++)
+                {
+                    Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
+                    CvInvoke.Rectangle(_frame, rect, new MCvScalar(0, 255, 0), 2);
+                }
+
                 //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
 
                 CvInvoke.Imshow("VT-Color Tracker", this._frame);
