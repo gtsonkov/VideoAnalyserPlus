@@ -1,6 +1,7 @@
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Emgu.CV.Util;
 
 namespace VideoAnalyserPlus
 {
@@ -71,11 +72,16 @@ namespace VideoAnalyserPlus
 
                 Mat mask = new Mat();
 
-                //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
-
                 CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
                 CvInvoke.InRange(hsv, lower, upper, mask);
 
+                VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+                Mat hierarchy = new Mat();
+                CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
+
+                //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
+
+                CvInvoke.Imshow("VT-Color Tracker", this._frame);
                 this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
             }
         }
