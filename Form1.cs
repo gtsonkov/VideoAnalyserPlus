@@ -83,11 +83,10 @@ namespace VideoAnalyserPlus
                 {
                     Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
 
-                    //To Do: Make minimum size dynamic
+                    //To Do: Make minimum size (rect.Height & rect.Width) dynamic
                     if (rect.Height > 5 && rect.Width > 5)
                     {
                         CvInvoke.Rectangle(_frame, rect, new MCvScalar(0, 255, 0), 2);
-
                     }
                 }
 
