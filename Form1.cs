@@ -83,7 +83,7 @@ namespace VideoAnalyserPlus
                 {
                     Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
 
-                    if (rect.Height < 5 && rect.Width < 5)
+                    if (rect.Height > 5 && rect.Width > 5)
                     {
                         CvInvoke.Rectangle(_frame, rect, new MCvScalar(0, 255, 0), 2);
 
