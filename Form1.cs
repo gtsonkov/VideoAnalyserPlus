@@ -47,7 +47,8 @@ namespace VideoAnalyserPlus
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-
+            //To Do: Make new thread!!!
+            TrackColor();
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
