@@ -59,8 +59,12 @@ namespace VideoAnalyserPlus
         {
             while (!stopThread)
             {
-                _capture.Read(_frame);
-                if (_frame.IsEmpty) break;
+                this._capture.Read(_frame);
+
+                if (this._frame.IsEmpty)
+                {
+                    break;
+                }
 
                 //To Do: Use RGB
                 Mat hsv = new Mat();
