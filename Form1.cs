@@ -11,6 +11,8 @@ namespace VideoAnalyserPlus
 
         private Mat _frame;
 
+        private Thread _trackingThread;
+
         private bool stopThread;
 
         //To Do: Make it dynamic
@@ -48,13 +50,14 @@ namespace VideoAnalyserPlus
         private void StartBtn_Click(object sender, EventArgs e)
         {
             this.stopThread = false;
-            this.trackingThread = new Thread(TrackColor);
-            this.trackingThread.Start();
+            this._trackingThread = new Thread(TrackColor);
+            this._trackingThread.Start();
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
             this.stopThread = true;
+            this._trackingThread.Abort();
         }
 
         private void TrackColor()
