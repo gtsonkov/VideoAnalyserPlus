@@ -47,9 +47,9 @@ namespace VideoAnalyserPlus
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            stopThread = false;
-            trackingThread = new Thread(TrackColor);
-            trackingThread.Start();
+            this.stopThread = false;
+            this.trackingThread = new Thread(TrackColor);
+            this.trackingThread.Start();
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
