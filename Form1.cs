@@ -57,7 +57,7 @@ namespace VideoAnalyserPlus
         private void StopBtn_Click(object sender, EventArgs e)
         {
             this.stopThread = true;
-            this._trackingThread.Abort();
+            //this._trackingThread.Abort();
         }
 
         private void TrackColor()
