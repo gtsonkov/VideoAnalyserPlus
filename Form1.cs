@@ -62,7 +62,7 @@ namespace VideoAnalyserPlus
 
         private void TrackColor()
         {
-            while (!stopThread)
+            while (!this.stopThread)
             {
                 this._capture.Read(_frame);
 
