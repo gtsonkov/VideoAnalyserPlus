@@ -38,13 +38,17 @@ namespace VideoAnalyserPlus
                 file = openFileDialog1.FileName;
             }
 
-            this._capture = new VideoCapture(file);
+            try
+            {
+                this._capture = new VideoCapture(file);
 
-            this._frame = new Mat();
+                this._frame = new Mat();
+            }
+            catch (Exception ex)
+            {
 
-            this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
-
-            this.screenBox.Show();
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
