@@ -37,11 +37,11 @@
             // 
             // BrowseBtn
             // 
-            this.BrowseBtn.Location = new System.Drawing.Point(32, 63);
+            this.BrowseBtn.Location = new System.Drawing.Point(7, 63);
             this.BrowseBtn.Name = "BrowseBtn";
-            this.BrowseBtn.Size = new System.Drawing.Size(75, 23);
+            this.BrowseBtn.Size = new System.Drawing.Size(125, 23);
             this.BrowseBtn.TabIndex = 0;
-            this.BrowseBtn.Text = "Browse";
+            this.BrowseBtn.Text = "Browse File";
             this.BrowseBtn.UseVisualStyleBackColor = true;
             this.BrowseBtn.Click += new System.EventHandler(this.BrowseBtn_Click);
             // 
