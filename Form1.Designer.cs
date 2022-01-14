@@ -72,6 +72,7 @@
             this.screenBox.Size = new System.Drawing.Size(573, 277);
             this.screenBox.TabIndex = 3;
             this.screenBox.TabStop = false;
+            this.screenBox.Click += new System.EventHandler(this.screenBox_Click);
             // 
             // MainForm
             // 

@@ -109,5 +109,10 @@ namespace VideoAnalyserPlus
                 this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
             }
         }
+
+        private void screenBox_Click(object sender, EventArgs e)
+        {
+            //To Do: What happen when mouse over
+        }
     }
 }
