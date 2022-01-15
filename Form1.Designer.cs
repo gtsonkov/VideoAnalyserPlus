@@ -67,9 +67,11 @@
             // 
             // screenBox
             // 
-            this.screenBox.Location = new System.Drawing.Point(138, 2);
+            this.screenBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.screenBox.Location = new System.Drawing.Point(141, 2);
             this.screenBox.Name = "screenBox";
-            this.screenBox.Size = new System.Drawing.Size(573, 277);
+            this.screenBox.Size = new System.Drawing.Size(573, 431);
             this.screenBox.TabIndex = 3;
             this.screenBox.TabStop = false;
             this.screenBox.Click += new System.EventHandler(this.screenBox_Click);
@@ -78,7 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 281);
+            this.ClientSize = new System.Drawing.Size(717, 435);
             this.Controls.Add(this.screenBox);
             this.Controls.Add(this.StopBtn);
             this.Controls.Add(this.StartBtn);
