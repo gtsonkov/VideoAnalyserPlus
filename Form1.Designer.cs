@@ -67,11 +67,12 @@
             // 
             // screenBox
             // 
-            this.screenBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.screenBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.screenBox.Location = new System.Drawing.Point(141, 2);
             this.screenBox.Name = "screenBox";
-            this.screenBox.Size = new System.Drawing.Size(573, 431);
+            this.screenBox.Size = new System.Drawing.Size(512, 399);
             this.screenBox.TabIndex = 3;
             this.screenBox.TabStop = false;
             this.screenBox.Click += new System.EventHandler(this.screenBox_Click);
@@ -80,11 +81,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(717, 435);
+            this.ClientSize = new System.Drawing.Size(656, 403);
             this.Controls.Add(this.screenBox);
             this.Controls.Add(this.StopBtn);
             this.Controls.Add(this.StartBtn);
             this.Controls.Add(this.BrowseBtn);
+            this.MinimumSize = new System.Drawing.Size(672, 442);
             this.Name = "MainForm";
             this.Text = "Video Analyser";
             ((System.ComponentModel.ISupportInitialize)(this.screenBox)).EndInit();
