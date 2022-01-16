@@ -74,11 +74,13 @@ namespace VideoAnalyserPlus
                 {
                     break;
                 }
-
+                
                 //To Do: Use RGB
                 Mat hsv = new Mat();
                 CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
 
+                //To Do: Implement new Method to avoid copy code (at the moment just for test)
+                #region First Color
                 //To Do: Make it dynamic 
                 var lower = new ScalarArray(new MCvScalar(0, 0, 0));
                 var upper = new ScalarArray(new MCvScalar(200, 255, 255));
@@ -102,6 +104,30 @@ namespace VideoAnalyserPlus
                         CvInvoke.Rectangle(_frame, rect, new MCvScalar(0, 255, 0), 2);
                     }
                 }
+                #endregion
+
+                #region Second Color
+
+                lower = new ScalarArray(new MCvScalar(20, 25, 10));
+                upper = new ScalarArray(new MCvScalar(100, 150, 105));
+
+                CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
+                CvInvoke.InRange(hsv, lower, upper, mask);
+
+                VectorOfVectorOfPoint contours2 = new VectorOfVectorOfPoint();
+                Mat hierarchy2 = new Mat();
+                CvInvoke.FindContours(mask, contours2, hierarchy2, RetrType.External, ChainApproxMethod.ChainApproxSimple);
+
+                for (int i = 0; i < contours2.Size; i++)
+                {
+                    Rectangle rect = CvInvoke.BoundingRectangle(contours2[i]);
+
+
+
+                    CvInvoke.Rectangle(_frame, rect, new MCvScalar(255, 255, 255), 2);
+                }
+
+                #endregion
 
                 //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
 
