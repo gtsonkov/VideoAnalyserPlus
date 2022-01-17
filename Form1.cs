@@ -81,6 +81,7 @@ namespace VideoAnalyserPlus
 
                 //To Do: Implement new Method to avoid copy code (at the moment just for test)
                 #region First Color
+
                 //To Do: Make it dynamic 
                 var lower = new ScalarArray(new MCvScalar(0, 0, 0));
                 var upper = new ScalarArray(new MCvScalar(200, 255, 255));
@@ -107,6 +108,7 @@ namespace VideoAnalyserPlus
                 #endregion
 
                 #region Second Color
+
                 //To Do: Make it dynamic 
                 lower = new ScalarArray(new MCvScalar(20, 25, 10));
                 upper = new ScalarArray(new MCvScalar(100, 150, 105));
