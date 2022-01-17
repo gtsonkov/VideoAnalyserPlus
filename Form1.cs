@@ -122,8 +122,7 @@ namespace VideoAnalyserPlus
                 {
                     Rectangle rect = CvInvoke.BoundingRectangle(contours2[i]);
 
-
-
+                    //To Do: Make rectangle color dynamic
                     CvInvoke.Rectangle(_frame, rect, new MCvScalar(255, 255, 255), 2);
                 }
 
