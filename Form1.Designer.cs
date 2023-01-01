@@ -31,6 +31,8 @@
             this.BrowseBtn = new System.Windows.Forms.Button();
             this.StartBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
+            this.screenBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.screenBox)).BeginInit();
             this.SuspendLayout();
             // 
             // BrowseBtn
@@ -63,16 +65,26 @@
             this.StopBtn.UseVisualStyleBackColor = true;
             this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
+            // screenBox
+            // 
+            this.screenBox.Location = new System.Drawing.Point(138, 2);
+            this.screenBox.Name = "screenBox";
+            this.screenBox.Size = new System.Drawing.Size(573, 277);
+            this.screenBox.TabIndex = 3;
+            this.screenBox.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 281);
+            this.Controls.Add(this.screenBox);
             this.Controls.Add(this.StopBtn);
             this.Controls.Add(this.StartBtn);
             this.Controls.Add(this.BrowseBtn);
             this.Name = "MainForm";
             this.Text = "Video Analyser";
+            ((System.ComponentModel.ISupportInitialize)(this.screenBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -82,5 +94,6 @@
         private Button BrowseBtn;
         private Button StartBtn;
         private Button StopBtn;
+        private PictureBox screenBox;
     }
 }
