@@ -107,10 +107,10 @@ namespace VideoAnalyserPlus
                 }
                 #endregion
 
-                //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
+                screenBox.Image = BitmapExtension.ToBitmap(this._frame);
 
-                CvInvoke.Imshow("VT-Color Tracker", this._frame);
-                this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
+                //CvInvoke.Imshow("VT-Color Tracker", this._frame);
+                //this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
             }
         }
 
