@@ -107,6 +107,28 @@ namespace VideoAnalyserPlus
                 }
                 #endregion
 
+                #region Second Color
+
+                //To Do: Make it dynamic 
+                lower = new ScalarArray(new MCvScalar(20, 25, 10));
+                upper = new ScalarArray(new MCvScalar(100, 150, 105));
+
+                CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
+                CvInvoke.InRange(hsv, lower, upper, mask);
+
+                VectorOfVectorOfPoint contours2 = new VectorOfVectorOfPoint();
+                Mat hierarchy2 = new Mat();
+                CvInvoke.FindContours(mask, contours2, hierarchy2, RetrType.External, ChainApproxMethod.ChainApproxSimple);
+
+                for (int i = 0; i < contours2.Size; i++)
+                {
+                    Rectangle rect = CvInvoke.BoundingRectangle(contours2[i]);
+
+                    //To Do: Make rectangle color dynamic
+                    CvInvoke.Rectangle(_frame, rect, new MCvScalar(255, 255, 255), 2);
+                }
+                #endregion
+
                 screenBox.Image = BitmapExtension.ToBitmap(this._frame);
 
                 //CvInvoke.Imshow("VT-Color Tracker", this._frame);
