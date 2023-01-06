@@ -140,5 +140,10 @@ namespace VideoAnalyserPlus
         {
             //To Do: What happen when mouse over
         }
+
+        private void userCameraBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

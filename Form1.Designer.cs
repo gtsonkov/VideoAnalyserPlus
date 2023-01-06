@@ -32,6 +32,7 @@
             this.StartBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
             this.screenBox = new System.Windows.Forms.PictureBox();
+            this.userCameraBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.screenBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,11 +78,22 @@
             this.screenBox.TabStop = false;
             this.screenBox.Click += new System.EventHandler(this.screenBox_Click);
             // 
+            // userCameraBtn
+            // 
+            this.userCameraBtn.Location = new System.Drawing.Point(7, 34);
+            this.userCameraBtn.Name = "userCameraBtn";
+            this.userCameraBtn.Size = new System.Drawing.Size(125, 23);
+            this.userCameraBtn.TabIndex = 4;
+            this.userCameraBtn.Text = "Camera";
+            this.userCameraBtn.UseVisualStyleBackColor = true;
+            this.userCameraBtn.Click += new System.EventHandler(this.userCameraBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(656, 403);
+            this.Controls.Add(this.userCameraBtn);
             this.Controls.Add(this.screenBox);
             this.Controls.Add(this.StopBtn);
             this.Controls.Add(this.StartBtn);
@@ -100,5 +112,6 @@
         private Button StartBtn;
         private Button StopBtn;
         private PictureBox screenBox;
+        private Button userCameraBtn;
     }
 }
