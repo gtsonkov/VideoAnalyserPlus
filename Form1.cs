@@ -145,6 +145,7 @@ namespace VideoAnalyserPlus
         {
             int defaultCaptureDevice = 0;
 
+            //To Do: make device selection dynamic
             this._capture = new VideoCapture(defaultCaptureDevice);
 
             this._frame = new Mat();
