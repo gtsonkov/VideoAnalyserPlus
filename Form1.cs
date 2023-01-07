@@ -143,8 +143,9 @@ namespace VideoAnalyserPlus
 
         private void userCameraBtn_Click(object sender, EventArgs e)
         {
-            
-            this._capture = new VideoCapture(0);
+            int defaultCaptureDevice = 0;
+
+            this._capture = new VideoCapture(defaultCaptureDevice);
 
             this._frame = new Mat();
         }
