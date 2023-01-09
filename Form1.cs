@@ -152,10 +152,10 @@ namespace VideoAnalyserPlus
 
                 this._frame = new Mat();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw new ArgumentException(ex.Message);
             }
         }
     }
