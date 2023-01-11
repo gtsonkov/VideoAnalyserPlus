@@ -132,7 +132,6 @@ namespace VideoAnalyserPlus
                 //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
 
                 CvInvoke.Imshow("VT-Color Tracker", this._frame);
-                this.screenBox.Image = BitmapExtension.ToBitmap(this._frame);
                 CvInvoke.WaitKey(this._frameRate);
             }
         }
