@@ -157,5 +157,11 @@ namespace VideoAnalyserPlus
                 throw new ArgumentException(ex.Message);
             }
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this._capture.Dispose();
+            this._frame.Dispose();
+        }
     }
 }
