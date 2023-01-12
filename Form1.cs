@@ -160,8 +160,15 @@ namespace VideoAnalyserPlus
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this._capture.Dispose();
-            this._frame.Dispose();
+            if (this._capture != null)
+            {
+                this._capture.Dispose();
+            }
+
+            if (this._frame != null) 
+            {
+                this._frame.Dispose();
+            }
         }
     }
 }
