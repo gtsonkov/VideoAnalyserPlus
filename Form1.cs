@@ -40,6 +40,7 @@ namespace VideoAnalyserPlus
 
             try
             {
+                //To Do: Add another capture devices ex. web cams
                 this._capture = new VideoCapture(file);
 
                 this._frame = new Mat();
