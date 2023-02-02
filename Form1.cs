@@ -66,73 +66,58 @@ namespace VideoAnalyserPlus
 
         private void TrackColor()
         {
-            while (!this.stopThread)
+            while (!stopThread)
             {
-                this._capture.Read(_frame);
+                this._capture.Read(this._frame);
 
-                if (this._frame.IsEmpty)
+                if (_frame.IsEmpty)
                 {
                     break;
                 }
-                
-                //To Do: Use RGB
-                Mat hsv = new Mat();
-                CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
 
-                //To Do: Implement new Method to avoid copy code (at the moment just for test)
-                #region First Color
+                Mat rgb = this._frame.Clone();
 
-                //To Do: Make it dynamic 
-                var lower = new ScalarArray(new MCvScalar(0, 0, 0));
-                var upper = new ScalarArray(new MCvScalar(200, 255, 255));
 
-                Mat mask = new Mat();
 
-                CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
-                CvInvoke.InRange(hsv, lower, upper, mask);
+                var lower = new ScalarArray(new MCvScalar(35, 50, 50));
+                var upper = new ScalarArray(new MCvScalar(75, 255, 255));
 
-                VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
-                Mat hierarchy = new Mat();
-                CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
+                var recColor = new MCvScalar(0, 255, 0);
 
-                for (int i = 0; i < contours.Size; i++)
-                {
-                    Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
+                TrackCurrentColor(lower, upper, rgb, recColor);
 
-                    //To Do: Make minimum size (rect.Height & rect.Width) dynamic
-                    if (rect.Height > 5 && rect.Width > 5)
-                    {
-                        CvInvoke.Rectangle(_frame, rect, new MCvScalar(0, 255, 0), 2);
-                    }
-                }
-                #endregion
+                lower = new ScalarArray(new MCvScalar(250, 25, 100));
+                upper = new ScalarArray(new MCvScalar(255, 85, 200));
 
-                #region Second Color
+                recColor = new MCvScalar(255, 0, 0);
 
-                //To Do: Make it dynamic 
-                lower = new ScalarArray(new MCvScalar(20, 25, 10));
-                upper = new ScalarArray(new MCvScalar(100, 150, 105));
+                TrackCurrentColor(lower, upper, rgb, recColor);
 
-                CvInvoke.CvtColor(_frame, hsv, ColorConversion.Bgr2Hsv);
-                CvInvoke.InRange(hsv, lower, upper, mask);
+                //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
 
-                VectorOfVectorOfPoint contours2 = new VectorOfVectorOfPoint();
-                Mat hierarchy2 = new Mat();
-                CvInvoke.FindContours(mask, contours2, hierarchy2, RetrType.External, ChainApproxMethod.ChainApproxSimple);
-
-                for (int i = 0; i < contours2.Size; i++)
-                {
-                    Rectangle rect = CvInvoke.BoundingRectangle(contours2[i]);
-
-                    //To Do: Make rectangle color dynamic
-                    CvInvoke.Rectangle(_frame, rect, new MCvScalar(255, 255, 255), 2);
-                }
-                #endregion
-
-                //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
-
-                CvInvoke.Imshow("VT-Color Tracker", this._frame);
+                CvInvoke.Imshow("Color Tracking", this._frame);
                 CvInvoke.WaitKey(this._frameRate);
+            }
+        }
+
+        private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
+        {
+            Mat mask = new Mat();
+
+            CvInvoke.InRange(rgb, lower, upper, mask);
+
+            VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+            Mat hierarchy = new Mat();
+            CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
+
+            for (int i = 0; i < contours.Size; i++)
+            {
+                Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
+
+                if (rect.Height > 10 && rect.Width > 10)
+                {
+                    CvInvoke.Rectangle(_frame, rect, colorRec, 2);
+                }
             }
         }
 
