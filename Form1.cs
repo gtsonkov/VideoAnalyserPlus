@@ -18,8 +18,6 @@ namespace VideoAnalyserPlus
         //To Do: Make it dynamic
         private int _frameRate = 30;
 
-
-
         public MainForm()
         {
             InitializeComponent();
@@ -40,7 +38,6 @@ namespace VideoAnalyserPlus
 
             try
             {
-                //To Do: Add another capture devices ex. web cams
                 this._capture = new VideoCapture(file);
 
                 this._frame = new Mat();
@@ -150,8 +147,6 @@ namespace VideoAnalyserPlus
 
                 Mat rgb = this._frame.Clone();
 
-
-
                 var lower = new ScalarArray(new MCvScalar(35, 50, 50));
                 var upper = new ScalarArray(new MCvScalar(75, 255, 255));
 
@@ -207,7 +202,6 @@ namespace VideoAnalyserPlus
             {
                 //To Do: make device selection dynamic
                 this._capture = new VideoCapture(defaultCaptureDevice);
-
                 this._frame = new Mat();
             }
             catch (Exception ex)
