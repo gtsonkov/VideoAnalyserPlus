@@ -199,7 +199,10 @@ namespace VideoAnalyserPlus
 
             _capture.Retrieve(this._frame);
 
-            screenBox.Image = BitmapExtension.ToBitmap(this._frame);
+            //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
+
+            CvInvoke.Imshow("Color Tracking", this._frame);
+            CvInvoke.WaitKey(this._frameRate);
         }
 
         private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
