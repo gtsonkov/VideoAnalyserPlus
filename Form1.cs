@@ -50,9 +50,14 @@ namespace VideoAnalyserPlus
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            this.stopThread = false;
-            this._trackingThread = new Thread(TrackColor);
-            this._trackingThread.Start();
+            //this.stopThread = false;
+            //this._trackingThread = new Thread(TrackColor);
+            //this._trackingThread.Start();
+
+            this._capture.ImageGrabbed += ProcessFrameEventHandler;
+            this._capture.ImageGrabbed -= ProcessFrameEventHandler;
+
+            this._capture.Start();
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -160,11 +165,41 @@ namespace VideoAnalyserPlus
 
                 TrackCurrentColor(lower, upper, rgb, recColor);
 
-                //ImageViewer.Image = BitmapExtension.ToBitmap(this._frame);
+                //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
 
                 CvInvoke.Imshow("Color Tracking", this._frame);
                 CvInvoke.WaitKey(this._frameRate);
             }
+        }
+
+        private void ProcessFrameEventHandler(object sender, EventArgs e)
+        {
+            if (_frame.IsEmpty)
+            {
+                return;
+            }
+
+            Mat rgb = this._frame.Clone();
+
+            screenBox.Image = BitmapExtension.ToBitmap(this._frame);
+
+            var lower = new ScalarArray(new MCvScalar(35, 50, 50));
+            var upper = new ScalarArray(new MCvScalar(75, 255, 255));
+
+            var recColor = new MCvScalar(0, 255, 0);
+
+            TrackCurrentColor(lower, upper, rgb, recColor);
+
+            lower = new ScalarArray(new MCvScalar(250, 25, 100));
+            upper = new ScalarArray(new MCvScalar(255, 85, 200));
+
+            recColor = new MCvScalar(255, 0, 0);
+
+            TrackCurrentColor(lower, upper, rgb, recColor);
+
+            _capture.Retrieve(this._frame);
+
+            screenBox.Image = BitmapExtension.ToBitmap(this._frame);
         }
 
         private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
