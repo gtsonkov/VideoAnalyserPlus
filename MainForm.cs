@@ -1,22 +1,12 @@
 using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
-using Emgu.CV.Util;
+using VT;
 
 namespace VideoAnalyserPlus
 {
     public partial class MainForm : Form
     {
-        private VideoCapture _capture;
 
-        private Mat _frame;
-
-        private Thread _trackingThread;
-
-        private bool stopThread;
-
-        //To Do: Make it dynamic
-        private int _frameRate = 30;
+        private string file = string.Empty;
 
         public MainForm()
         {
@@ -27,24 +17,11 @@ namespace VideoAnalyserPlus
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            string file = string.Empty;
-
             DialogResult result = openFileDialog1.ShowDialog(Owner); // Show Explorer browser dialog.
 
             if (result == DialogResult.OK) // Get result after click OK
             {
-                file = openFileDialog1.FileName;
-            }
-
-            try
-            {
-                this._capture = new VideoCapture(file);
-
-                this._frame = new Mat();
-            }
-            catch (Exception ex)
-            {
-                throw new ArgumentException(ex.Message);
+                this.file = openFileDialog1.FileName;
             }
         }
 
@@ -53,106 +30,15 @@ namespace VideoAnalyserPlus
             //this.stopThread = false;
             //this._trackingThread = new Thread(TrackColor);
             //this._trackingThread.Start();
-            this._capture.ImageGrabbed -= ProcessFrameEventHandler;
-            this._capture.ImageGrabbed += ProcessFrameEventHandler;
-
-            this._capture.Start();
+            using (var form = new VideoPlayerForm(this.file))
+            {
+                form.ShowDialog();
+            }
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            this._capture.ImageGrabbed -= ProcessFrameEventHandler;
-            this._capture.Stop();
-            this.stopThread = true;
-            //this._trackingThread.Abort();
-        }
-
-        private void TrackColor()
-        {
-            while (!stopThread)
-            {
-                this._capture.Read(this._frame);
-
-                if (_frame.IsEmpty)
-                {
-                    break;
-                }
-
-                Mat rgb = this._frame.Clone();
-
-                var lower = new ScalarArray(new MCvScalar(35, 50, 50));
-                var upper = new ScalarArray(new MCvScalar(75, 255, 255));
-
-                var recColor = new MCvScalar(0, 255, 0);
-
-                TrackCurrentColor(lower, upper, rgb, recColor);
-
-                lower = new ScalarArray(new MCvScalar(250, 25, 100));
-                upper = new ScalarArray(new MCvScalar(255, 85, 200));
-
-                recColor = new MCvScalar(255, 0, 0);
-
-                TrackCurrentColor(lower, upper, rgb, recColor);
-
-                //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
-
-                CvInvoke.Imshow("Color Tracking", this._frame);
-                CvInvoke.WaitKey(this._frameRate);
-            }
-        }
-
-        private void ProcessFrameEventHandler(object sender, EventArgs e)
-        {
-            this._capture.Read(this._frame);
-
-            if (_frame.IsEmpty)
-            {
-                return;
-            }
-
-            Mat rgb = this._frame.Clone();
-
-            var lower = new ScalarArray(new MCvScalar(35, 50, 50));
-            var upper = new ScalarArray(new MCvScalar(75, 255, 255));
-
-            var recColor = new MCvScalar(0, 255, 0);
-
-            TrackCurrentColor(lower, upper, rgb, recColor);
-
-            lower = new ScalarArray(new MCvScalar(100, 50, 50));
-            upper = new ScalarArray(new MCvScalar(135, 255, 255));
-
-            recColor = new MCvScalar(255, 0, 255);
-
-            TrackCurrentColor(lower, upper, rgb, recColor);
-
-            //_capture.Retrieve(this._frame);
-
-            //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
-
-            CvInvoke.Imshow("Color Tracking", this._frame);
-            CvInvoke.WaitKey(this._frameRate);
-        }
-
-        private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
-        {
-            Mat mask = new Mat();
-
-            CvInvoke.InRange(rgb, lower, upper, mask);
-
-            VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
-            Mat hierarchy = new Mat();
-            CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
-
-            for (int i = 0; i < contours.Size; i++)
-            {
-                Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
-
-                if (rect.Height > 10 && rect.Width > 10)
-                {
-                    CvInvoke.Rectangle(_frame, rect, colorRec, 2);
-                }
-            }
+            
         }
 
         private void screenBox_Click(object sender, EventArgs e)
@@ -167,8 +53,6 @@ namespace VideoAnalyserPlus
             try
             {
                 //To Do: make device selection dynamic
-                this._capture = new VideoCapture(defaultCaptureDevice);
-                this._frame = new Mat();
             }
             catch (Exception ex)
             {
@@ -178,15 +62,7 @@ namespace VideoAnalyserPlus
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this._capture != null)
-            {
-                this._capture.Dispose();
-            }
 
-            if (this._frame != null) 
-            {
-                this._frame.Dispose();
-            }
         }
     }
 }

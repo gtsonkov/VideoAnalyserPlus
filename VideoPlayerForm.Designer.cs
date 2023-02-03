@@ -49,7 +49,7 @@
             // PlayBtn
             // 
             this.PlayBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.PlayBtn.Location = new System.Drawing.Point(286, 494);
+            this.PlayBtn.Location = new System.Drawing.Point(274, 495);
             this.PlayBtn.Name = "PlayBtn";
             this.PlayBtn.Size = new System.Drawing.Size(75, 23);
             this.PlayBtn.TabIndex = 1;
@@ -60,7 +60,7 @@
             // PauseBtn
             // 
             this.PauseBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.PauseBtn.Location = new System.Drawing.Point(377, 494);
+            this.PauseBtn.Location = new System.Drawing.Point(365, 495);
             this.PauseBtn.Name = "PauseBtn";
             this.PauseBtn.Size = new System.Drawing.Size(75, 23);
             this.PauseBtn.TabIndex = 2;
@@ -71,7 +71,7 @@
             // StopBtn
             // 
             this.StopBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.StopBtn.Location = new System.Drawing.Point(468, 494);
+            this.StopBtn.Location = new System.Drawing.Point(456, 495);
             this.StopBtn.Name = "StopBtn";
             this.StopBtn.Size = new System.Drawing.Size(75, 23);
             this.StopBtn.TabIndex = 3;
@@ -90,6 +90,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "VideoPlayerForm";
             this.Text = "VideoPlayerForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VideoPlayerForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
