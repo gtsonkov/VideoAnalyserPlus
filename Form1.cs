@@ -189,14 +189,14 @@ namespace VideoAnalyserPlus
 
             TrackCurrentColor(lower, upper, rgb, recColor);
 
-            lower = new ScalarArray(new MCvScalar(250, 25, 100));
+            lower = new ScalarArray(new MCvScalar(150, 25, 100));
             upper = new ScalarArray(new MCvScalar(255, 85, 200));
 
             recColor = new MCvScalar(255, 0, 0);
 
             TrackCurrentColor(lower, upper, rgb, recColor);
 
-            _capture.Retrieve(this._frame);
+            //_capture.Retrieve(this._frame);
 
             //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
 
