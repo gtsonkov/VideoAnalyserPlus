@@ -53,9 +53,8 @@ namespace VideoAnalyserPlus
             //this.stopThread = false;
             //this._trackingThread = new Thread(TrackColor);
             //this._trackingThread.Start();
-
-            this._capture.ImageGrabbed += ProcessFrameEventHandler;
             this._capture.ImageGrabbed -= ProcessFrameEventHandler;
+            this._capture.ImageGrabbed += ProcessFrameEventHandler;
 
             this._capture.Start();
         }
@@ -174,14 +173,14 @@ namespace VideoAnalyserPlus
 
         private void ProcessFrameEventHandler(object sender, EventArgs e)
         {
+            this._capture.Read(this._frame);
+
             if (_frame.IsEmpty)
             {
                 return;
             }
 
             Mat rgb = this._frame.Clone();
-
-            screenBox.Image = BitmapExtension.ToBitmap(this._frame);
 
             var lower = new ScalarArray(new MCvScalar(35, 50, 50));
             var upper = new ScalarArray(new MCvScalar(75, 255, 255));
