@@ -2,6 +2,7 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
+using System.Text.RegularExpressions;
 
 namespace VT
 {
@@ -12,8 +13,8 @@ namespace VT
         private Mat _frame;
 
         //To Do: Make it dynamic
-        private int _frameRate = 30;
-
+        private int _frameRate = 60;
+        private const int toolbarWight = 100;
         private string _file = string.Empty;
         private bool _stopThread;
 
@@ -34,15 +35,17 @@ namespace VT
 
             this._frame = new Mat();
 
+            this.Height = (this._capture.Height) + toolbarWight;
+            this.Width = this._capture.Width;
+
             this._capture.ImageGrabbed -= ProcessFrameEventHandler;
             this._capture.ImageGrabbed += ProcessFrameEventHandler;
-
             this._capture.Start();
         }
 
         private void PauseBtn_Click(object sender, EventArgs e)
         {
-
+            playTimer.Enabled = false;
         }
 
         private void ProcessFrameEventHandler(object sender, EventArgs e)
@@ -68,56 +71,26 @@ namespace VT
 
             recColor = new MCvScalar(255, 0, 255);
 
+
             TrackCurrentColor(lower, upper, rgb, recColor);
+
+            ShowVideo();
 
             //_capture.Retrieve(this._frame);
 
-            //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
-
-            CvInvoke.Imshow("Color Tracking", this._frame);
+            //CvInvoke.Imshow("Color Tracking", this._frame);
             CvInvoke.WaitKey(this._frameRate);
+        }
+
+        private void ShowVideo()
+        {
+            this.screenBox1.Image = BitmapExtension.ToBitmap(this._frame);
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            this._capture.ImageGrabbed -= ProcessFrameEventHandler;
-            this._capture.Stop();
-            this._stopThread = true;
-            //this._trackingThread.Abort();
-        }
-
-        private void TrackColor()
-        {
-            while (!_stopThread)
-            {
-                this._capture.Read(this._frame);
-
-                if (_frame.IsEmpty)
-                {
-                    break;
-                }
-
-                Mat rgb = this._frame.Clone();
-
-                var lower = new ScalarArray(new MCvScalar(35, 50, 50));
-                var upper = new ScalarArray(new MCvScalar(75, 255, 255));
-
-                var recColor = new MCvScalar(0, 255, 0);
-
-                TrackCurrentColor(lower, upper, rgb, recColor);
-
-                lower = new ScalarArray(new MCvScalar(250, 25, 100));
-                upper = new ScalarArray(new MCvScalar(255, 85, 200));
-
-                recColor = new MCvScalar(255, 0, 0);
-
-                TrackCurrentColor(lower, upper, rgb, recColor);
-
-                //screenBox.Image = BitmapExtension.ToBitmap(this._frame);
-
-                CvInvoke.Imshow("Color Tracking", this._frame);
-                CvInvoke.WaitKey(this._frameRate);
-            }
+            playTimer.Enabled = false;
+            this._capture.Dispose();
         }
 
         private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
@@ -152,6 +125,11 @@ namespace VT
             {
                 this._frame.Dispose();
             }
+        }
+
+        private void playTimer_Tick(object sender, EventArgs e)
+        {
+            
         }
     }
 }

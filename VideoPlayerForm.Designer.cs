@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.components = new System.ComponentModel.Container();
+            this.screenBox1 = new System.Windows.Forms.PictureBox();
             this.PlayBtn = new System.Windows.Forms.Button();
             this.PauseBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.playTimer = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.screenBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // screenBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.screenBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(1, 1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(794, 479);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.screenBox1.Location = new System.Drawing.Point(1, 1);
+            this.screenBox1.Name = "screenBox1";
+            this.screenBox1.Size = new System.Drawing.Size(794, 479);
+            this.screenBox1.TabIndex = 0;
+            this.screenBox1.TabStop = false;
             // 
             // PlayBtn
             // 
@@ -79,6 +81,11 @@
             this.StopBtn.UseVisualStyleBackColor = true;
             this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
+            // playTimer
+            // 
+            this.playTimer.Interval = 24;
+            this.playTimer.Tick += new System.EventHandler(this.playTimer_Tick);
+            // 
             // VideoPlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -87,20 +94,21 @@
             this.Controls.Add(this.StopBtn);
             this.Controls.Add(this.PauseBtn);
             this.Controls.Add(this.PlayBtn);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.screenBox1);
             this.Name = "VideoPlayerForm";
             this.Text = "VideoPlayerForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VideoPlayerForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.screenBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
+        private PictureBox screenBox1;
         private Button PlayBtn;
         private Button PauseBtn;
         private Button StopBtn;
+        private System.Windows.Forms.Timer playTimer;
     }
 }
