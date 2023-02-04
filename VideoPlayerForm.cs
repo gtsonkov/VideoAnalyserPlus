@@ -134,10 +134,5 @@ namespace VT
                 this._frame.Dispose();
             }
         }
-
-        private void playTimer_Tick(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.screenBox1 = new System.Windows.Forms.PictureBox();
             this.PlayBtn = new System.Windows.Forms.Button();
             this.PauseBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
-            this.playTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.screenBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,11 +79,6 @@
             this.StopBtn.UseVisualStyleBackColor = true;
             this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
-            // playTimer
-            // 
-            this.playTimer.Interval = 24;
-            this.playTimer.Tick += new System.EventHandler(this.playTimer_Tick);
-            // 
             // VideoPlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -109,6 +102,5 @@
         private Button PlayBtn;
         private Button PauseBtn;
         private Button StopBtn;
-        private System.Windows.Forms.Timer playTimer;
     }
 }
