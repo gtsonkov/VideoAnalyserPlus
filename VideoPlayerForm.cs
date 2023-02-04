@@ -16,7 +16,7 @@ namespace VT
         private int _frameRate = 60;
         private const int toolbarWight = 100;
         private string _file = string.Empty;
-        private bool _stopThread;
+        private bool _isPaused;
 
         public VideoPlayerForm()
         {
@@ -31,6 +31,13 @@ namespace VT
 
         private void PlayBtn_Click(object sender, EventArgs e)
         {
+            if (this._isPaused)
+            {
+                this._capture.Start();
+                this._isPaused = false;
+                return;
+            }
+
             this._capture = new VideoCapture(this._file);
 
             this._frame = new Mat();
@@ -45,7 +52,8 @@ namespace VT
 
         private void PauseBtn_Click(object sender, EventArgs e)
         {
-            playTimer.Enabled = false;
+            this._capture.Pause();
+            this._isPaused= true;
         }
 
         private void ProcessFrameEventHandler(object sender, EventArgs e)
@@ -59,15 +67,15 @@ namespace VT
 
             Mat rgb = this._frame.Clone();
 
-            var lower = new ScalarArray(new MCvScalar(35, 50, 50));
-            var upper = new ScalarArray(new MCvScalar(75, 255, 255));
+            var lower = new ScalarArray(new MCvScalar(204, 204 , 0));
+            var upper = new ScalarArray(new MCvScalar(255, 255, 204));
 
             var recColor = new MCvScalar(0, 255, 0);
 
             TrackCurrentColor(lower, upper, rgb, recColor);
 
-            lower = new ScalarArray(new MCvScalar(100, 50, 50));
-            upper = new ScalarArray(new MCvScalar(135, 255, 255));
+            lower = new ScalarArray(new MCvScalar(0, 0, 255));
+            upper = new ScalarArray(new MCvScalar(255, 0, 0d));
 
             recColor = new MCvScalar(255, 0, 255);
 
@@ -89,8 +97,8 @@ namespace VT
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            playTimer.Enabled = false;
             this._capture.Dispose();
+            this._isPaused = false;
         }
 
         private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
@@ -107,7 +115,7 @@ namespace VT
             {
                 Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
 
-                if (rect.Height > 10 && rect.Width > 10)
+                if (rect.Height > 1 && rect.Width > 1)
                 {
                     CvInvoke.Rectangle(_frame, rect, colorRec, 2);
                 }

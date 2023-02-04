@@ -48,8 +48,6 @@ namespace VideoAnalyserPlus
 
         private void userCameraBtn_Click(object sender, EventArgs e)
         {
-            int defaultCaptureDevice = 0;
-
             try
             {
                 //To Do: make device selection dynamic
