@@ -67,15 +67,15 @@ namespace VT
 
             Mat rgb = this._frame.Clone();
 
-            var lower = new ScalarArray(new MCvScalar(204, 204 , 0));
+            var lower = new ScalarArray(new MCvScalar(255, 204 , 255));
             var upper = new ScalarArray(new MCvScalar(255, 255, 204));
 
             var recColor = new MCvScalar(0, 255, 0);
 
             TrackCurrentColor(lower, upper, rgb, recColor);
 
-            lower = new ScalarArray(new MCvScalar(0, 0, 255));
-            upper = new ScalarArray(new MCvScalar(255, 0, 0d));
+            lower = new ScalarArray(new MCvScalar(255, 0, 0));
+            upper = new ScalarArray(new MCvScalar(255, 255, 255));
 
             recColor = new MCvScalar(255, 0, 255);
 
