@@ -1,4 +1,3 @@
-using Emgu.CV;
 using VT;
 
 namespace VideoAnalyserPlus
@@ -56,11 +55,6 @@ namespace VideoAnalyserPlus
             {
                 throw new ArgumentException(ex.Message);
             }
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
     }
 }

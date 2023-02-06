@@ -101,7 +101,6 @@
             this.MinimumSize = new System.Drawing.Size(672, 442);
             this.Name = "MainForm";
             this.Text = "Video Analyser";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.screenBox)).EndInit();
             this.ResumeLayout(false);
 
