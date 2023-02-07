@@ -103,7 +103,6 @@
             this.Text = "Video Analyser";
             ((System.ComponentModel.ISupportInitialize)(this.screenBox)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion

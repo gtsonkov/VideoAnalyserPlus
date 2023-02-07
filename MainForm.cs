@@ -49,7 +49,9 @@ namespace VideoAnalyserPlus
         {
             try
             {
-                //To Do: make device selection dynamic
+                // At this point will be executed only the default camera
+
+                this.file = string.Empty;
             }
             catch (Exception ex)
             {

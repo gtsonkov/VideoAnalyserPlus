@@ -38,7 +38,31 @@ namespace VT
                 return;
             }
 
-            this._capture = new VideoCapture(this._file);
+            //At this version: if _file ist empty just execute the default video capture device
+            //Else execute the video sorce
+
+            if (this._file == string.Empty)
+            {
+                try
+                {
+                    this._capture = new VideoCapture(0);
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException (ex.Message);
+                }
+            }
+            else
+            {
+                try
+                {
+                    this._capture = new VideoCapture(this._file);
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException ("Selected videosorce can not be played");
+                }
+            }
 
             this._frame = new Mat();
 
