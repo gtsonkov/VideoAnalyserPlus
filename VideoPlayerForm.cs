@@ -90,15 +90,17 @@ namespace VT
 
             Mat rgb = this._frame.Clone();
 
-            var lower = new ScalarArray(new MCvScalar(255, 204 , 255));
-            var upper = new ScalarArray(new MCvScalar(255, 255, 204));
+            //To Do: User shoud manualy select the color and range
+            var lower = new ScalarArray(new MCvScalar(200, 200 , 200));
+            var upper = new ScalarArray(new MCvScalar(255, 255, 255));
 
             var recColor = new MCvScalar(0, 255, 0);
 
             TrackCurrentColor(lower, upper, rgb, recColor);
 
-            lower = new ScalarArray(new MCvScalar(255, 0, 0));
-            upper = new ScalarArray(new MCvScalar(255, 255, 255));
+            //To Do: User shoud manualy select the color and range
+            lower = new ScalarArray(new MCvScalar(89,150, 63));
+            upper = new ScalarArray(new MCvScalar(100, 100, 255));
 
             recColor = new MCvScalar(255, 0, 255);
 
