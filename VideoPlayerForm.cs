@@ -2,7 +2,6 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
-using System.Text.RegularExpressions;
 
 namespace VT
 {
@@ -26,7 +25,7 @@ namespace VT
         public VideoPlayerForm(object obj)
         {
             InitializeComponent();
-            this._file = (string)obj.ToString();
+            this._file = obj.ToString() as string;
         }
 
         private void PlayBtn_Click(object sender, EventArgs e)
@@ -58,7 +57,7 @@ namespace VT
                 {
                     this._capture = new VideoCapture(this._file);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw new ArgumentException ("Selected videosorce can not be played");
                 }
@@ -148,15 +147,15 @@ namespace VT
 
         private void VideoPlayerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this._capture != null)
-            {
-                this._capture.Dispose();
-            }
-
-            if (this._frame != null)
-            {
-                this._frame.Dispose();
-            }
+            //if (this._capture != null)
+            //{
+            //    this._capture.Dispose();
+            //}
+            //
+            //if (this._frame != null)
+            //{
+            //    this._frame.Dispose();
+            //}
         }
     }
 }
