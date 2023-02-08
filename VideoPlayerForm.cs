@@ -147,15 +147,15 @@ namespace VT
 
         private void VideoPlayerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (this._capture != null)
-            //{
-            //    this._capture.Dispose();
-            //}
-            //
-            //if (this._frame != null)
-            //{
-            //    this._frame.Dispose();
-            //}
+            if (this._capture != null)
+            {
+                this._capture.Dispose();
+            }
+            
+            if (this._frame != null)
+            {
+                this._frame.Dispose();
+            }
         }
     }
 }
