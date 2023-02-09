@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_VideoAnaluserPlus", "..\Setup_VideoAnaluserPlus\Setup_VideoAnaluserPlus.vdproj", "{3A33687B-F0E0-4AB2-9271-9B60F00B6CD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,8 @@ Global
 		{DEA4E553-7553-4276-BCA9-FA0E24235280}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEA4E553-7553-4276-BCA9-FA0E24235280}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEA4E553-7553-4276-BCA9-FA0E24235280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A33687B-F0E0-4AB2-9271-9B60F00B6CD2}.Debug|Any CPU.ActiveCfg = Debug
+		{3A33687B-F0E0-4AB2-9271-9B60F00B6CD2}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
