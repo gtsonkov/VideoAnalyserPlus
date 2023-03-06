@@ -53,7 +53,7 @@ namespace VT
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message,"Warnung");
                     return;
                 }
             }
@@ -63,13 +63,12 @@ namespace VT
                 {
                     this._capture = new VideoCapture(this._file);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw new ArgumentException("Selected videosorce can not be played");
+                    MessageBox.Show(ex.Message, "Warnung");
+                    return;
                 }
             }
-
-            
 
             this._frame = new Mat();
 
