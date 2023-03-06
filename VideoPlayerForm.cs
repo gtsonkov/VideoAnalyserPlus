@@ -45,10 +45,16 @@ namespace VT
                 try
                 {
                     this._capture = new VideoCapture(0);
+
+                    if (this._capture.Height == 0 || this._capture.Width == 0)
+                    {
+                        throw new ArgumentException("Keine Aufnahmegerät gefunden.");
+                    }
                 }
                 catch (Exception ex)
                 {
-                    throw new ArgumentException (ex.Message);
+                    MessageBox.Show(ex.Message);
+                    return;
                 }
             }
             else
@@ -59,9 +65,11 @@ namespace VT
                 }
                 catch (Exception)
                 {
-                    throw new ArgumentException ("Selected videosorce can not be played");
+                    throw new ArgumentException("Selected videosorce can not be played");
                 }
             }
+
+            
 
             this._frame = new Mat();
 
@@ -76,7 +84,7 @@ namespace VT
         private void PauseBtn_Click(object sender, EventArgs e)
         {
             this._capture.Pause();
-            this._isPaused= true;
+            this._isPaused = true;
         }
 
         private void ProcessFrameEventHandler(object sender, EventArgs e)
@@ -91,7 +99,7 @@ namespace VT
             Mat rgb = this._frame.Clone();
 
             //To Do: User shoud manualy select the color and range
-            var lower = new ScalarArray(new MCvScalar(200, 200 , 200));
+            var lower = new ScalarArray(new MCvScalar(200, 200, 200));
             var upper = new ScalarArray(new MCvScalar(255, 255, 255));
 
             var recColor = new MCvScalar(0, 255, 0);
@@ -99,7 +107,7 @@ namespace VT
             TrackCurrentColor(lower, upper, rgb, recColor);
 
             //To Do: User shoud manualy select the color and range
-            lower = new ScalarArray(new MCvScalar(89,150, 63));
+            lower = new ScalarArray(new MCvScalar(89, 150, 63));
             upper = new ScalarArray(new MCvScalar(100, 100, 255));
 
             recColor = new MCvScalar(255, 0, 255);
@@ -153,7 +161,7 @@ namespace VT
             {
                 this._capture.Dispose();
             }
-            
+
             if (this._frame != null)
             {
                 this._frame.Dispose();

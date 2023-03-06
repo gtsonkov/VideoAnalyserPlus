@@ -28,72 +28,121 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.screenBox1 = new System.Windows.Forms.PictureBox();
-            this.PlayBtn = new System.Windows.Forms.Button();
-            this.PauseBtn = new System.Windows.Forms.Button();
-            this.StopBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.screenBox1)).BeginInit();
-            this.SuspendLayout();
+            screenBox1 = new PictureBox();
+            PlayBtn = new Button();
+            PauseBtn = new Button();
+            StopBtn = new Button();
+            menuStrip1 = new MenuStrip();
+            sorceToolStripMenuItem = new ToolStripMenuItem();
+            kameraToolStripMenuItem = new ToolStripMenuItem();
+            videodateiToolStripMenuItem = new ToolStripMenuItem();
+            prozesseinstellungenToolStripMenuItem = new ToolStripMenuItem();
+            hilfeToolStripMenuItem = new ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)screenBox1).BeginInit();
+            menuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // screenBox1
             // 
-            this.screenBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.screenBox1.Location = new System.Drawing.Point(1, 1);
-            this.screenBox1.Name = "screenBox1";
-            this.screenBox1.Size = new System.Drawing.Size(794, 479);
-            this.screenBox1.TabIndex = 0;
-            this.screenBox1.TabStop = false;
+            screenBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            screenBox1.Location = new Point(1, 26);
+            screenBox1.Name = "screenBox1";
+            screenBox1.Size = new Size(794, 454);
+            screenBox1.TabIndex = 0;
+            screenBox1.TabStop = false;
             // 
             // PlayBtn
             // 
-            this.PlayBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.PlayBtn.Location = new System.Drawing.Point(274, 495);
-            this.PlayBtn.Name = "PlayBtn";
-            this.PlayBtn.Size = new System.Drawing.Size(75, 23);
-            this.PlayBtn.TabIndex = 1;
-            this.PlayBtn.Text = "Play";
-            this.PlayBtn.UseVisualStyleBackColor = true;
-            this.PlayBtn.Click += new System.EventHandler(this.PlayBtn_Click);
+            PlayBtn.Anchor = AnchorStyles.Bottom;
+            PlayBtn.Location = new Point(274, 495);
+            PlayBtn.Name = "PlayBtn";
+            PlayBtn.Size = new Size(75, 23);
+            PlayBtn.TabIndex = 1;
+            PlayBtn.Text = "Play";
+            PlayBtn.UseVisualStyleBackColor = true;
+            PlayBtn.Click += PlayBtn_Click;
             // 
             // PauseBtn
             // 
-            this.PauseBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.PauseBtn.Location = new System.Drawing.Point(365, 495);
-            this.PauseBtn.Name = "PauseBtn";
-            this.PauseBtn.Size = new System.Drawing.Size(75, 23);
-            this.PauseBtn.TabIndex = 2;
-            this.PauseBtn.Text = "Pause";
-            this.PauseBtn.UseVisualStyleBackColor = true;
-            this.PauseBtn.Click += new System.EventHandler(this.PauseBtn_Click);
+            PauseBtn.Anchor = AnchorStyles.Bottom;
+            PauseBtn.Location = new Point(365, 495);
+            PauseBtn.Name = "PauseBtn";
+            PauseBtn.Size = new Size(75, 23);
+            PauseBtn.TabIndex = 2;
+            PauseBtn.Text = "Pause";
+            PauseBtn.UseVisualStyleBackColor = true;
+            PauseBtn.Click += PauseBtn_Click;
             // 
             // StopBtn
             // 
-            this.StopBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.StopBtn.Location = new System.Drawing.Point(456, 495);
-            this.StopBtn.Name = "StopBtn";
-            this.StopBtn.Size = new System.Drawing.Size(75, 23);
-            this.StopBtn.TabIndex = 3;
-            this.StopBtn.Text = "Stop";
-            this.StopBtn.UseVisualStyleBackColor = true;
-            this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
+            StopBtn.Anchor = AnchorStyles.Bottom;
+            StopBtn.Location = new Point(456, 495);
+            StopBtn.Name = "StopBtn";
+            StopBtn.Size = new Size(75, 23);
+            StopBtn.TabIndex = 3;
+            StopBtn.Text = "Stop";
+            StopBtn.UseVisualStyleBackColor = true;
+            StopBtn.Click += StopBtn_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { sorceToolStripMenuItem, prozesseinstellungenToolStripMenuItem, hilfeToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(796, 24);
+            menuStrip1.TabIndex = 4;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // sorceToolStripMenuItem
+            // 
+            sorceToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kameraToolStripMenuItem, videodateiToolStripMenuItem });
+            sorceToolStripMenuItem.Name = "sorceToolStripMenuItem";
+            sorceToolStripMenuItem.Size = new Size(48, 20);
+            sorceToolStripMenuItem.Text = "Sorce";
+            // 
+            // kameraToolStripMenuItem
+            // 
+            kameraToolStripMenuItem.Name = "kameraToolStripMenuItem";
+            kameraToolStripMenuItem.Size = new Size(180, 22);
+            kameraToolStripMenuItem.Text = "Kamera";
+            // 
+            // videodateiToolStripMenuItem
+            // 
+            videodateiToolStripMenuItem.Name = "videodateiToolStripMenuItem";
+            videodateiToolStripMenuItem.Size = new Size(180, 22);
+            videodateiToolStripMenuItem.Text = "Videodatei";
+            // 
+            // prozesseinstellungenToolStripMenuItem
+            // 
+            prozesseinstellungenToolStripMenuItem.Name = "prozesseinstellungenToolStripMenuItem";
+            prozesseinstellungenToolStripMenuItem.Size = new Size(129, 20);
+            prozesseinstellungenToolStripMenuItem.Text = "Prozesseinstellungen";
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            hilfeToolStripMenuItem.Size = new Size(44, 20);
+            hilfeToolStripMenuItem.Text = "Hilfe";
             // 
             // VideoPlayerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 536);
-            this.Controls.Add(this.StopBtn);
-            this.Controls.Add(this.PauseBtn);
-            this.Controls.Add(this.PlayBtn);
-            this.Controls.Add(this.screenBox1);
-            this.Name = "VideoPlayerForm";
-            this.Text = "VideoPlayerForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VideoPlayerForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.screenBox1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(796, 536);
+            Controls.Add(StopBtn);
+            Controls.Add(PauseBtn);
+            Controls.Add(PlayBtn);
+            Controls.Add(screenBox1);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
+            Name = "VideoPlayerForm";
+            Text = "VideoPlayerForm";
+            FormClosing += VideoPlayerForm_FormClosing;
+            ((System.ComponentModel.ISupportInitialize)screenBox1).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -102,5 +151,11 @@
         private Button PlayBtn;
         private Button PauseBtn;
         private Button StopBtn;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem sorceToolStripMenuItem;
+        private ToolStripMenuItem kameraToolStripMenuItem;
+        private ToolStripMenuItem videodateiToolStripMenuItem;
+        private ToolStripMenuItem prozesseinstellungenToolStripMenuItem;
+        private ToolStripMenuItem hilfeToolStripMenuItem;
     }
 }

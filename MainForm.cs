@@ -37,7 +37,7 @@ namespace VideoAnalyserPlus
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void screenBox_Click(object sender, EventArgs e)
