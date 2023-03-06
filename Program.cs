@@ -1,3 +1,5 @@
+using VT;
+
 namespace VideoAnalyserPlus
 {
     internal static class Program
