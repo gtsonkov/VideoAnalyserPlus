@@ -169,7 +169,10 @@ namespace VT
 
         private void kameraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            using (var camSettings = new SelectCaptureDevice())
+            {
+                camSettings.ShowDialog();
+            }
         }
     }
 }
