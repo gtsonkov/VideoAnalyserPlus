@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectCaptureDevice));
             deviceList = new ComboBox();
             refreshBtn = new Button();
             OkBtn = new Button();
@@ -71,6 +72,7 @@
             Controls.Add(OkBtn);
             Controls.Add(refreshBtn);
             Controls.Add(deviceList);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SelectCaptureDevice";
             Text = "Aufnahmegerät konfigurieren";
             ResumeLayout(false);

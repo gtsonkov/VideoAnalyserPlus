@@ -90,7 +90,7 @@ namespace VT
             this.pictureBox2.BackColor = _color1;
             this.pictureBox3.BackColor = Color.FromArgb(c1.Red_Max, c1.Green_Max, c1.Blue_Max);
 
-            this.label2.Text = (_color1.R.ToString() + _color1.G.ToString() + _color1.B.ToString()); 
+            this.label2.Text = (_color1.R.ToString() + _color1.G.ToString() + _color1.B.ToString());
 
             this.pictureBox4.BackColor = Color.FromArgb(c2.Red_Min, c2.Green_Min, c2.Blue_Min);
             this.pictureBox5.BackColor = _color2;

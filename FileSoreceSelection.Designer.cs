@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileSoreceSelection));
             OkBtn = new Button();
             textBox1 = new TextBox();
             BrowseBtn = new Button();
@@ -68,6 +69,7 @@
             Controls.Add(BrowseBtn);
             Controls.Add(textBox1);
             Controls.Add(OkBtn);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FileSoreceSelection";
             Text = "Dateisuchen";
             ResumeLayout(false);

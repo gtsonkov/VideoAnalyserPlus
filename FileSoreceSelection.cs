@@ -37,7 +37,7 @@ namespace VT
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             DialogResult result = openFileDialog1.ShowDialog(Owner); // Show Explorer browser dialog.
-            
+
 
             if (result == DialogResult.OK) // Get result after click OK
             {

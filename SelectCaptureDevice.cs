@@ -55,7 +55,7 @@ namespace VT
             {
                 var mainForm = (MainForm)Application.OpenForms["MainForm"];
                 mainForm.deviceIndex = this.deviceList.SelectedIndex;
-                if (mainForm._file != string.Empty) 
+                if (mainForm._file != string.Empty)
                 {
                     mainForm.SorceChange();
                     mainForm._file = string.Empty;

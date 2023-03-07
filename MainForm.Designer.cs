@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             screenBox1 = new PictureBox();
             PlayBtn = new Button();
             PauseBtn = new Button();
@@ -137,6 +138,7 @@
             Controls.Add(PlayBtn);
             Controls.Add(screenBox1);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             MinimumSize = new Size(150, 150);
             Name = "MainForm";

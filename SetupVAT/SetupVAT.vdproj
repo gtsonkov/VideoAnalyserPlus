@@ -15,7 +15,25 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_60BCB8B9C57B40B8B1E595432BFB3A52"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_985572E642EF47298EF031320B2BA997"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BF8B22A8ADBE4DE3B9524BEEAC1DBFA5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E9EF3C4B110A4F29B980EDAF3EBA65A2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -84,6 +102,66 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_60BCB8B9C57B40B8B1E595432BFB3A52"
+            {
+            "SourcePath" = "8:D:\\Downloads\\Logo_VA.ico"
+            "TargetName" = "8:Logo_VA.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_CE4A683C9F9449C99952060E691AB2D3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF8B22A8ADBE4DE3B9524BEEAC1DBFA5"
+            {
+            "SourcePath" = "8:D:\\Downloads\\Logo_VA.ico"
+            "TargetName" = "8:Logo_VA.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_75C48400126549C8BB6909F8FF7C0CE7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E9EF3C4B110A4F29B980EDAF3EBA65A2"
+            {
+            "SourcePath" = "8:D:\\Downloads\\Logo_VA.ico"
+            "TargetName" = "8:Logo_VA.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_DF13447535F74B4EB3FC83270077BC10"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -141,7 +219,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Video Analyser Plus"
         "ProductCode" = "8:{90300863-96DF-4B91-A9E6-3A2ACED63798}"
-        "PackageCode" = "8:{CBA61A0E-3141-42E4-B8FC-DAB5707AC9D2}"
+        "PackageCode" = "8:{A4122892-4951-4F1F-ACDF-2DBCE4EA9633}"
         "UpgradeCode" = "8:{4091ED64-9A21-42B4-A835-A585FE68D7D2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -263,7 +341,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_096DEFF8170149A59A28B18A1D69285C"
             {
-            "Name" = "8:VT"
+            "Name" = "8:Video Analyser Plus"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -271,6 +349,20 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_985572E642EF47298EF031320B2BA997"
             "Folder" = "8:_CE4A683C9F9449C99952060E691AB2D3"
+            "WorkingFolder" = "8:_75C48400126549C8BB6909F8FF7C0CE7"
+            "Icon" = "8:_E9EF3C4B110A4F29B980EDAF3EBA65A2"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B8A7CE4EC6B4414593970C63CC4A4968"
+            {
+            "Name" = "8:Video Analyser Plus"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_985572E642EF47298EF031320B2BA997"
+            "Folder" = "8:_DF13447535F74B4EB3FC83270077BC10"
             "WorkingFolder" = "8:_75C48400126549C8BB6909F8FF7C0CE7"
             "Icon" = "8:"
             "Feature" = "8:"

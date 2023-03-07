@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorSettings));
             Color1SetBtn = new Button();
             Color2SetBtn = new Button();
             colorDialog_C1 = new ColorDialog();
@@ -214,6 +215,7 @@
             Controls.Add(radiusC1TxtBox);
             Controls.Add(Color2SetBtn);
             Controls.Add(Color1SetBtn);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ColorSettings";
             Text = "ColorSettings";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
