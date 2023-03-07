@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace Modules
 {
     public class ColorMask
     {
@@ -9,9 +9,9 @@
         public int Blue_Min { get; set; }
 
         public int Red_Max { get; set; }
-        
+
         public int Green_Max { get; set; }
 
-        public int Blue_Max { get; set;}
+        public int Blue_Max { get; set; }
     }
 }
