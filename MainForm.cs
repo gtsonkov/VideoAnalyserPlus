@@ -121,8 +121,8 @@ namespace VT
             Mat rgb = this._frame.Clone();
 
             //To Do: User shoud manualy select the color and range
-            var lower = new ScalarArray(new MCvScalar(color1.Blue_Min,color1.Green_Min,color1.Red_Min, 255));
-            var upper = new ScalarArray(new MCvScalar(color1.Blue_Max,color1.Green_Max, color1.Red_Max, 255));
+            var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
+            var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
 
             var recColor = new MCvScalar(0, 255, 0);
 
@@ -131,7 +131,7 @@ namespace VT
             //To Do: User shoud manualy select the color and range
             lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
             upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
-            
+
             recColor = new MCvScalar(255, 0, 255);
 
 

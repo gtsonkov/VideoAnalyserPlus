@@ -140,6 +140,7 @@
             MainMenuStrip = menuStrip1;
             MinimumSize = new Size(150, 150);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "VideoPlayerForm";
             FormClosing += VideoPlayerForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)screenBox1).EndInit();
