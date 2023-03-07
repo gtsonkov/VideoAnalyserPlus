@@ -1,6 +1,0 @@
-D:\Projekts\Police\VideoAnalyserPlus\Models\Models\bin\Debug\Models.dll
-D:\Projekts\Police\VideoAnalyserPlus\Models\Models\bin\Debug\Models.pdb
-D:\Projekts\Police\VideoAnalyserPlus\Models\Models\obj\Debug\Models.csproj.AssemblyReference.cache
-D:\Projekts\Police\VideoAnalyserPlus\Models\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
-D:\Projekts\Police\VideoAnalyserPlus\Models\Models\obj\Debug\Models.dll
-D:\Projekts\Police\VideoAnalyserPlus\Models\Models\obj\Debug\Models.pdb
