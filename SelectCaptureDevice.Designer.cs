@@ -38,7 +38,7 @@
             // 
             deviceList.DropDownStyle = ComboBoxStyle.DropDownList;
             deviceList.FormattingEnabled = true;
-            deviceList.Location = new Point(12, 24);
+            deviceList.Location = new Point(12, 23);
             deviceList.Name = "deviceList";
             deviceList.Size = new Size(393, 23);
             deviceList.TabIndex = 0;
@@ -46,17 +46,17 @@
             // 
             // refreshBtn
             // 
-            refreshBtn.Location = new Point(425, 24);
+            refreshBtn.Location = new Point(12, 56);
             refreshBtn.Name = "refreshBtn";
-            refreshBtn.Size = new Size(75, 23);
+            refreshBtn.Size = new Size(89, 31);
             refreshBtn.TabIndex = 1;
-            refreshBtn.Text = "Refresh";
+            refreshBtn.Text = "Aktualisieren";
             refreshBtn.UseVisualStyleBackColor = true;
             refreshBtn.Click += refreshBtn_Click;
             // 
             // OkBtn
             // 
-            OkBtn.Location = new Point(425, 53);
+            OkBtn.Location = new Point(424, 18);
             OkBtn.Name = "OkBtn";
             OkBtn.Size = new Size(73, 32);
             OkBtn.TabIndex = 2;

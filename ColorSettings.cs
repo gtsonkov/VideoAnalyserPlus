@@ -90,13 +90,9 @@ namespace VT
             this.pictureBox2.BackColor = _color1;
             this.pictureBox3.BackColor = Color.FromArgb(c1.Red_Max, c1.Green_Max, c1.Blue_Max);
 
-            this.label2.Text = (_color1.R.ToString() + _color1.G.ToString() + _color1.B.ToString());
-
             this.pictureBox4.BackColor = Color.FromArgb(c2.Red_Min, c2.Green_Min, c2.Blue_Min);
             this.pictureBox5.BackColor = _color2;
             this.pictureBox6.BackColor = Color.FromArgb(c2.Red_Max, c2.Green_Max, c2.Blue_Max);
-
-            this.label3.Text = (_color2.R.ToString() + _color2.G.ToString() + _color2.B.ToString());
         }
 
         private ColorMask SetColorRange(Color color, int radius)
