@@ -103,21 +103,23 @@
             // kameraToolStripMenuItem
             // 
             kameraToolStripMenuItem.Name = "kameraToolStripMenuItem";
-            kameraToolStripMenuItem.Size = new Size(180, 22);
+            kameraToolStripMenuItem.Size = new Size(130, 22);
             kameraToolStripMenuItem.Text = "Kamera";
             kameraToolStripMenuItem.Click += kameraToolStripMenuItem_Click;
             // 
             // videodateiToolStripMenuItem
             // 
             videodateiToolStripMenuItem.Name = "videodateiToolStripMenuItem";
-            videodateiToolStripMenuItem.Size = new Size(180, 22);
+            videodateiToolStripMenuItem.Size = new Size(130, 22);
             videodateiToolStripMenuItem.Text = "Videodatei";
+            videodateiToolStripMenuItem.Click += videodateiToolStripMenuItem_Click;
             // 
             // prozesseinstellungenToolStripMenuItem
             // 
             prozesseinstellungenToolStripMenuItem.Name = "prozesseinstellungenToolStripMenuItem";
             prozesseinstellungenToolStripMenuItem.Size = new Size(129, 20);
             prozesseinstellungenToolStripMenuItem.Text = "Prozesseinstellungen";
+            prozesseinstellungenToolStripMenuItem.Click += prozesseinstellungenToolStripMenuItem_Click;
             // 
             // hilfeToolStripMenuItem
             // 
@@ -125,7 +127,7 @@
             hilfeToolStripMenuItem.Size = new Size(44, 20);
             hilfeToolStripMenuItem.Text = "Hilfe";
             // 
-            // VideoPlayerForm
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -136,6 +138,7 @@
             Controls.Add(screenBox1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            MinimumSize = new Size(150, 150);
             Name = "MainForm";
             Text = "VideoPlayerForm";
             FormClosing += VideoPlayerForm_FormClosing;

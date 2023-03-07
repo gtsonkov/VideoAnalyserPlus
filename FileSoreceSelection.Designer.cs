@@ -1,6 +1,6 @@
 ﻿namespace VT
 {
-    partial class SelectCaptureDevice
+    partial class FileSoreceSelection
     {
         /// <summary>
         /// Required designer variable.
@@ -28,58 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            deviceList = new ComboBox();
-            refreshBtn = new Button();
             OkBtn = new Button();
+            textBox1 = new TextBox();
+            BrowseBtn = new Button();
             SuspendLayout();
-            // 
-            // deviceList
-            // 
-            deviceList.DropDownStyle = ComboBoxStyle.DropDownList;
-            deviceList.FormattingEnabled = true;
-            deviceList.Location = new Point(12, 24);
-            deviceList.Name = "deviceList";
-            deviceList.Size = new Size(393, 23);
-            deviceList.TabIndex = 0;
-            deviceList.SelectedIndexChanged += deviceList_SelectedIndexChanged;
-            // 
-            // refreshBtn
-            // 
-            refreshBtn.Location = new Point(425, 24);
-            refreshBtn.Name = "refreshBtn";
-            refreshBtn.Size = new Size(75, 23);
-            refreshBtn.TabIndex = 1;
-            refreshBtn.Text = "Refresh";
-            refreshBtn.UseVisualStyleBackColor = true;
-            refreshBtn.Click += refreshBtn_Click;
             // 
             // OkBtn
             // 
-            OkBtn.Location = new Point(425, 53);
+            OkBtn.Location = new Point(289, 101);
             OkBtn.Name = "OkBtn";
-            OkBtn.Size = new Size(73, 32);
-            OkBtn.TabIndex = 2;
+            OkBtn.Size = new Size(75, 23);
+            OkBtn.TabIndex = 0;
             OkBtn.Text = "Ok";
             OkBtn.UseVisualStyleBackColor = true;
             OkBtn.Click += OkBtn_Click;
             // 
-            // SelectCaptureDevice
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 72);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(296, 23);
+            textBox1.TabIndex = 1;
+            // 
+            // BrowseBtn
+            // 
+            BrowseBtn.Location = new Point(314, 72);
+            BrowseBtn.Name = "BrowseBtn";
+            BrowseBtn.Size = new Size(75, 23);
+            BrowseBtn.TabIndex = 2;
+            BrowseBtn.Text = "Suchen";
+            BrowseBtn.UseVisualStyleBackColor = true;
+            BrowseBtn.Click += BrowseBtn_Click;
+            // 
+            // FileSoreceSelection
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(509, 245);
+            ClientSize = new Size(425, 304);
+            Controls.Add(BrowseBtn);
+            Controls.Add(textBox1);
             Controls.Add(OkBtn);
-            Controls.Add(refreshBtn);
-            Controls.Add(deviceList);
-            Name = "SelectCaptureDevice";
-            Text = "Aufnahmegerät konfigurieren";
+            Name = "FileSoreceSelection";
+            Text = "Dateisuchen";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private ComboBox deviceList;
-        private Button refreshBtn;
         private Button OkBtn;
+        private TextBox textBox1;
+        private Button BrowseBtn;
     }
 }

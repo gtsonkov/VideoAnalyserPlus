@@ -2,6 +2,7 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
+using Models;
 
 namespace VT
 {
@@ -9,17 +10,26 @@ namespace VT
     {
         private VideoCapture _capture;
 
+        internal int deviceIndex = -1;
+        internal string _file = string.Empty;
+
         private Mat _frame;
 
         //To Do: Make it dynamic
         private int _frameRate = 60;
         private const int toolbarWight = 100;
-        private string _file = string.Empty;
         private bool _isPaused;
+        private int defaultWide = 812;
+        private int defaultHeight = 575;
+
+        internal ColorMask color1;
+        internal ColorMask color2;
 
         public MainForm()
         {
             InitializeComponent();
+            this.color1 = new ColorMask();
+            this.color2 = new ColorMask();
         }
 
         public MainForm(object obj)
@@ -40,33 +50,41 @@ namespace VT
             //At this version: if _file ist empty just execute the default video capture device
             //Else execute the video sorce
 
-            if (this._file == string.Empty)
+            if (this._file == string.Empty && this.deviceIndex == -1)
             {
-                try
-                {
-                    this._capture = new VideoCapture(0);
-
-                    if (this._capture.Height == 0 || this._capture.Width == 0)
-                    {
-                        throw new ArgumentException("Keine Aufnahmegerät gefunden.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Warnung");
-                    return;
-                }
+                MessageBox.Show("Bitte eine Quelle festliegen (Kamera oder Videodatei.)");
+                return;
             }
             else
             {
-                try
+                if (this.deviceIndex != -1)
                 {
-                    this._capture = new VideoCapture(this._file);
+                    this._capture = new VideoCapture(deviceIndex);
+
+                    try
+                    {
+                        if (this._capture.Height == 0 || this._capture.Width == 0)
+                        {
+                            throw new ArgumentException("Keine Aufnahmegerät gefunden.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Warnung");
+                        return;
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "Warnung");
-                    return;
+                    try
+                    {
+                        this._capture = new VideoCapture(this._file);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Warnung");
+                        return;
+                    }
                 }
             }
 
@@ -78,6 +96,11 @@ namespace VT
             this._capture.ImageGrabbed -= ProcessFrameEventHandler;
             this._capture.ImageGrabbed += ProcessFrameEventHandler;
             this._capture.Start();
+        }
+
+        internal void SorceChange()
+        {
+            this.StopPlaying();
         }
 
         private void PauseBtn_Click(object sender, EventArgs e)
@@ -98,17 +121,17 @@ namespace VT
             Mat rgb = this._frame.Clone();
 
             //To Do: User shoud manualy select the color and range
-            var lower = new ScalarArray(new MCvScalar(200, 200, 200));
-            var upper = new ScalarArray(new MCvScalar(255, 255, 255));
+            var lower = new ScalarArray(new MCvScalar(color1.Blue_Min,color1.Green_Min,color1.Red_Min, 255));
+            var upper = new ScalarArray(new MCvScalar(color1.Blue_Max,color1.Green_Max, color1.Red_Max, 255));
 
             var recColor = new MCvScalar(0, 255, 0);
 
             TrackCurrentColor(lower, upper, rgb, recColor);
 
             //To Do: User shoud manualy select the color and range
-            lower = new ScalarArray(new MCvScalar(89, 150, 63));
-            upper = new ScalarArray(new MCvScalar(100, 100, 255));
-
+            lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
+            upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
+            
             recColor = new MCvScalar(255, 0, 255);
 
 
@@ -129,8 +152,16 @@ namespace VT
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            this._capture.Dispose();
+            StopPlaying();
             this._isPaused = false;
+        }
+
+        private void StopPlaying()
+        {
+            this._capture.Dispose();
+            this.screenBox1.Image = null;
+            this.Height = this.defaultHeight;
+            this.Width = this.defaultWide;
         }
 
         private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
@@ -172,6 +203,22 @@ namespace VT
             using (var camSettings = new SelectCaptureDevice())
             {
                 camSettings.ShowDialog();
+            }
+        }
+
+        private void videodateiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var fileSelection = new FileSoreceSelection())
+            {
+                fileSelection.ShowDialog();
+            }
+        }
+
+        private void prozesseinstellungenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var colorSettings = new ColorSettings())
+            {
+                colorSettings.ShowDialog();
             }
         }
     }
