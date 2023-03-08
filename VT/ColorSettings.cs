@@ -102,7 +102,7 @@ namespace VT
 
                 MessageBox.Show("Bitte geben Sie eine gültige Zahl an.", "Fehler");
             }
-            
+
             SetColorRange(this._color2, this._color2.Radius);
             SetColorsView();
         }
