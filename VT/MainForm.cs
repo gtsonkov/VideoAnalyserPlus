@@ -74,8 +74,8 @@ namespace VT
                         return;
                     }
 
-                    this._capture.Set(CapProp.FrameWidth, 1920);
-                    this._capture.Set(CapProp.FrameWidth, 1080);
+                    this._capture.Set(CapProp.FrameWidth, 1024);
+                    this._capture.Set(CapProp.FrameHeight, 768);
                 }
                 else
                 {
@@ -135,10 +135,10 @@ namespace VT
 
             if (this.trackColor2)
             {
-               var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
-               var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
+                var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
+                var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
-               var recColor = new MCvScalar(255, 0, 255);
+                var recColor = new MCvScalar(255, 0, 255);
 
                 TrackCurrentColor(lower, upper, rgb, recColor);
             }

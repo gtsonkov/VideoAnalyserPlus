@@ -48,14 +48,14 @@
             screenBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             screenBox1.Location = new Point(1, 26);
             screenBox1.Name = "screenBox1";
-            screenBox1.Size = new Size(794, 454);
+            screenBox1.Size = new Size(814, 454);
             screenBox1.TabIndex = 0;
             screenBox1.TabStop = false;
             // 
             // PlayBtn
             // 
             PlayBtn.Anchor = AnchorStyles.Bottom;
-            PlayBtn.Location = new Point(274, 495);
+            PlayBtn.Location = new Point(284, 495);
             PlayBtn.Name = "PlayBtn";
             PlayBtn.Size = new Size(75, 23);
             PlayBtn.TabIndex = 1;
@@ -66,7 +66,7 @@
             // PauseBtn
             // 
             PauseBtn.Anchor = AnchorStyles.Bottom;
-            PauseBtn.Location = new Point(365, 495);
+            PauseBtn.Location = new Point(375, 495);
             PauseBtn.Name = "PauseBtn";
             PauseBtn.Size = new Size(75, 23);
             PauseBtn.TabIndex = 2;
@@ -77,7 +77,7 @@
             // StopBtn
             // 
             StopBtn.Anchor = AnchorStyles.Bottom;
-            StopBtn.Location = new Point(456, 495);
+            StopBtn.Location = new Point(466, 495);
             StopBtn.Name = "StopBtn";
             StopBtn.Size = new Size(75, 23);
             StopBtn.TabIndex = 3;
@@ -90,7 +90,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { sorceToolStripMenuItem, prozesseinstellungenToolStripMenuItem, hilfeToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(796, 24);
+            menuStrip1.Size = new Size(816, 24);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -132,7 +132,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(796, 536);
+            ClientSize = new Size(816, 536);
             Controls.Add(StopBtn);
             Controls.Add(PauseBtn);
             Controls.Add(PlayBtn);
