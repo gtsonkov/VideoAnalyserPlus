@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileSoreceSelection));
             OkBtn = new Button();
-            textBox1 = new TextBox();
+            fileNameTxtBox = new TextBox();
             BrowseBtn = new Button();
             SuspendLayout();
             // 
             // OkBtn
             // 
-            OkBtn.Location = new Point(289, 101);
+            OkBtn.Location = new Point(314, 116);
             OkBtn.Name = "OkBtn";
             OkBtn.Size = new Size(75, 23);
             OkBtn.TabIndex = 0;
@@ -44,12 +44,12 @@
             OkBtn.UseVisualStyleBackColor = true;
             OkBtn.Click += OkBtn_Click;
             // 
-            // textBox1
+            // fileNameTxtBox
             // 
-            textBox1.Location = new Point(12, 72);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(296, 23);
-            textBox1.TabIndex = 1;
+            fileNameTxtBox.Location = new Point(12, 72);
+            fileNameTxtBox.Name = "fileNameTxtBox";
+            fileNameTxtBox.Size = new Size(296, 23);
+            fileNameTxtBox.TabIndex = 1;
             // 
             // BrowseBtn
             // 
@@ -67,7 +67,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(425, 304);
             Controls.Add(BrowseBtn);
-            Controls.Add(textBox1);
+            Controls.Add(fileNameTxtBox);
             Controls.Add(OkBtn);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FileSoreceSelection";
@@ -79,7 +79,7 @@
         #endregion
 
         private Button OkBtn;
-        private TextBox textBox1;
+        private TextBox fileNameTxtBox;
         private Button BrowseBtn;
     }
 }

@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace VT
+﻿namespace VT
 {
     public partial class FileSoreceSelection : Form
     {
@@ -21,6 +11,8 @@ namespace VT
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
+            this.filePath = this.fileNameTxtBox.Text;
+
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
             mainForm._file = this.filePath;
             if (mainForm.deviceIndex > -1)
@@ -41,8 +33,9 @@ namespace VT
 
             if (result == DialogResult.OK) // Get result after click OK
             {
-                this.filePath = openFileDialog1.FileName;
-                this.OkBtn.Enabled = !String.IsNullOrEmpty(filePath);
+                this.fileNameTxtBox.Text = openFileDialog1.FileName;
+
+                this.OkBtn.Enabled = !String.IsNullOrEmpty(this.fileNameTxtBox.Text);
             }
         }
     }
