@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "dgSpecHash": "U4J1OneDeOBUxx6afUdymXzLvBkKIVfvQUFOKcRgTyot9GLq4xoqRQNmmtb5zgegU7pK41S//Xk/oNWbebMr+Q==",
+  "success": false,
+  "projectFilePath": "D:\\Work\\_Projects\\VideoAnalyserPlus\\VT.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\directshowlib\\1.0.0\\directshowlib.1.0.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\emgu.cv\\4.6.0.5131\\emgu.cv.4.6.0.5131.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\emgu.cv.bitmap\\4.6.0.5131\\emgu.cv.bitmap.4.6.0.5131.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\emgu.cv.runtime.windows\\4.6.0.5131\\emgu.cv.runtime.windows.4.6.0.5131.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\emgu.cv.ui\\4.6.0.5131\\emgu.cv.ui.4.6.0.5131.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\emgu.runtime.windows.msvc.rt.arm64\\19.33.31630\\emgu.runtime.windows.msvc.rt.arm64.19.33.31630.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\emgu.runtime.windows.msvc.rt.x64\\19.33.31630\\emgu.runtime.windows.msvc.rt.x64.19.33.31630.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\emgu.runtime.windows.msvc.rt.x86\\19.33.31630\\emgu.runtime.windows.msvc.rt.x86.19.33.31630.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.drawing.primitives\\4.3.0\\system.drawing.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.runtime\\4.3.1\\system.runtime.4.3.1.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation\\4.3.0\\system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
+    "C:\\Users\\g.tsonkov\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Unable to find project 'D:\\Work\\_Projects\\Models\\Models.csproj'. Check that the project reference is valid and that the project file exists.",
+      "libraryId": "D:\\Work\\_Projects\\Models\\Models.csproj",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'DirectShowLib 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "DirectShowLib",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
+}

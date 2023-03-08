@@ -50,9 +50,6 @@ namespace VT
                 return;
             }
 
-            //At this version: if _file ist empty just execute the default video capture device
-            //Else execute the video sorce
-
             if (this._file == string.Empty && this.deviceIndex == -1)
             {
                 MessageBox.Show("Bitte eine Quelle festliegen (Kamera oder Videodatei.)");
@@ -76,6 +73,9 @@ namespace VT
                         MessageBox.Show(ex.Message, "Warnung");
                         return;
                     }
+
+                    this._capture.Set(CapProp.FrameWidth, 1920);
+                    this._capture.Set(CapProp.FrameWidth, 1080);
                 }
                 else
                 {
@@ -125,7 +125,6 @@ namespace VT
 
             if (this.trackColor1)
             {
-                //To Do: User shoud manualy select the color and range
                 var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
 
@@ -136,7 +135,6 @@ namespace VT
 
             if (this.trackColor2)
             {
-                //To Do: User shoud manualy select the color and range
                var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
                var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
