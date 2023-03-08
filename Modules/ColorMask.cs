@@ -1,7 +1,13 @@
-﻿namespace Modules
+﻿using System.Drawing;
+
+namespace Modules
 {
     public class ColorMask
     {
+        public Color BaseColor { get; set; }
+
+        public int Radius { get; set; }
+
         public int Red_Min { get; set; }
 
         public int Green_Min { get; set; }

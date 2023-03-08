@@ -45,6 +45,8 @@
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
             pictureBox6 = new PictureBox();
+            stratTrackC1CheckBox = new CheckBox();
+            stratTrackC2CheckBox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -118,9 +120,9 @@
             // 
             // okBtn
             // 
-            okBtn.Location = new Point(386, 325);
+            okBtn.Location = new Point(177, 317);
             okBtn.Name = "okBtn";
-            okBtn.Size = new Size(78, 38);
+            okBtn.Size = new Size(101, 44);
             okBtn.TabIndex = 7;
             okBtn.Text = "OK";
             okBtn.UseVisualStyleBackColor = true;
@@ -174,11 +176,35 @@
             pictureBox6.TabIndex = 13;
             pictureBox6.TabStop = false;
             // 
+            // stratTrackC1CheckBox
+            // 
+            stratTrackC1CheckBox.AutoSize = true;
+            stratTrackC1CheckBox.Location = new Point(41, 290);
+            stratTrackC1CheckBox.Name = "stratTrackC1CheckBox";
+            stratTrackC1CheckBox.Size = new Size(94, 19);
+            stratTrackC1CheckBox.TabIndex = 14;
+            stratTrackC1CheckBox.Text = "StratTracking";
+            stratTrackC1CheckBox.UseVisualStyleBackColor = true;
+            stratTrackC1CheckBox.CheckedChanged += stratTrackC1CheckBox_CheckedChanged;
+            // 
+            // stratTrackC2CheckBox
+            // 
+            stratTrackC2CheckBox.AutoSize = true;
+            stratTrackC2CheckBox.Location = new Point(308, 290);
+            stratTrackC2CheckBox.Name = "stratTrackC2CheckBox";
+            stratTrackC2CheckBox.Size = new Size(97, 19);
+            stratTrackC2CheckBox.TabIndex = 15;
+            stratTrackC2CheckBox.Text = "Strat Tracking";
+            stratTrackC2CheckBox.UseVisualStyleBackColor = true;
+            stratTrackC2CheckBox.CheckedChanged += stratTrackC2CheckBox_CheckedChanged;
+            // 
             // ColorSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(477, 373);
+            Controls.Add(stratTrackC2CheckBox);
+            Controls.Add(stratTrackC1CheckBox);
             Controls.Add(pictureBox6);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox4);
@@ -224,5 +250,7 @@
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private PictureBox pictureBox6;
+        private CheckBox stratTrackC1CheckBox;
+        private CheckBox stratTrackC2CheckBox;
     }
 }

@@ -1,26 +1,50 @@
-﻿
-using Modules;
+﻿using Modules;
 
 namespace VT
 {
     public partial class ColorSettings : Form
     {
-        private Color _color1;
-        private int radiusColor1 = 0;
-
-        private Color _color2;
-        private int radiusColor2 = 0;
+        private ColorMask _color1;
+        private ColorMask _color2;
 
         public ColorSettings()
         {
             InitializeComponent();
+            this._color1 = new ColorMask();
+            this._color2 = new ColorMask();
+
+            SetPropertysState();
+        }
+
+        private void SetPropertysState()
+        {
+            var mainForm = (MainForm)Application.OpenForms["MainForm"];
+
+            this.stratTrackC1CheckBox.Checked = mainForm.trackColor1;
+            this.stratTrackC2CheckBox.Checked = mainForm.trackColor2;
+
+            this.radiusC1TxtBox.Text = this._color1.Radius.ToString();
+            this.radiusC2TxtBox.Text = this._color2.Radius.ToString();
+        }
+
+        public ColorSettings(ColorMask color1, ColorMask color2)
+        {
+            InitializeComponent();
+            this._color1 = color1;
+            this._color2 = color2;
+
+            SetColorsView();
+
+            SetPropertysState();
         }
 
         private void Color1SetBtn_Click(object sender, EventArgs e)
         {
             if (colorDialog_C1.ShowDialog() == DialogResult.OK)
             {
-                this._color1 = colorDialog_C1.Color;
+                this._color1.BaseColor = colorDialog_C1.Color;
+
+                SetColorsView();
             }
         }
 
@@ -28,7 +52,9 @@ namespace VT
         {
             if (colorDialog_C2.ShowDialog() == DialogResult.OK)
             {
-                this._color2 = colorDialog_C2.Color;
+                this._color2.BaseColor = colorDialog_C2.Color;
+
+                SetColorsView();
             }
         }
 
@@ -38,19 +64,23 @@ namespace VT
             {
                 int currRadius = int.Parse(radiusC1TxtBox.Text);
 
-                if (radiusColor1 > 255 || radiusColor1 < 0)
+                if (currRadius > 255 || currRadius < 0)
                 {
                     MessageBox.Show("Radius auserhalb die grenzen 0 bis 255.", "Fehler");
                     return;
                 }
 
-                radiusColor1 = currRadius;
+                this._color1.Radius = currRadius;
             }
             catch
             {
 
                 MessageBox.Show("Bitte geben Sie eine gültige Zahl an.", "Fehler");
             }
+
+            SetColorRange(this._color1, this._color1.Radius);
+
+            SetColorsView();
         }
 
         private void radiusC2Btn_Click(object sender, EventArgs e)
@@ -59,55 +89,61 @@ namespace VT
             {
                 int currRadius = int.Parse(radiusC2TxtBox.Text);
 
-                if (radiusColor2 > 255 || radiusColor2 < 0)
+                if (currRadius > 255 || currRadius < 0)
                 {
                     MessageBox.Show("Radius auserhalb die grenzen 0 bis 255.", "Fehler");
                     return;
                 }
 
-                radiusColor2 = currRadius;
+                this._color2.Radius = currRadius;
             }
             catch
             {
 
                 MessageBox.Show("Bitte geben Sie eine gültige Zahl an.", "Fehler");
             }
+            
+            SetColorRange(this._color2, this._color2.Radius);
+            SetColorsView();
         }
 
         private void okBtn_Click(object sender, EventArgs e)
         {
+            ApllayColorsChanges();
+        }
+
+        private void ApllayColorsChanges()
+        {
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
 
-            mainForm.color1 = SetColorRange(this._color1, this.radiusColor1);
-            mainForm.color2 = SetColorRange(this._color2, this.radiusColor2);
+            mainForm.color1 = this._color1;
+            mainForm.color2 = this._color2;
 
-            SetColorsView(mainForm.color1, mainForm.color2);
+            SetColorsView();
         }
 
-        private void SetColorsView(ColorMask c1, ColorMask c2)
+        private void SetColorsView()
         {
-            this.pictureBox1.BackColor = Color.FromArgb(c1.Red_Min, c1.Green_Min, c1.Blue_Min);
-            this.pictureBox2.BackColor = _color1;
-            this.pictureBox3.BackColor = Color.FromArgb(c1.Red_Max, c1.Green_Max, c1.Blue_Max);
+            this.pictureBox1.BackColor = Color.FromArgb(this._color1.Red_Min, this._color1.Green_Min, this._color1.Blue_Min);
+            this.pictureBox2.BackColor = _color1.BaseColor;
+            this.pictureBox3.BackColor = Color.FromArgb(this._color1.Red_Max, this._color1.Green_Max, this._color1.Blue_Max);
 
-            this.pictureBox4.BackColor = Color.FromArgb(c2.Red_Min, c2.Green_Min, c2.Blue_Min);
-            this.pictureBox5.BackColor = _color2;
-            this.pictureBox6.BackColor = Color.FromArgb(c2.Red_Max, c2.Green_Max, c2.Blue_Max);
+            this.pictureBox4.BackColor = Color.FromArgb(this._color2.Red_Min, this._color2.Green_Min, this._color2.Blue_Min);
+            this.pictureBox5.BackColor = _color2.BaseColor;
+            this.pictureBox6.BackColor = Color.FromArgb(this._color2.Red_Max, this._color2.Green_Max, this._color2.Blue_Max);
         }
 
-        private ColorMask SetColorRange(Color color, int radius)
+        private void SetColorRange(ColorMask color, int radius)
         {
-            ColorMask currColor = new ColorMask();
+            color.BaseColor = color.BaseColor;
 
-            currColor.Red_Max = getMax(color.R, radius);
-            currColor.Green_Max = getMax(color.G, radius);
-            currColor.Blue_Max = getMax(color.B, radius);
+            color.Red_Max = getMax(color.BaseColor.R, radius);
+            color.Green_Max = getMax(color.BaseColor.G, radius);
+            color.Blue_Max = getMax(color.BaseColor.B, radius);
 
-            currColor.Red_Min = getMin(color.R, radius);
-            currColor.Green_Min = getMin(color.G, radius);
-            currColor.Blue_Min = getMin(color.B, radius);
-
-            return currColor;
+            color.Red_Min = getMin(color.BaseColor.R, radius);
+            color.Green_Min = getMin(color.BaseColor.G, radius);
+            color.Blue_Min = getMin(color.BaseColor.B, radius);
         }
 
         private int getMax(byte color, int radius)
@@ -132,6 +168,18 @@ namespace VT
             {
                 return color - radius;
             }
+        }
+
+        private void stratTrackC1CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var mainForm = (MainForm)Application.OpenForms["MainForm"];
+            mainForm.trackColor1 = this.stratTrackC1CheckBox.Checked;
+        }
+
+        private void stratTrackC2CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var mainForm = (MainForm)Application.OpenForms["MainForm"];
+            mainForm.trackColor2 = this.stratTrackC2CheckBox.Checked;
         }
     }
 }

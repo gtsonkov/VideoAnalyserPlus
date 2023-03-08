@@ -3,6 +3,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Modules;
+
 namespace VT
 {
     public partial class MainForm : Form
@@ -23,6 +24,9 @@ namespace VT
 
         internal ColorMask color1;
         internal ColorMask color2;
+
+        internal bool trackColor1;
+        internal bool trackColor2;
 
         public MainForm()
         {
@@ -119,22 +123,27 @@ namespace VT
 
             Mat rgb = this._frame.Clone();
 
-            //To Do: User shoud manualy select the color and range
-            var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
-            var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
+            if (this.trackColor1)
+            {
+                //To Do: User shoud manualy select the color and range
+                var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
+                var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
 
-            var recColor = new MCvScalar(0, 255, 0);
+                var recColor = new MCvScalar(0, 255, 0);
 
-            TrackCurrentColor(lower, upper, rgb, recColor);
+                TrackCurrentColor(lower, upper, rgb, recColor);
+            }
 
-            //To Do: User shoud manualy select the color and range
-            lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
-            upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
+            if (this.trackColor2)
+            {
+                //To Do: User shoud manualy select the color and range
+               var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
+               var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
-            recColor = new MCvScalar(255, 0, 255);
+               var recColor = new MCvScalar(255, 0, 255);
 
-
-            TrackCurrentColor(lower, upper, rgb, recColor);
+                TrackCurrentColor(lower, upper, rgb, recColor);
+            }
 
             ShowVideo();
 
@@ -215,7 +224,7 @@ namespace VT
 
         private void prozesseinstellungenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var colorSettings = new ColorSettings())
+            using (var colorSettings = new ColorSettings(color1, color2))
             {
                 colorSettings.ShowDialog();
             }
