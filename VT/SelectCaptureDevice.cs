@@ -1,4 +1,6 @@
 ﻿using DirectShowLib;
+using Modules;
+using System.Management;
 
 namespace VT
 {
@@ -6,6 +8,7 @@ namespace VT
     {
         private List<string> captureDevices;
         private DsDevice[]? devices;
+        private IEnumerable<ManagementObject> foundedDevices;
 
         public SelectCaptureDevice()
         {
@@ -13,6 +16,8 @@ namespace VT
             this.captureDevices = new List<string>();
             GetCaptureDevices();
             FillDropDownMenu();
+
+            foundedDevices = GetVideoCaptureDevices();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
@@ -39,10 +44,14 @@ namespace VT
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
 
+        private void GetSupportedResolutions()
+        {
+
+        }
+
         private void GetCaptureDevices()
         {
             this.devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
-
 
             foreach (var device in this.devices)
             {
@@ -74,6 +83,61 @@ namespace VT
             {
                 var currDevice = this.devices[int.Parse(this.deviceList.SelectedIndex.ToString())];
             }
+        }
+
+        private IEnumerable<Resolution> GetDeviceResolution(ManagementObject crrDevices)
+        {
+            IEnumerable<Resolution> result = new List<Resolution>();
+                    
+            result = GetSupportedResolutions(crrDevices);
+                
+            return result;
+        }
+
+        private IEnumerable<ManagementObject> GetVideoCaptureDevices()
+        {
+            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption LIKE '%(video)%'");
+
+            foreach (ManagementObject device in searcher.Get())
+            {
+                yield return device;
+            }
+        }
+
+        private IEnumerable<Resolution> GetSupportedResolutions(ManagementObject device)
+        {
+            var resolutions = new List<Resolution>();
+
+            var name = (string)device["Name"];
+            var deviceId = GetDeviceId(name);
+
+            var searcher = new ManagementObjectSearcher("SELECT * FROM WmiMediaSupportedFormats WHERE InstanceName='" + deviceId + "'");
+
+            foreach (ManagementObject supportedFormat in searcher.Get())
+            {
+                int width = (int)supportedFormat["HorizontalResolution"];
+                int height = (int)supportedFormat["VerticalResolution"];
+
+                var resolution = new Resolution(width, height);
+                if (!resolutions.Contains(resolution))
+                {
+                    resolutions.Add(resolution);
+                }
+            }
+
+            return resolutions;
+        }
+
+        private string GetDeviceId(string name)
+        {
+            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption='" + name + "'");
+
+            foreach (ManagementObject device in searcher.Get())
+            {
+                return (string)device["DeviceID"];
+            }
+
+            return string.Empty;
         }
     }
 }
