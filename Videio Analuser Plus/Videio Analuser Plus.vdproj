@@ -15,19 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_2A81263F84A94947861281EE6EA96228"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3890E0E4CC17452D9370F8CA9BD2DE15"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E991AC743D7E4262A1BA900078A709B2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -49,6 +37,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -65,6 +61,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -96,46 +100,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2A81263F84A94947861281EE6EA96228"
-            {
-            "SourcePath" = "8:D:\\Downloads\\Logo_VA.ico"
-            "TargetName" = "8:Logo_VA.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_2FDBA021A9C84E32BE084361E62A40E4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E991AC743D7E4262A1BA900078A709B2"
-            {
-            "SourcePath" = "8:D:\\Downloads\\Logo_VA.ico"
-            "TargetName" = "8:Logo_VA.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_5808BD32EF97433DB8A0004707F363A3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -324,7 +288,7 @@
             "Target" = "8:_3890E0E4CC17452D9370F8CA9BD2DE15"
             "Folder" = "8:_5808BD32EF97433DB8A0004707F363A3"
             "WorkingFolder" = "8:_C439C124D2C344EF82231A5855E376EE"
-            "Icon" = "8:_E991AC743D7E4262A1BA900078A709B2"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DB4605E49F60457CB2541D773DF60CB2"
@@ -338,7 +302,7 @@
             "Target" = "8:_3890E0E4CC17452D9370F8CA9BD2DE15"
             "Folder" = "8:_2FDBA021A9C84E32BE084361E62A40E4"
             "WorkingFolder" = "8:_C439C124D2C344EF82231A5855E376EE"
-            "Icon" = "8:_2A81263F84A94947861281EE6EA96228"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }
