@@ -104,7 +104,7 @@ namespace VT
 
         private IEnumerable<ManagementObject> GetVideoCaptureDevices()
         {
-            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption LIKE '%(video)%'");
+            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption LIKE '%vid%'");
 
             foreach (ManagementObject device in searcher.Get())
             {
@@ -123,14 +123,15 @@ namespace VT
 
             foreach (ManagementObject supportedFormat in searcher.Get())
             {
-                int width = (int)supportedFormat["HorizontalResolution"];
-                int height = (int)supportedFormat["VerticalResolution"];
+                    int width = (int)supportedFormat["HorizontalResolution"];
+                    int height = (int)supportedFormat["VerticalResolution"];
 
-                var resolution = new Resolution(width, height);
-                if (!resolutions.Contains(resolution))
-                {
-                    resolutions.Add(resolution);
-                }
+                    var resolution = new Resolution(width, height);
+                    if (!resolutions.Contains(resolution))
+                    {
+                        resolutions.Add(resolution);
+                    }
+                
             }
 
             return resolutions;
