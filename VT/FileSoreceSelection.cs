@@ -3,6 +3,7 @@
     public partial class FileSoreceSelection : Form
     {
         private string filePath = string.Empty;
+
         public FileSoreceSelection()
         {
             InitializeComponent();
@@ -15,6 +16,7 @@
 
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
             mainForm._file = this.filePath;
+
             if (mainForm.deviceIndex > -1)
             {
                 mainForm.SorceChange();

@@ -75,7 +75,7 @@ namespace VT
                     }
 
                     this._capture.Set(CapProp.FrameWidth, 1024);
-                    this._capture.Set(CapProp.FrameHeight, 768);
+                    this._capture.Set(CapProp.FrameHeight, 576);
                 }
                 else
                 {
@@ -164,10 +164,13 @@ namespace VT
 
         private void StopPlaying()
         {
-            this._capture.Dispose();
-            this.screenBox1.Image = null;
-            this.Height = this.defaultHeight;
-            this.Width = this.defaultWide;
+            if (this._capture != null) 
+            {
+                this._capture.Dispose();
+                this.screenBox1.Image = null;
+                this.Height = this.defaultHeight;
+                this.Width = this.defaultWide;
+            }
         }
 
         private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)

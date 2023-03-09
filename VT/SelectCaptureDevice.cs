@@ -5,6 +5,7 @@ namespace VT
     public partial class SelectCaptureDevice : Form
     {
         private List<string> captureDevices;
+        private DsDevice[]? devices;
 
         public SelectCaptureDevice()
         {
@@ -40,10 +41,10 @@ namespace VT
 
         private void GetCaptureDevices()
         {
-            var devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+            this.devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
 
-            foreach (var device in devices)
+            foreach (var device in this.devices)
             {
                 this.captureDevices.Add(device.Name);
             }
@@ -68,6 +69,11 @@ namespace VT
         private void deviceList_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
+
+            if (this.devices != null)
+            {
+                var currDevice = this.devices[int.Parse(this.deviceList.SelectedIndex.ToString())];
+            }
         }
     }
 }
