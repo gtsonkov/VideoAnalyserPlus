@@ -8,13 +8,8 @@
 
         public Resolution(int width, int height)
         {
-            Width = width;
-            Height = height;
-        }
-
-        public override int GetHashCode()
-        {
-            return (Width << 16) ^ Height;
+            this.Width = width;
+            this.Height = height;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using DirectShowLib;
+using Emgu.CV.Structure;
 using Modules;
 using System.Management;
+using System.Text;
 
 namespace VT
 {
@@ -9,6 +11,8 @@ namespace VT
         private List<string> captureDevices;
         private DsDevice[]? devices;
         private List<ManagementObject> foundedDevices;
+        private Resolution resulution;
+        private CaptureDevice selectedDevice;
 
         public SelectCaptureDevice()
         {
@@ -16,8 +20,6 @@ namespace VT
             this.captureDevices = new List<string>();
             GetCaptureDevices();
             FillDropDownMenu();
-
-            foundedDevices = GetVideoCaptureDevices().ToList();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
@@ -44,11 +46,6 @@ namespace VT
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
 
-        private void GetSupportedResolutions()
-        {
-
-        }
-
         private void GetCaptureDevices()
         {
             this.devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
@@ -63,8 +60,11 @@ namespace VT
         {
             if (this.deviceList.SelectedIndex >= 0)
             {
+
                 var mainForm = (MainForm)Application.OpenForms["MainForm"];
-                mainForm.deviceIndex = this.deviceList.SelectedIndex;
+
+                mainForm.currCaptureDevice = this.selectedDevice;
+
                 if (mainForm._file != string.Empty)
                 {
                     mainForm.SorceChange();
@@ -79,74 +79,61 @@ namespace VT
         {
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
 
-            //Testing with both libs (DirectShowLib and .net)
-
             if (this.devices != null)
             {
-                var currDevice = this.devices[int.Parse(this.deviceList.SelectedIndex.ToString())];
-            }
-
-            if (this.foundedDevices != null)
-            {
-                var selectedDevice = foundedDevices[int.Parse(this.deviceList.SelectedIndex.ToString())];
-                var resolutions = GetDeviceResolution(selectedDevice);
+                int deviceIndex = this.deviceList.SelectedIndex;
+                LoadSelectedDevice(deviceIndex);
+                LoadResolutionsToComboMenu();
             }
         }
 
-        private IEnumerable<Resolution> GetDeviceResolution(ManagementObject crrDevices)
+        private void LoadResolutionsToComboMenu()
         {
-            IEnumerable<Resolution> result = new List<Resolution>();
-                    
-            result = GetSupportedResolutions(crrDevices);
-                
-            return result;
+            this.resolutionsComboBox.Items.Clear();
+
+            List<string> resolutions = new List<string>();
+
+            foreach (var item in this.selectedDevice.SupportedResolutions)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append(item.Width.ToString());
+                stringBuilder.Append("x");
+                stringBuilder.Append(item.Height.ToString());
+
+                resolutions.Add(stringBuilder.ToString());
+            }
+
+            resolutionsComboBox.Items.AddRange(resolutions.ToArray());
         }
 
-        private IEnumerable<ManagementObject> GetVideoCaptureDevices()
+        private void LoadSelectedDevice(int deviceIndex)
         {
-            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption LIKE '%vid%'");
+            string deviceName = this.deviceList.SelectedItem.ToString();
+            DsDevice capture = devices[deviceIndex];
 
-            foreach (ManagementObject device in searcher.Get())
+            this.selectedDevice = new CaptureDevice(capture, deviceName, deviceIndex);
+
+            if (this.resulution == null)
             {
-                yield return device;
+                this.resulution = selectedDevice.SupportedResolutions.FirstOrDefault();
+                this.selectedDevice.Resolution = resulution;
             }
         }
 
-        private IEnumerable<Resolution> GetSupportedResolutions(ManagementObject device)
+        private void resolutionsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var resolutions = new List<Resolution>();
-
-            var name = (string)device["Name"];
-            var deviceId = GetDeviceId(name);
-
-            var searcher = new ManagementObjectSearcher("SELECT * FROM WmiMediaSupportedFormats WHERE InstanceName='" + deviceId + "'");
-
-            foreach (ManagementObject supportedFormat in searcher.Get())
+            try
             {
-                    int width = (int)supportedFormat["HorizontalResolution"];
-                    int height = (int)supportedFormat["VerticalResolution"];
+                int[] temp = resolutionsComboBox.SelectedItem.ToString().Split("x").Select(int.Parse).ToArray();
+                var selectedResolution = new Resolution(temp[0], temp[1]);
 
-                    var resolution = new Resolution(width, height);
-                    if (!resolutions.Contains(resolution))
-                    {
-                        resolutions.Add(resolution);
-                    }
-                
+                this.selectedDevice.Resolution = selectedResolution;
             }
-
-            return resolutions;
-        }
-
-        private string GetDeviceId(string name)
-        {
-            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption='" + name + "'");
-
-            foreach (ManagementObject device in searcher.Get())
+            catch (Exception ex)
             {
-                return (string)device["DeviceID"];
-            }
 
-            return string.Empty;
+                throw new ArgumentException(ex.Message);
+            }
         }
     }
 }

@@ -11,7 +11,16 @@ namespace VT
         private VideoCapture _capture;
 
         internal int deviceIndex = -1;
+
+        internal CaptureDevice currCaptureDevice;
+
         internal string _file = string.Empty;
+
+        internal ColorMask color1;
+        internal ColorMask color2;
+
+        internal bool trackColor1;
+        internal bool trackColor2;
 
         private Mat _frame;
 
@@ -21,12 +30,6 @@ namespace VT
         private bool _isPaused;
         private int defaultWide = 812;
         private int defaultHeight = 575;
-
-        internal ColorMask color1;
-        internal ColorMask color2;
-
-        internal bool trackColor1;
-        internal bool trackColor2;
 
         public MainForm()
         {
@@ -50,16 +53,17 @@ namespace VT
                 return;
             }
 
-            if (this._file == string.Empty && this.deviceIndex == -1)
+            if (this._file == string.Empty && this.currCaptureDevice == null)
             {
-                MessageBox.Show("Bitte eine Quelle festliegen (Kamera oder Videodatei.)");
+                MessageBox.Show("Bitte eine Quelle festliegen (Kamera oder Videodatei.)","Warnung");
                 return;
             }
             else
             {
-                if (this.deviceIndex != -1)
+                if (this.currCaptureDevice != null)
                 {
-                    this._capture = new VideoCapture(deviceIndex);
+                    //this._capture = new VideoCapture(deviceIndex);
+                    this._capture = this.currCaptureDevice.VideoSorce;
 
                     try
                     {
@@ -74,8 +78,8 @@ namespace VT
                         return;
                     }
 
-                    this._capture.Set(CapProp.FrameWidth, 1024);
-                    this._capture.Set(CapProp.FrameHeight, 576);
+                    //this._capture.Set(CapProp.FrameWidth, 1024);
+                    //this._capture.Set(CapProp.FrameHeight, 576);
                 }
                 else
                 {

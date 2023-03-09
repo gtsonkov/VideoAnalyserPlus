@@ -33,6 +33,21 @@ dotnet_diagnostic.CS8601.severity = none
 # CS8622: Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 dotnet_diagnostic.CS8622.severity = none
 
+# CS8602: Dereference of a possibly null reference.
+dotnet_diagnostic.CS8602.severity = silent
+
+# CS8073: The result of the expression is always the same since a value of this type is never equal to 'null'
+dotnet_diagnostic.CS8073.severity = silent
+
+# IDE0018: Inline variable declaration
+csharp_style_inlined_variable_declaration = false
+
+# CS8600: Converting null literal or possible null value to non-nullable type.
+dotnet_diagnostic.CS8600.severity = silent
+
+# CS8604: Possible null reference argument.
+dotnet_diagnostic.CS8604.severity = silent
+
 [*.{cs,vb}]
 #### Naming styles ####
 
@@ -99,3 +114,6 @@ dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_style_prefer_simplified_interpolation = true:suggestion
 dotnet_style_namespace_match_folder = true:suggestion
+
+# Default severity for all analyzer diagnostics
+dotnet_analyzer_diagnostic.severity = silent
