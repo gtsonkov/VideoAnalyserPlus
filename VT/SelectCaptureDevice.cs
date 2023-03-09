@@ -8,7 +8,7 @@ namespace VT
     {
         private List<string> captureDevices;
         private DsDevice[]? devices;
-        private IEnumerable<ManagementObject> foundedDevices;
+        private List<ManagementObject> foundedDevices;
 
         public SelectCaptureDevice()
         {
@@ -17,7 +17,7 @@ namespace VT
             GetCaptureDevices();
             FillDropDownMenu();
 
-            foundedDevices = GetVideoCaptureDevices();
+            foundedDevices = GetVideoCaptureDevices().ToList();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
@@ -79,9 +79,17 @@ namespace VT
         {
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
 
+            //Testing with both libs (DirectShowLib and .net)
+
             if (this.devices != null)
             {
                 var currDevice = this.devices[int.Parse(this.deviceList.SelectedIndex.ToString())];
+            }
+
+            if (this.foundedDevices != null)
+            {
+                var selectedDevice = foundedDevices[int.Parse(this.deviceList.SelectedIndex.ToString())];
+                var resolutions = GetDeviceResolution(selectedDevice);
             }
         }
 
