@@ -1,4 +1,5 @@
-﻿using Modules;
+﻿using Microsoft.VisualBasic;
+using Modules;
 
 namespace VT
 {
@@ -6,12 +7,26 @@ namespace VT
     {
         private ColorMask _color1;
         private ColorMask _color2;
+        private bool sorceRedy;
 
         public ColorSettings()
         {
             InitializeComponent();
+
             this._color1 = new ColorMask();
             this._color2 = new ColorMask();
+
+            SetPropertysState();
+        }
+
+        public ColorSettings(ColorMask color1, ColorMask color2)
+        {
+            InitializeComponent();
+
+            this._color1 = color1;
+            this._color2 = color2;
+
+            SetColorsView();
 
             SetPropertysState();
         }
@@ -20,22 +35,16 @@ namespace VT
         {
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
 
+            sorceRedy = mainForm.sorceRedy;
+
             this.stratTrackC1CheckBox.Checked = mainForm.trackColor1;
             this.stratTrackC2CheckBox.Checked = mainForm.trackColor2;
 
+            this.stratTrackC1CheckBox.Enabled = sorceRedy;
+            this.stratTrackC2CheckBox.Enabled = sorceRedy;
+
             this.radiusC1TxtBox.Text = this._color1.Radius.ToString();
             this.radiusC2TxtBox.Text = this._color2.Radius.ToString();
-        }
-
-        public ColorSettings(ColorMask color1, ColorMask color2)
-        {
-            InitializeComponent();
-            this._color1 = color1;
-            this._color2 = color2;
-
-            SetColorsView();
-
-            SetPropertysState();
         }
 
         private void Color1SetBtn_Click(object sender, EventArgs e)
@@ -109,6 +118,12 @@ namespace VT
 
         private void okBtn_Click(object sender, EventArgs e)
         {
+            if (!sorceRedy)
+            {
+                MessageBox.Show("Bitte wählenn sie vorerst eine vido Quelle (camera oder video file)","Warnung");
+                return;
+            }
+
             ApllayColorsChanges();
         }
 
@@ -116,8 +131,7 @@ namespace VT
         {
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
 
-            mainForm.color1 = this._color1;
-            mainForm.color2 = this._color2;
+            mainForm.SetFilterColors(this._color1, this._color2);
 
             SetColorsView();
         }
@@ -172,14 +186,19 @@ namespace VT
 
         private void stratTrackC1CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            var mainForm = (MainForm)Application.OpenForms["MainForm"];
-            mainForm.trackColor1 = this.stratTrackC1CheckBox.Checked;
+            SetTrackingControl();
         }
 
         private void stratTrackC2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            SetTrackingControl();
+        }
+
+        private void SetTrackingControl()
+        {
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
-            mainForm.trackColor2 = this.stratTrackC2CheckBox.Checked;
+
+            mainForm.SetTrackingControl(this.stratTrackC1CheckBox.Checked, this.stratTrackC2CheckBox.Checked);
         }
     }
 }

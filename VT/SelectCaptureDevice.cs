@@ -62,7 +62,7 @@ namespace VT
 
                 var mainForm = (MainForm)Application.OpenForms["MainForm"];
 
-                mainForm.currCaptureDevice = this.selectedDevice;
+                mainForm.SetPlayer(this.selectedDevice, mainForm);
 
                 if (mainForm._file != string.Empty)
                 {

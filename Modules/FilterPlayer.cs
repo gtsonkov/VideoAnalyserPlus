@@ -7,32 +7,22 @@ using System.Drawing;
 
 namespace Modules
 {
-    public class Player : IPlayer
+    public class FilterPlayer : IPlayer
     {
         private VideoCapture _capture;
-
         private IStreamable _streamFrame;
-
-        internal CaptureDevice currCaptureDevice;
-
-        internal string _file = string.Empty;
-
-        internal ColorMask color1;
-        internal ColorMask color2;
-
-        internal bool trackColor1;
-        internal bool trackColor2;
-
+        private CaptureDevice currCaptureDevice;
         private Mat _frame;
 
-        //To Do: Make it dynamic
-        private int _frameRate = 60;
-        private const int toolbarWight = 100;
-        private bool _isPaused;
-        private int defaultWide = 812;
-        private int defaultHeight = 575;
+        private ColorMask color1;
+        private ColorMask color2;
 
-        public Player(CaptureDevice currCaptureDevice, IStreamable stream)
+        private bool trackColor1;
+        private bool trackColor2;
+
+        private bool _isPaused;
+
+        public FilterPlayer(CaptureDevice currCaptureDevice, IStreamable stream)
         {
             if (currCaptureDevice == null)
             {
@@ -51,14 +41,48 @@ namespace Modules
             this._isPaused = true;
         }
 
-        public IStreamable SetStream 
+        public IStreamable SetStream
         {
-            set 
-            { 
-                this._streamFrame = value; 
+            set
+            {
+                this._streamFrame = value;
             }
         }
 
+        //Return resolution from curren capture
+        public Resolution Resolution
+        {
+            get
+            {
+                return this.currCaptureDevice.Resolution;
+            }
+        }
+
+        public bool EnableTrackColor_A
+        {
+            get
+            {
+                return this.trackColor1;
+            }
+            set
+            {
+                this.trackColor1 = value;
+            }
+        }
+
+        public bool EnableTrackColor_B
+        {
+            get
+            {
+                return this.trackColor2;
+            }
+            set
+            {
+                this.trackColor2 = value;
+            }
+        }
+
+        //Strat playing
         public async void Play()
         {
             if (this._isPaused)
@@ -68,37 +92,19 @@ namespace Modules
                 return;
             }
 
-            if (this._file == string.Empty && this.currCaptureDevice == null)
+            if (this.currCaptureDevice == null)
             {
                 throw new ArgumentNullException("Bitte eine Quelle festliegen (Kamera oder Videodatei.)", "Warnung");
             }
             else
             {
-                if (this.currCaptureDevice != null)
+                try
                 {
-                    //this._capture = new VideoCapture(deviceIndex);
-                    try
-                    {
-                        this._capture = this.currCaptureDevice.VideoSorce;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ArgumentException(ex.Message);
-                    }
-
-                    //this._capture.Set(CapProp.FrameWidth, 1024);
-                    //this._capture.Set(CapProp.FrameHeight, 576);
+                    this._capture = this.currCaptureDevice.VideoSorce;
                 }
-                else
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        this._capture = new VideoCapture(this._file);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ArgumentException(ex.Message);
-                    }
+                    throw new ArgumentException(ex.Message);
                 }
             }
 
@@ -109,7 +115,30 @@ namespace Modules
             this._capture.Start();
         }
 
-        
+        public ColorMask FilterColor_A
+        {
+            get
+            {
+                return this.color1;
+            }
+            set
+            {
+                this.color1 = value;
+            }
+        }
+
+        public ColorMask FilterColor_B
+        {
+            get
+            {
+                return this.color2;
+            }
+            set
+            {
+                this.color2 = value;
+            }
+        }
+
 
         public void Stop()
         {
@@ -148,10 +177,6 @@ namespace Modules
                 TrackCurrentColor(lower, upper, rgb, recColor);
             }
 
-            //_capture.Retrieve(this._frame);
-
-            //CvInvoke.Imshow("Color Tracking", this._frame);
-            //CvInvoke.WaitKey(this._frameRate);
             this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame));
         }
 
@@ -191,4 +216,4 @@ namespace Modules
             this._isPaused = false;
         }
     }
-}
+} 

@@ -1,19 +1,11 @@
-﻿using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
-using Emgu.CV.Util;
-using Modules;
+﻿using Modules;
 using Modules.Interfaces;
 
 namespace VT
 {
     public partial class MainForm : Form, IStreamable
     {
-        private VideoCapture _capture;
-
-        private Player _player;
-
-        internal CaptureDevice currCaptureDevice;
+        private FilterPlayer _player;
 
         internal string _file = string.Empty;
 
@@ -22,11 +14,8 @@ namespace VT
 
         internal bool trackColor1;
         internal bool trackColor2;
+        internal bool sorceRedy;
 
-        private Mat _frame;
-
-        //To Do: Make it dynamic
-        private int _frameRate = 160;
         private const int toolbarWight = 100;
         private bool _isPaused;
         private int defaultWide = 812;
@@ -45,16 +34,63 @@ namespace VT
             this._file = obj.ToString() as string;
         }
 
+        public void DisplayFrame(Bitmap frame)
+        {
+
+            this.screenBox1.Image = frame;
+        }
+
+        //Set colors to tracking
+        internal void SetFilterColors (ColorMask colorA, ColorMask colorB) 
+        {
+            if (this._player != null)
+            {
+                this.color1 = colorA;
+                this.color2 = colorB;
+
+                this._player.FilterColor_A = this.color1;
+                this._player.FilterColor_B = this.color2;
+            }
+        }
+
+        //Enable/Disable Colors (A)/(B) Tracking
+        internal void SetTrackingControl(bool trackColorA, bool trackColorB)
+        {
+            if (this._player != null) 
+            {
+                this.trackColor1 = trackColorA;
+                this.trackColor2 = trackColorB;
+
+                this._player.EnableTrackColor_A = this.trackColor1;
+                this._player.EnableTrackColor_B = this.trackColor2;
+            }
+        }
+
+        //Create Player including capture device
+        internal void SetPlayer(CaptureDevice device, IStreamable form)
+        {
+            if (device == null || form == null)
+            {
+                throw new ArgumentNullException("Device und form can not be null.");
+            }
+
+            this._player = new FilterPlayer(device, form);
+
+            //The sorce is set and redy to use
+            this.sorceRedy = true;
+        }
+
         private void PlayBtn_Click(object sender, EventArgs e)
         {
+            //If paused, just cotinue playing
             if (this._isPaused)
             {
-                this._capture.Start();
+                this._player.Play();
                 this._isPaused = false;
                 return;
             }
 
-            if (this._file == string.Empty && this.currCaptureDevice == null)
+            if (this._file == string.Empty && this._player == null)
             {
                 MessageBox.Show("Bitte eine Quelle festliegen (Kamera oder Videodatei.)", "Warnung");
                 return;
@@ -63,10 +99,8 @@ namespace VT
             {
                 //Strat video form capture device
 
-                if (this.currCaptureDevice != null)
+                if (this._player != null)
                 {
-                    this._player = new Player(this.currCaptureDevice, this);
-
                     try
                     {
                         this._player.Play();
@@ -79,28 +113,16 @@ namespace VT
                 }
                 else
                 {
-                    try
-                    {
-                        this._capture = new VideoCapture(this._file);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Warnung");
-                        return;
-                    }
+                    //To do: Play video file sorce
                 }
             }
 
-            //this._frame = new Mat();
-            //
-            //this.Height = (this._capture.Height) + toolbarWight;
-            //this.Width = this._capture.Width;
-            //
-            //this._capture.ImageGrabbed -= ProcessFrameEventHandler;
-            //this._capture.ImageGrabbed += ProcessFrameEventHandler;
-            //this._capture.Start();
+            //Set the Image box size to the sorce size
+            this.Height = (this._player.Resolution.Height) + toolbarWight;
+            this.Width = this._player.Resolution.Width;
         }
 
+        //If sorce chenge, stop playing current sorce first
         internal void SorceChange()
         {
             this.StopPlaying();
@@ -108,8 +130,11 @@ namespace VT
 
         private void PauseBtn_Click(object sender, EventArgs e)
         {
-            this._capture.Pause();
-            this._isPaused = true;
+            if (this._player != null) 
+            {
+                this._player.Pause();
+                this._isPaused = true;
+            }
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -159,12 +184,6 @@ namespace VT
             {
                 colorSettings.ShowDialog();
             }
-        }
-
-        public void DisplayFrame(Bitmap frame)
-        {
-            
-            this.screenBox1.Image = frame;
         }
     }
 }
