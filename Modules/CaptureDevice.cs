@@ -16,6 +16,16 @@ namespace Modules
 
         public CaptureDevice(DsDevice sorce, string deviceName, int position)
         {
+            if (sorce == null || deviceName == string.Empty)
+            {
+                throw new ArgumentNullException("Value null or empty.");
+            }
+
+            if (position < 0)
+            {
+                throw new InvalidOperationException("Device position can not be negative value.");
+            }
+
             this.captureDevice = sorce;
             this.DeviceName = deviceName;
             this.supportedResolutions = GetSupportedResolutions();
