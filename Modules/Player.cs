@@ -1,12 +1,17 @@
 ﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Emgu.CV.Util;
 using Modules.Interfaces;
+using System.Drawing;
 
 namespace Modules
 {
     public class Player : IPlayer
     {
         private VideoCapture _capture;
+
+        private IStreamable _streamFrame;
 
         internal CaptureDevice currCaptureDevice;
 
@@ -27,13 +32,34 @@ namespace Modules
         private int defaultWide = 812;
         private int defaultHeight = 575;
 
+        public Player(CaptureDevice currCaptureDevice, IStreamable stream)
+        {
+            if (currCaptureDevice == null)
+            {
+                throw new ArgumentNullException("Capture device can not be null.");
+            }
+
+            this.currCaptureDevice = currCaptureDevice;
+            this._streamFrame = stream;
+
+            this._capture = currCaptureDevice.VideoSorce;
+        }
+
         public void Pause()
         {
             this._capture.Pause();
             this._isPaused = true;
         }
 
-        public void Play()
+        public IStreamable SetStream 
+        {
+            set 
+            { 
+                this._streamFrame = value; 
+            }
+        }
+
+        public async void Play()
         {
             if (this._isPaused)
             {
@@ -83,13 +109,15 @@ namespace Modules
             this._capture.Start();
         }
 
+        
+
         public void Stop()
         {
             StopPlaying();
             this._isPaused = false;
         }
 
-        private void ProcessFrameEventHandler(object sender, EventArgs e)
+        public async void ProcessFrameEventHandler(object sender, EventArgs e)
         {
             this._capture.Read(this._frame);
 
@@ -120,27 +148,37 @@ namespace Modules
                 TrackCurrentColor(lower, upper, rgb, recColor);
             }
 
-            ShowVideo();
-
             //_capture.Retrieve(this._frame);
 
             //CvInvoke.Imshow("Color Tracking", this._frame);
-            CvInvoke.WaitKey(this._frameRate);
+            //CvInvoke.WaitKey(this._frameRate);
+            this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame));
         }
 
-        private void ShowVideo()
+        private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec)
         {
-            throw new NotImplementedException();
-        }
+            Mat mask = new Mat();
 
-        private void TrackCurrentColor(ScalarArray lower, ScalarArray upper, Mat rgb, MCvScalar recColor)
-        {
-            throw new NotImplementedException();
+            CvInvoke.InRange(rgb, lower, upper, mask);
+
+            VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+            Mat hierarchy = new Mat();
+            CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
+
+            for (int i = 0; i < contours.Size; i++)
+            {
+                Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
+
+                if (rect.Height > 1 && rect.Width > 1)
+                {
+                    CvInvoke.Rectangle(_frame, rect, colorRec, 2);
+                }
+            }
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            
+            StopPlaying();
         }
 
         private void StopPlaying()
