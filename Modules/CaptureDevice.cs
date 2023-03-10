@@ -30,7 +30,7 @@ namespace Modules
             this.DeviceName = deviceName;
             this.supportedResolutions = GetSupportedResolutions();
 
-            if (position >= 0) 
+            if (position >= 0)
             {
                 try
                 {
@@ -69,8 +69,8 @@ namespace Modules
             }
         }
 
-        public List<Resolution> SupportedResolutions 
-        { 
+        public List<Resolution> SupportedResolutions
+        {
             get
             {
                 return this.supportedResolutions;
@@ -83,11 +83,21 @@ namespace Modules
             {
                 return this.currentResolution;
             }
-            set
+            private set
             {
                 this.currentResolution = value;
                 SetCurrentResolution();
             }
+        }
+
+        public void SetResolution(Resolution resolution)
+        {
+            this.Resolution = resolution;
+        }
+
+        public void SetResolution(string resolution)
+        {
+            this.Resolution = GetResolution(resolution);
         }
 
         private void SetCurrentResolution()
@@ -128,6 +138,7 @@ namespace Modules
                     while (fetched != null && mediaTypes[0] != null)
                     {
                         Marshal.PtrToStructure(mediaTypes[0].formatPtr, v);
+
                         if (v.BmiHeader.Size != 0 && v.BmiHeader.BitCount != 0)
                         {
                             if (v.BmiHeader.BitCount > bitCount)
@@ -135,12 +146,14 @@ namespace Modules
                                 AvailableResolutions.Clear();
                                 bitCount = v.BmiHeader.BitCount;
                             }
+
                             AvailableResolutions.Add(v.BmiHeader.Width + "x" + v.BmiHeader.Height);
                         }
+
                         hr = mediaTypeEnum.Next(1, mediaTypes, fetched);
                     }
 
-                    List < Resolution > temp = new List < Resolution >();
+                    List<Resolution> temp = new List<Resolution>();
 
                     foreach (var element in AvailableResolutions)
                     {
@@ -151,7 +164,6 @@ namespace Modules
                     return temp;
                 }
             }
-
             catch (Exception ex)
             {
                 throw new ArgumentException(ex.Message);

@@ -117,7 +117,7 @@ namespace VT
             if (this.resulution == null)
             {
                 this.resulution = selectedDevice.SupportedResolutions.FirstOrDefault();
-                this.selectedDevice.Resolution = resulution;
+                this.selectedDevice.SetResolution(resulution);
             }
         }
 
@@ -125,10 +125,7 @@ namespace VT
         {
             try
             {
-                int[] temp = resolutionsComboBox.SelectedItem.ToString().Split("x").Select(int.Parse).ToArray();
-                var selectedResolution = new Resolution(temp[0], temp[1]);
-
-                this.selectedDevice.Resolution = selectedResolution;
+                this.selectedDevice.SetResolution(resolutionsComboBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
