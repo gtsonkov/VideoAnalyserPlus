@@ -17,11 +17,7 @@
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
             mainForm._file = this.filePath;
 
-            if (mainForm.deviceIndex > -1)
-            {
-                mainForm.SorceChange();
-                mainForm.deviceIndex = -1;
-            }
+            //To Do: If video sorce selected, remove existing CaptureDevice in mainForm
 
             this.Close();
         }

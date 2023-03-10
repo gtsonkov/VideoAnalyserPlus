@@ -10,8 +10,6 @@ namespace VT
     {
         private VideoCapture _capture;
 
-        internal int deviceIndex = -1;
-
         internal CaptureDevice currCaptureDevice;
 
         internal string _file = string.Empty;

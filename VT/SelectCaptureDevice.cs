@@ -1,5 +1,4 @@
 ﻿using DirectShowLib;
-using Emgu.CV.Structure;
 using Modules;
 using System.Management;
 using System.Text;
@@ -19,12 +18,12 @@ namespace VT
             InitializeComponent();
             this.captureDevices = new List<string>();
             GetCaptureDevices();
-            FillDropDownMenu();
+            FillDropDevicesDownMenu();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
 
-        private void FillDropDownMenu()
+        private void FillDropDevicesDownMenu()
         {
             if (captureDevices.Count > 0)
             {
@@ -41,7 +40,7 @@ namespace VT
             this.deviceList.Items.Clear();
             this.captureDevices.Clear();
             await (GetCaptureDevices());
-            FillDropDownMenu();
+            FillDropDevicesDownMenu();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
