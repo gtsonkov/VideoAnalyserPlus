@@ -36,17 +36,17 @@ namespace VT
             }
         }
 
-        private void refreshBtn_Click(object sender, EventArgs e)
+        private async void refreshBtn_Click(object sender, EventArgs e)
         {
             this.deviceList.Items.Clear();
             this.captureDevices.Clear();
-            GetCaptureDevices();
+            await (GetCaptureDevices());
             FillDropDownMenu();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
 
-        private void GetCaptureDevices()
+        private async Task GetCaptureDevices()
         {
             this.devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
@@ -75,19 +75,19 @@ namespace VT
             }
         }
 
-        private void deviceList_SelectedIndexChanged(object sender, EventArgs e)
+        private async void deviceList_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
 
             if (this.devices != null)
             {
                 int deviceIndex = this.deviceList.SelectedIndex;
-                LoadSelectedDevice(deviceIndex);
-                LoadResolutionsToComboMenu();
+                await(LoadSelectedDevice(deviceIndex));
+                await (LoadResolutionsToComboMenu());
             }
         }
 
-        private void LoadResolutionsToComboMenu()
+        private async Task<string> LoadResolutionsToComboMenu()
         {
             this.resolutionsComboBox.Items.Clear();
 
@@ -104,9 +104,10 @@ namespace VT
             }
 
             resolutionsComboBox.Items.AddRange(resolutions.ToArray());
+            return string.Empty;
         }
 
-        private void LoadSelectedDevice(int deviceIndex)
+        private async Task LoadSelectedDevice(int deviceIndex)
         {
             string deviceName = this.deviceList.SelectedItem.ToString();
             DsDevice capture = devices[deviceIndex];
@@ -131,7 +132,6 @@ namespace VT
             }
             catch (Exception ex)
             {
-
                 throw new ArgumentException(ex.Message);
             }
         }

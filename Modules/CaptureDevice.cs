@@ -7,11 +7,11 @@ namespace Modules
 {
     public class CaptureDevice
     {
-        private VideoCapture currentSorce;
-        private Resolution currentResolution;
+        private VideoCapture? currentSorce;
+        private Resolution? currentResolution;
         private DsDevice captureDevice;
 
-        private string deviceName;
+        private string? deviceName;
         List<Resolution> supportedResolutions;
 
         public CaptureDevice(DsDevice sorce, string deviceName, int position)
@@ -92,8 +92,11 @@ namespace Modules
 
         private void SetCurrentResolution()
         {
-            this.currentSorce.Set(CapProp.FrameWidth, this.currentResolution.Width);
-            this.currentSorce.Set(CapProp.FrameHeight, this.currentResolution.Height);
+            if (this.currentSorce != null && currentResolution != null)
+            {
+                this.currentSorce.Set(CapProp.FrameWidth, this.currentResolution.Width);
+                this.currentSorce.Set(CapProp.FrameHeight, this.currentResolution.Height);
+            }
         }
 
         private List<Resolution> GetSupportedResolutions()
