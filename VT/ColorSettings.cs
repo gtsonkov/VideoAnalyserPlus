@@ -44,6 +44,9 @@ namespace VT
 
             this.radiusC1TxtBox.Text = this._color1.Radius.ToString();
             this.radiusC2TxtBox.Text = this._color2.Radius.ToString();
+
+            this.MinPixelCountC1TxtBox.Text = this._color1.MinPixelSize.ToString();
+            this.MinPixelCountC2TxtBox.Text = this._color2.MinPixelSize.ToString();
         }
 
         private void Color1SetBtn_Click(object sender, EventArgs e)
@@ -83,7 +86,25 @@ namespace VT
             catch
             {
 
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl an.", "Fehler");
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Radius an.", "Fehler");
+            }
+
+            try
+            {
+                int currMinPixelSize = int.Parse(this.MinPixelCountC1TxtBox.Text);
+
+                if (currMinPixelSize < 1)
+                {
+                    MessageBox.Show("Pixelzahl muss > 0 sein!", "Fehler");
+                    return;
+                }
+
+                this._color1.MinPixelSize = currMinPixelSize;
+            }
+            catch
+            {
+
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Minimum Pixelzahl an.", "Fehler"); ;
             }
 
             SetColorRange(this._color1, this._color1.Radius);
@@ -107,8 +128,24 @@ namespace VT
             }
             catch
             {
-
                 MessageBox.Show("Bitte geben Sie eine gültige Zahl an.", "Fehler");
+            }
+
+            try
+            {
+                int currMinPixelSize = int.Parse(this.MinPixelCountC2TxtBox.Text);
+
+                if (currMinPixelSize < 1)
+                {
+                    MessageBox.Show("Pixelzahl muss > 0 sein!","Fehler");
+                    return;
+                }
+
+                this._color2.MinPixelSize = currMinPixelSize;
+            }
+            catch
+            {
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Minimum Pixelzahl an.", "Fehler");
             }
 
             SetColorRange(this._color2, this._color2.Radius);
@@ -119,7 +156,7 @@ namespace VT
         {
             if (!sorceRedy)
             {
-                MessageBox.Show("Bitte wählenn sie vorerst eine vido Quelle (camera oder video file)","Warnung");
+                MessageBox.Show("Bitte wählenn sie vorerst eine vido Quelle (camera oder video file)", "Warnung");
                 return;
             }
 
@@ -198,6 +235,37 @@ namespace VT
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
 
             mainForm.SetTrackingControl(this.stratTrackC1CheckBox.Checked, this.stratTrackC2CheckBox.Checked);
+        }
+
+        private void radiusC1TxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckUserInput(sender, e);
+        }
+
+        private void radiusC2TxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckUserInput(sender, e);
+        }
+
+        private void MinPixelCountC1TxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckUserInput(sender, e);
+        }
+
+        private void MinPixelCountC2TxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckUserInput(sender, e);
+        }
+
+        private void CheckUserInput(object sender, KeyPressEventArgs e)
+        {
+            TextBox currSender = sender as TextBox;
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)
+                || (currSender.Text.Count() == 1 && currSender.Text == "0" && !char.IsControl(e.KeyChar)))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -4,9 +4,35 @@ namespace Modules
 {
     public class FilterMask
     {
+        private int minPixelSize;
+        private int radius;
+
+        public FilterMask()
+        {
+            this.MinPixelSize = 1;
+            this.radius = 0;
+        }
+
         public Color BaseColor { get; set; }
 
-        public int Radius { get; set; }
+        /// <summary>
+        /// Radius of colors. Can not be negative
+        /// </summary>
+        public int Radius 
+        {
+            get 
+            {
+                return this.radius;
+            }
+            
+            set
+            {
+                if (value >= 0) 
+                {
+                    this.radius = value;
+                }
+            }
+        }
 
         public int Red_Min { get; set; }
 
@@ -20,6 +46,22 @@ namespace Modules
 
         public int Blue_Max { get; set; }
 
-        public int MinPixelSize { get; set; }
+        /// <summary>
+        /// Minimum pixel size (pixel x pixel). Always > 0
+        /// </summary>
+        public int MinPixelSize
+        {
+            get
+            {
+                return this.minPixelSize;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    this.minPixelSize = value;
+                }
+            }
+        }
     }
 }

@@ -47,6 +47,9 @@
             pictureBox6 = new PictureBox();
             stratTrackC1CheckBox = new CheckBox();
             stratTrackC2CheckBox = new CheckBox();
+            label2 = new Label();
+            MinPixelCountC2TxtBox = new TextBox();
+            MinPixelCountC1TxtBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -81,18 +84,20 @@
             radiusC1TxtBox.Name = "radiusC1TxtBox";
             radiusC1TxtBox.Size = new Size(60, 23);
             radiusC1TxtBox.TabIndex = 2;
+            radiusC1TxtBox.KeyPress += radiusC1TxtBox_KeyPress;
             // 
             // radiusC2TxtBox
             // 
-            radiusC2TxtBox.Location = new Point(308, 262);
+            radiusC2TxtBox.Location = new Point(308, 261);
             radiusC2TxtBox.Name = "radiusC2TxtBox";
             radiusC2TxtBox.Size = new Size(60, 23);
             radiusC2TxtBox.TabIndex = 3;
+            radiusC2TxtBox.KeyPress += radiusC2TxtBox_KeyPress;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(213, 265);
+            label1.Location = new Point(217, 265);
             label1.Name = "label1";
             label1.Size = new Size(42, 15);
             label1.TabIndex = 4;
@@ -102,7 +107,7 @@
             // 
             radiusC1Btn.Location = new Point(41, 261);
             radiusC1Btn.Name = "radiusC1Btn";
-            radiusC1Btn.Size = new Size(59, 23);
+            radiusC1Btn.Size = new Size(59, 60);
             radiusC1Btn.TabIndex = 5;
             radiusC1Btn.Text = "Setzen";
             radiusC1Btn.UseVisualStyleBackColor = true;
@@ -112,7 +117,7 @@
             // 
             radiusC2Btn.Location = new Point(373, 261);
             radiusC2Btn.Name = "radiusC2Btn";
-            radiusC2Btn.Size = new Size(60, 23);
+            radiusC2Btn.Size = new Size(60, 60);
             radiusC2Btn.TabIndex = 6;
             radiusC2Btn.Text = "Setzen";
             radiusC2Btn.UseVisualStyleBackColor = true;
@@ -120,9 +125,9 @@
             // 
             // okBtn
             // 
-            okBtn.Location = new Point(177, 317);
+            okBtn.Location = new Point(182, 363);
             okBtn.Name = "okBtn";
-            okBtn.Size = new Size(101, 44);
+            okBtn.Size = new Size(112, 44);
             okBtn.TabIndex = 7;
             okBtn.Text = "OK";
             okBtn.UseVisualStyleBackColor = true;
@@ -179,7 +184,7 @@
             // stratTrackC1CheckBox
             // 
             stratTrackC1CheckBox.AutoSize = true;
-            stratTrackC1CheckBox.Location = new Point(41, 290);
+            stratTrackC1CheckBox.Location = new Point(41, 332);
             stratTrackC1CheckBox.Name = "stratTrackC1CheckBox";
             stratTrackC1CheckBox.Size = new Size(94, 19);
             stratTrackC1CheckBox.TabIndex = 14;
@@ -190,7 +195,7 @@
             // stratTrackC2CheckBox
             // 
             stratTrackC2CheckBox.AutoSize = true;
-            stratTrackC2CheckBox.Location = new Point(308, 290);
+            stratTrackC2CheckBox.Location = new Point(308, 332);
             stratTrackC2CheckBox.Name = "stratTrackC2CheckBox";
             stratTrackC2CheckBox.Size = new Size(97, 19);
             stratTrackC2CheckBox.TabIndex = 15;
@@ -198,11 +203,41 @@
             stratTrackC2CheckBox.UseVisualStyleBackColor = true;
             stratTrackC2CheckBox.CheckedChanged += stratTrackC2CheckBox_CheckedChanged;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(198, 302);
+            label2.Name = "label2";
+            label2.Size = new Size(80, 15);
+            label2.TabIndex = 18;
+            label2.Text = "Min. Pixelzahl";
+            // 
+            // MinPixelCountC2TxtBox
+            // 
+            MinPixelCountC2TxtBox.Location = new Point(308, 298);
+            MinPixelCountC2TxtBox.Name = "MinPixelCountC2TxtBox";
+            MinPixelCountC2TxtBox.Size = new Size(60, 23);
+            MinPixelCountC2TxtBox.TabIndex = 17;
+            MinPixelCountC2TxtBox.Tag = "Minimale Pixelzahl der gesuchte Object mit Farbe 2";
+            MinPixelCountC2TxtBox.KeyPress += MinPixelCountC2TxtBox_KeyPress;
+            // 
+            // MinPixelCountC1TxtBox
+            // 
+            MinPixelCountC1TxtBox.Location = new Point(106, 298);
+            MinPixelCountC1TxtBox.Name = "MinPixelCountC1TxtBox";
+            MinPixelCountC1TxtBox.Size = new Size(60, 23);
+            MinPixelCountC1TxtBox.TabIndex = 16;
+            MinPixelCountC1TxtBox.Tag = "Minimale Pixelzahl der gesuchte Object mit Farbe 1";
+            MinPixelCountC1TxtBox.KeyPress += MinPixelCountC1TxtBox_KeyPress;
+            // 
             // ColorSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(477, 373);
+            ClientSize = new Size(477, 419);
+            Controls.Add(label2);
+            Controls.Add(MinPixelCountC2TxtBox);
+            Controls.Add(MinPixelCountC1TxtBox);
             Controls.Add(stratTrackC2CheckBox);
             Controls.Add(stratTrackC1CheckBox);
             Controls.Add(pictureBox6);
@@ -252,5 +287,8 @@
         private PictureBox pictureBox6;
         private CheckBox stratTrackC1CheckBox;
         private CheckBox stratTrackC2CheckBox;
+        private Label label2;
+        private TextBox MinPixelCountC2TxtBox;
+        private TextBox MinPixelCountC1TxtBox;
     }
 }
