@@ -1,6 +1,6 @@
 ﻿namespace Modules.Interfaces
 {
-    public interface IPlayer
+    public interface IPlayable
     {
         public void Play();
 

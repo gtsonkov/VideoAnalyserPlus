@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Modules
 {
-    public class FilterPlayer : IPlayer
+    public class FilterPlayer : IPlayable
     {
         private VideoCapture _capture;
         private IStreamable _streamFrame;
