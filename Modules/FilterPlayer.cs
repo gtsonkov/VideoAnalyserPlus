@@ -164,7 +164,7 @@ namespace Modules
 
                 var recColor = new MCvScalar(0, 255, 0);
 
-                TrackCurrentColor(lower, upper, rgb, recColor, this.color1.MinPixelSize);
+                TrackCurrentColor(lower, upper, rgb, recColor, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
             }
 
             if (this.trackColor2)
@@ -174,13 +174,13 @@ namespace Modules
 
                 var recColor = new MCvScalar(255, 0, 255);
 
-                TrackCurrentColor(lower, upper, rgb, recColor, this.color2.MinPixelSize);
+                TrackCurrentColor(lower, upper, rgb, recColor, this.color2.MinPixelSize.Width, this.color2.MinPixelSize.Height);
             }
 
             this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame));
         }
 
-        private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec, int pixelSize)
+        private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec, int pixelSizeW, int pixelSizeH)
         {
             Mat mask = new Mat();
 
@@ -194,7 +194,7 @@ namespace Modules
             {
                 Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
 
-                if (rect.Height >= pixelSize && rect.Width >= pixelSize)
+                if (rect.Width >= pixelSizeW && rect.Height >= pixelSizeH)
                 {
                     CvInvoke.Rectangle(_frame, rect, colorRec, 2);
                 }

@@ -45,8 +45,10 @@ namespace VT
             this.radiusC1TxtBox.Text = this._color1.Radius.ToString();
             this.radiusC2TxtBox.Text = this._color2.Radius.ToString();
 
-            this.MinPixelCountC1TxtBox.Text = this._color1.MinPixelSize.ToString();
-            this.MinPixelCountC2TxtBox.Text = this._color2.MinPixelSize.ToString();
+            this.MinWidthC1TxtBox.Text = this._color1.MinPixelSize.Width.ToString();
+            this.MinHeightC1TxtBox.Text = this._color1.MinPixelSize.Height.ToString();
+            this.MinWidthC2TxtBox.Text = this._color2.MinPixelSize.Width.ToString();
+            this.MinHeightC2TxtBox.Text = this._color2.MinPixelSize.Height.ToString(); ;
         }
 
         private void Color1SetBtn_Click(object sender, EventArgs e)
@@ -91,15 +93,26 @@ namespace VT
 
             try
             {
-                int currMinPixelSize = int.Parse(this.MinPixelCountC1TxtBox.Text);
+                int currMinPixelSizeW = int.Parse(this.MinWidthC1TxtBox.Text);
+                int currMinPixelSizeH = int.Parse(this.MinHeightC1TxtBox.Text);
 
-                if (currMinPixelSize < 1)
+                if (currMinPixelSizeW < 1 || currMinPixelSizeH < 1)
                 {
                     MessageBox.Show("Pixelzahl muss > 0 sein!", "Fehler");
                     return;
                 }
 
-                this._color1.MinPixelSize = currMinPixelSize;
+                try
+                {
+                    this._color1.MinPixelSize.Width = currMinPixelSizeW;
+                    this._color1.MinPixelSize.Height = currMinPixelSizeH;
+                }
+                catch (Exception ex)
+                {
+
+                    throw new ArgumentException(ex.Message);
+                }
+
             }
             catch
             {
@@ -133,19 +146,29 @@ namespace VT
 
             try
             {
-                int currMinPixelSize = int.Parse(this.MinPixelCountC2TxtBox.Text);
+                int currMinPixelSizeW = int.Parse(this.MinWidthC2TxtBox.Text);
+                int currMinPixelSizeH = int.Parse(this.MinHeightC2TxtBox.Text);
 
-                if (currMinPixelSize < 1)
+                if (currMinPixelSizeW < 1 || currMinPixelSizeH < 1)
                 {
-                    MessageBox.Show("Pixelzahl muss > 0 sein!","Fehler");
+                    MessageBox.Show("Pixelzahl muss > 0 sein!", "Fehler");
                     return;
                 }
 
-                this._color2.MinPixelSize = currMinPixelSize;
+                try
+                {
+                    this._color2.MinPixelSize.Width = currMinPixelSizeW;
+                    this._color2.MinPixelSize.Height = currMinPixelSizeH;
+                }
+                catch (Exception ex)
+                {
+
+                    throw new ArgumentException(ex.Message);
+                }
             }
             catch
             {
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Minimum Pixelzahl an.", "Fehler");
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Minimum Pixelzahl an.", "Fehler"); ;
             }
 
             SetColorRange(this._color2, this._color2.Radius);
@@ -160,10 +183,12 @@ namespace VT
                 return;
             }
 
-            ApllayColorsChanges();
+            ApllyColorsChanges();
+
+            this.Close();
         }
 
-        private void ApllayColorsChanges()
+        private void ApllyColorsChanges()
         {
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
 
@@ -237,27 +262,7 @@ namespace VT
             mainForm.SetTrackingControl(this.stratTrackC1CheckBox.Checked, this.stratTrackC2CheckBox.Checked);
         }
 
-        private void radiusC1TxtBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            CheckUserInput(sender, e);
-        }
-
-        private void radiusC2TxtBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            CheckUserInput(sender, e);
-        }
-
-        private void MinPixelCountC1TxtBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            CheckUserInput(sender, e);
-        }
-
-        private void MinPixelCountC2TxtBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            CheckUserInput(sender, e);
-        }
-
-        private void CheckUserInput(object sender, KeyPressEventArgs e)
+        private void CheckUserInput_KeyPressed(object sender, KeyPressEventArgs e)
         {
             TextBox currSender = sender as TextBox;
 

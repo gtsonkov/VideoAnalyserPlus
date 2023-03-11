@@ -4,12 +4,16 @@ namespace Modules
 {
     public class FilterMask
     {
-        private int minPixelSize;
+        private Resolution minPixelSize;
+
+        private const int minPixelSizeW = 1;
+        private const int minPixelSizeH = 1;
+
         private int radius;
 
         public FilterMask()
         {
-            this.MinPixelSize = 1;
+            this.MinPixelSize = new Resolution(minPixelSizeW,minPixelSizeH);
             this.radius = 0;
         }
 
@@ -49,7 +53,7 @@ namespace Modules
         /// <summary>
         /// Minimum pixel size (pixel x pixel). Always > 0
         /// </summary>
-        public int MinPixelSize
+        public Resolution MinPixelSize
         {
             get
             {
@@ -57,9 +61,16 @@ namespace Modules
             }
             set
             {
-                if (value > 0)
+                if (value != null)
                 {
-                    this.minPixelSize = value;
+                    if (value.Width > 0 && value.Height > 0)
+                    {
+                        this.minPixelSize = value;
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("Resolution Width and Height must be bigger than 0");
                 }
             }
         }
