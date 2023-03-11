@@ -2,7 +2,7 @@
 
 namespace Modules
 {
-    public class ColorMask
+    public class FilterMask
     {
         public Color BaseColor { get; set; }
 
@@ -19,5 +19,7 @@ namespace Modules
         public int Green_Max { get; set; }
 
         public int Blue_Max { get; set; }
+
+        public int MinPixelSize { get; set; }
     }
 }

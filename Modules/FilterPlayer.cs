@@ -14,8 +14,8 @@ namespace Modules
         private CaptureDevice currCaptureDevice;
         private Mat _frame;
 
-        private ColorMask color1;
-        private ColorMask color2;
+        private FilterMask color1;
+        private FilterMask color2;
 
         private bool trackColor1;
         private bool trackColor2;
@@ -115,7 +115,7 @@ namespace Modules
             this._capture.Start();
         }
 
-        public ColorMask FilterColor_A
+        public FilterMask FilterColor_A
         {
             get
             {
@@ -127,7 +127,7 @@ namespace Modules
             }
         }
 
-        public ColorMask FilterColor_B
+        public FilterMask FilterColor_B
         {
             get
             {

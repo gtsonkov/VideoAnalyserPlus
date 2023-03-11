@@ -4,21 +4,21 @@ namespace VT
 {
     public partial class ColorSettings : Form
     {
-        private ColorMask _color1;
-        private ColorMask _color2;
+        private FilterMask _color1;
+        private FilterMask _color2;
         private bool sorceRedy;
 
         public ColorSettings()
         {
             InitializeComponent();
 
-            this._color1 = new ColorMask();
-            this._color2 = new ColorMask();
+            this._color1 = new FilterMask();
+            this._color2 = new FilterMask();
 
             SetPropertysState();
         }
 
-        public ColorSettings(ColorMask color1, ColorMask color2)
+        public ColorSettings(FilterMask color1, FilterMask color2)
         {
             InitializeComponent();
 
@@ -146,7 +146,7 @@ namespace VT
             this.pictureBox6.BackColor = Color.FromArgb(this._color2.Red_Max, this._color2.Green_Max, this._color2.Blue_Max);
         }
 
-        private void SetColorRange(ColorMask color, int radius)
+        private void SetColorRange(FilterMask color, int radius)
         {
             color.BaseColor = color.BaseColor;
 
