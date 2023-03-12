@@ -182,6 +182,19 @@ namespace Modules
             this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame), objectsFoundet);
         }
 
+        public void Dispose()
+        {
+            this.Stop();
+            this.currCaptureDevice = null;
+            this._capture.Dispose();
+
+            if (this._frame != null)
+            {
+                this._frame.Dispose();
+                this._frame = null;
+            }
+        }
+
         private List<Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int pixelSizeW, int pixelSizeH)
         {
             Mat mask = new Mat();

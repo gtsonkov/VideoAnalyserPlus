@@ -21,6 +21,12 @@
             this.Height = currPic.Height;
 
             this.pictureBox.Image = currPic.Clone(this._frameBounds, currPic.PixelFormat);
+            currPic.Dispose();
+        }
+
+        private void ShowSelected_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.pictureBox.Image = null;
         }
     }
 }

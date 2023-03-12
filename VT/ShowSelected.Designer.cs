@@ -49,6 +49,7 @@
             Controls.Add(pictureBox);
             Name = "ShowSelected";
             Text = "Bild";
+            FormClosed += ShowSelected_FormClosed;
             Load += ShowSelected_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);

@@ -194,6 +194,8 @@ namespace VT
             if (this._player != null)
             {
                 this._player.Stop();
+                this._player.Dispose();
+                this._player = null;
             }
         }
 
