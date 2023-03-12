@@ -39,6 +39,7 @@
             videodateiToolStripMenuItem = new ToolStripMenuItem();
             prozesseinstellungenToolStripMenuItem = new ToolStripMenuItem();
             hilfeToolStripMenuItem = new ToolStripMenuItem();
+            AdjustResolutionBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)screenBox1).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -49,6 +50,7 @@
             screenBox1.Location = new Point(1, 26);
             screenBox1.Name = "screenBox1";
             screenBox1.Size = new Size(814, 454);
+            screenBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             screenBox1.TabIndex = 0;
             screenBox1.TabStop = false;
             screenBox1.MouseClick += screenBox1_MouseClick;
@@ -129,11 +131,24 @@
             hilfeToolStripMenuItem.Size = new Size(44, 20);
             hilfeToolStripMenuItem.Text = "Hilfe";
             // 
+            // AdjustResolutionBtn
+            // 
+            AdjustResolutionBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            AdjustResolutionBtn.DialogResult = DialogResult.Retry;
+            AdjustResolutionBtn.Location = new Point(764, 486);
+            AdjustResolutionBtn.Name = "AdjustResolutionBtn";
+            AdjustResolutionBtn.Size = new Size(40, 23);
+            AdjustResolutionBtn.TabIndex = 5;
+            AdjustResolutionBtn.Text = "[ ]";
+            AdjustResolutionBtn.UseVisualStyleBackColor = true;
+            AdjustResolutionBtn.Click += AdjustResolutionBtn_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(816, 536);
+            Controls.Add(AdjustResolutionBtn);
             Controls.Add(StopBtn);
             Controls.Add(PauseBtn);
             Controls.Add(PlayBtn);
@@ -141,7 +156,7 @@
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(150, 150);
+            MinimumSize = new Size(390, 390);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "VideoPlayerForm";
@@ -165,5 +180,6 @@
         private ToolStripMenuItem videodateiToolStripMenuItem;
         private ToolStripMenuItem prozesseinstellungenToolStripMenuItem;
         private ToolStripMenuItem hilfeToolStripMenuItem;
+        private Button AdjustResolutionBtn;
     }
 }

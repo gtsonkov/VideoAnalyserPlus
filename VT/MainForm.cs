@@ -152,9 +152,7 @@ namespace VT
                 }
             }
 
-            //Set the Image box size to the sorce size
-            this.Height = (this._player.Resolution.Height) + toolbarWight;
-            this.Width = this._player.Resolution.Width;
+
         }
 
         //If sorce chenge, stop playing current sorce first
@@ -253,6 +251,12 @@ namespace VT
                 }
             }
         }
-            
+
+        private void AdjustResolutionBtn_Click(object sender, EventArgs e)
+        {
+            //Set the Image box size to the sorce size
+            this.Height = (this._player.Resolution.Height) + toolbarWight;
+            this.Width = this._player.Resolution.Width;
+        }
     }
 }

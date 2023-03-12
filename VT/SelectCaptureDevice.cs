@@ -1,6 +1,5 @@
 ﻿using DirectShowLib;
 using Modules;
-using System.Management;
 using System.Text;
 
 namespace VT
@@ -9,7 +8,6 @@ namespace VT
     {
         private List<string> captureDevices;
         private DsDevice[]? devices;
-        private List<ManagementObject> foundedDevices;
         private Resolution resulution;
         private CaptureDevice selectedDevice;
 

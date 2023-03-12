@@ -38,6 +38,7 @@
             pictureBox.Location = new Point(2, 2);
             pictureBox.Name = "pictureBox";
             pictureBox.Size = new Size(796, 447);
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.TabIndex = 0;
             pictureBox.TabStop = false;
             // 
