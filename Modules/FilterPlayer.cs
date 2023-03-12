@@ -157,30 +157,32 @@ namespace Modules
 
             Mat rgb = this._frame.Clone();
 
-            if (this.trackColor1)
+            List<Rectangle> color1Objects = new List<Rectangle>();
+
+            if (this.trackColor1 && this.color1 != null)
             {
                 var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
 
-                var recColor = new MCvScalar(0, 255, 0);
-
-                TrackCurrentColor(lower, upper, rgb, recColor, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
+                color1Objects = TrackCurrentColor(lower, upper, rgb, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
             }
 
-            if (this.trackColor2)
+            List<Rectangle> color2Objects = new List<Rectangle>();
+
+            if (this.trackColor2 && this.color2 != null)
             {
                 var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
-                var recColor = new MCvScalar(255, 0, 255);
-
-                TrackCurrentColor(lower, upper, rgb, recColor, this.color2.MinPixelSize.Width, this.color2.MinPixelSize.Height);
+               color2Objects = TrackCurrentColor(lower, upper, rgb, this.color2.MinPixelSize.Width, this.color2.MinPixelSize.Height);
             }
 
-            this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame));
+            List<Rectangle>[] objectsFoundet = new List<Rectangle>[] {color1Objects, color2Objects};
+
+            this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame), objectsFoundet);
         }
 
-        private void TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, MCvScalar colorRec, int pixelSizeW, int pixelSizeH)
+        private List<Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int pixelSizeW, int pixelSizeH)
         {
             Mat mask = new Mat();
 
@@ -190,15 +192,19 @@ namespace Modules
             Mat hierarchy = new Mat();
             CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
 
+            List<Rectangle> rectangles = new List<Rectangle>();
+
             for (int i = 0; i < contours.Size; i++)
             {
                 Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
 
                 if (rect.Width >= pixelSizeW && rect.Height >= pixelSizeH)
                 {
-                    CvInvoke.Rectangle(_frame, rect, colorRec, 2);
+                    rectangles.Add(rect);
                 }
             }
+
+            return rectangles;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)

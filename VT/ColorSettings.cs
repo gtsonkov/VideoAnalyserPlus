@@ -4,9 +4,12 @@ namespace VT
 {
     public partial class ColorSettings : Form
     {
+        private MainForm mainForm;
+
         private FilterMask _color1;
         private FilterMask _color2;
         private bool sorceRedy;
+        
 
         public ColorSettings()
         {
@@ -22,6 +25,8 @@ namespace VT
         {
             InitializeComponent();
 
+            this.mainForm = (MainForm)Application.OpenForms["MainForm"];
+
             this._color1 = color1;
             this._color2 = color2;
 
@@ -32,12 +37,10 @@ namespace VT
 
         private void SetPropertysState()
         {
-            var mainForm = (MainForm)Application.OpenForms["MainForm"];
+            sorceRedy = this.mainForm.sorceRedy;
 
-            sorceRedy = mainForm.sorceRedy;
-
-            this.stratTrackC1CheckBox.Checked = mainForm.trackColor1;
-            this.stratTrackC2CheckBox.Checked = mainForm.trackColor2;
+            this.stratTrackC1CheckBox.Checked = this.mainForm.trackColor1;
+            this.stratTrackC2CheckBox.Checked = this.mainForm.trackColor2;
 
             this.stratTrackC1CheckBox.Enabled = sorceRedy;
             this.stratTrackC2CheckBox.Enabled = sorceRedy;
@@ -84,6 +87,8 @@ namespace VT
                 }
 
                 this._color1.Radius = currRadius;
+
+                ApllyColorsChanges();
             }
             catch
             {
@@ -138,6 +143,8 @@ namespace VT
                 }
 
                 this._color2.Radius = currRadius;
+
+                ApllyColorsChanges();
             }
             catch
             {
@@ -190,9 +197,7 @@ namespace VT
 
         private void ApllyColorsChanges()
         {
-            var mainForm = (MainForm)Application.OpenForms["MainForm"];
-
-            mainForm.SetFilterColors(this._color1, this._color2);
+            this.mainForm.SetFilterColors(this._color1, this._color2);
 
             SetColorsView();
         }
@@ -247,19 +252,12 @@ namespace VT
 
         private void stratTrackC1CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            SetTrackingControl();
+            this.mainForm.SetTrackingControlColorA(this.stratTrackC1CheckBox.Checked);
         }
 
         private void stratTrackC2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            SetTrackingControl();
-        }
-
-        private void SetTrackingControl()
-        {
-            var mainForm = (MainForm)Application.OpenForms["MainForm"];
-
-            mainForm.SetTrackingControl(this.stratTrackC1CheckBox.Checked, this.stratTrackC2CheckBox.Checked);
+            this.mainForm.SetTrackingControlColorB(this.stratTrackC2CheckBox.Checked);
         }
 
         private void CheckUserInput_KeyPressed(object sender, KeyPressEventArgs e)

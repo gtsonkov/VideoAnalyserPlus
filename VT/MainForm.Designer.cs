@@ -51,6 +51,7 @@
             screenBox1.Size = new Size(814, 454);
             screenBox1.TabIndex = 0;
             screenBox1.TabStop = false;
+            screenBox1.MouseClick += screenBox1_MouseClick;
             // 
             // PlayBtn
             // 

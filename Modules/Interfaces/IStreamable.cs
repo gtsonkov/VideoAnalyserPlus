@@ -4,6 +4,6 @@ namespace Modules.Interfaces
 {
     public interface IStreamable
     {
-        public void DisplayFrame (Bitmap frame);
+        public void DisplayFrame (Bitmap frame, List<Rectangle>[] detectedAreas);
     }
 }
