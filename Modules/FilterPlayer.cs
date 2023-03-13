@@ -217,7 +217,11 @@ namespace Modules
                 }
             }
 
-            return rectangles;
+            //The list of rectangles schoud be sorted to assure that when Click to appier firs the mallest deteckted area
+            //if there are some nested areas
+            var orderedListOfRectangles = rectangles.OrderBy(x=> x.Width * x.Height).ToList();
+
+           return orderedListOfRectangles;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)

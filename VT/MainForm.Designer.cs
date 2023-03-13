@@ -50,7 +50,6 @@
             screenBox1.Location = new Point(1, 26);
             screenBox1.Name = "screenBox1";
             screenBox1.Size = new Size(814, 454);
-            screenBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             screenBox1.TabIndex = 0;
             screenBox1.TabStop = false;
             screenBox1.MouseClick += screenBox1_MouseClick;
