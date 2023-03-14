@@ -132,7 +132,7 @@ namespace Modules
 
                     IntPtr fetched = IntPtr.Zero;
 
-                    var pin = new IPin[1];
+                    IPin[] pin = new IPin[1];
 
                     while (ppEnum.Next(1, pin, fetched) == 0 && pin[0] != null)
                     {
@@ -193,6 +193,7 @@ namespace Modules
                 if (value != null && value != string.Empty)
                 {
                     var temp = value.Split("x").Select(x => int.Parse(x)).ToArray();
+
                     return new Resolution(temp[0], temp[1]);
                 }
             }
