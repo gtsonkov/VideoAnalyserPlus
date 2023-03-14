@@ -155,7 +155,7 @@ namespace Modules
                 return;
             }
 
-            Mat rgb = this._frame.Clone();
+            Mat filteredFrame = this._frame.Clone();
 
             List<Rectangle> color1Objects = new List<Rectangle>();
 
@@ -164,7 +164,7 @@ namespace Modules
                 var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
 
-                color1Objects = TrackCurrentColor(lower, upper, rgb, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
+                color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
             }
 
             List<Rectangle> color2Objects = new List<Rectangle>();
@@ -174,7 +174,7 @@ namespace Modules
                 var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
-               color2Objects = TrackCurrentColor(lower, upper, rgb, this.color2.MinPixelSize.Width, this.color2.MinPixelSize.Height);
+               color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinPixelSize.Width, this.color2.MinPixelSize.Height);
             }
 
             List<Rectangle>[] objectsFoundet = new List<Rectangle>[] {color1Objects, color2Objects};

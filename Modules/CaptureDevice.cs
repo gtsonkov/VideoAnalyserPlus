@@ -113,7 +113,8 @@ namespace Modules
         {
             try
             {
-                int hr, bitCount = 0;
+                int hr = 0; 
+                int    bitCount = 0;
 
                 if (this.captureDevice != null)
                 {
@@ -122,35 +123,48 @@ namespace Modules
                     IBaseFilter sourceFilter = null;
 
                     var m_FilterGraph2 = new FilterGraph() as IFilterGraph2;
+
                     hr = m_FilterGraph2.AddSourceFilterForMoniker(vidDev.Mon, null, vidDev.Name, out sourceFilter);
 
-                    var pRaw2 = DsFindPin.ByCategory(sourceFilter, PinCategory.Capture, 0);
+                    var pins = new List<IPin>();
+
+                    hr = sourceFilter.EnumPins(out var ppEnum);
+
+                    IntPtr fetched = IntPtr.Zero;
+
+                    var pin = new IPin[1];
+
+                    while (ppEnum.Next(1, pin, fetched) == 0 && pin[0] != null)
+                    {
+                        pins.Add(pin[0]);
+                    }
+
                     var AvailableResolutions = new List<string>();
 
-                    VideoInfoHeader v = new VideoInfoHeader();
-                    IEnumMediaTypes mediaTypeEnum;
-                    hr = pRaw2.EnumMediaTypes(out mediaTypeEnum);
-
-                    AMMediaType[] mediaTypes = new AMMediaType[1];
-                    IntPtr fetched = IntPtr.Zero;
-                    hr = mediaTypeEnum.Next(1, mediaTypes, fetched);
-
-                    while (fetched != null && mediaTypes[0] != null)
+                    foreach (var pRaw2 in pins)
                     {
-                        Marshal.PtrToStructure(mediaTypes[0].formatPtr, v);
+                        VideoInfoHeader v = new VideoInfoHeader();
+                        IEnumMediaTypes mediaTypeEnum;
+                        hr = pRaw2.EnumMediaTypes(out mediaTypeEnum);
 
-                        if (v.BmiHeader.Size != 0 && v.BmiHeader.BitCount != 0)
+                        AMMediaType[] mediaTypes = new AMMediaType[1];
+                        while (mediaTypeEnum.Next(1, mediaTypes, fetched) == 0 && mediaTypes[0] != null)
                         {
-                            if (v.BmiHeader.BitCount > bitCount)
+                            Marshal.PtrToStructure(mediaTypes[0].formatPtr, v);
+
+                            if (v.BmiHeader.Size != 0 && v.BmiHeader.BitCount != 0)
                             {
-                                AvailableResolutions.Clear();
-                                bitCount = v.BmiHeader.BitCount;
+                                if (v.BmiHeader.BitCount > bitCount)
+                                {
+                                    AvailableResolutions.Clear();
+                                    bitCount = v.BmiHeader.BitCount;
+                                }
+
+                                AvailableResolutions.Add(v.BmiHeader.Width + "x" + v.BmiHeader.Height);
                             }
 
-                            AvailableResolutions.Add(v.BmiHeader.Width + "x" + v.BmiHeader.Height);
+                            DsUtils.FreeAMMediaType(mediaTypes[0]);
                         }
-
-                        hr = mediaTypeEnum.Next(1, mediaTypes, fetched);
                     }
 
                     List<Resolution> temp = new List<Resolution>();
