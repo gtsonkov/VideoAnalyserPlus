@@ -9,7 +9,7 @@ namespace VT
         private FilterMask _color1;
         private FilterMask _color2;
         private bool sorceRedy;
-        
+
 
         public ColorSettings()
         {
@@ -197,7 +197,10 @@ namespace VT
 
         private void ApllyColorsChanges()
         {
-            this.mainForm.SetFilterColors(this._color1, this._color2);
+            Task.Factory.StartNew(() =>
+            {
+                this.mainForm.SetFilterColors(this._color1, this._color2);
+            });
 
             SetColorsView();
         }
@@ -252,12 +255,18 @@ namespace VT
 
         private void stratTrackC1CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            this.mainForm.SetTrackingControlColorA(this.stratTrackC1CheckBox.Checked);
+            Task.Factory.StartNew(() =>
+            {
+                this.mainForm.SetTrackingControlColorA(this.stratTrackC1CheckBox.Checked);
+            });
         }
 
         private void stratTrackC2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            this.mainForm.SetTrackingControlColorB(this.stratTrackC2CheckBox.Checked);
+            Task.Factory.StartNew(() =>
+            {
+                this.mainForm.SetTrackingControlColorB(this.stratTrackC2CheckBox.Checked);
+            });
         }
 
         private void CheckUserInput_KeyPressed(object sender, KeyPressEventArgs e)
