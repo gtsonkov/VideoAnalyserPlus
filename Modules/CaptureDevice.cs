@@ -114,7 +114,7 @@ namespace Modules
             try
             {
                 int hr = 0; 
-                int    bitCount = 0;
+                int bitCount = 0;
 
                 if (this.captureDevice != null)
                 {
