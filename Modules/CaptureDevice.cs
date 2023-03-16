@@ -113,7 +113,7 @@ namespace Modules
         {
             try
             {
-                int hr = 0; 
+                int hr = 0;
                 int bitCount = 0;
 
                 if (this.captureDevice != null)
@@ -172,7 +172,11 @@ namespace Modules
                     foreach (var element in AvailableResolutions)
                     {
                         var r = GetResolution(element);
-                        temp.Add(r);
+
+                        if (!(temp.Any(x => r.Width == x.Width && r.Height == x.Height)))
+                        {
+                            temp.Add(r);
+                        }
                     }
 
                     return temp;

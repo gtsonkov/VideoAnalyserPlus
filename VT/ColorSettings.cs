@@ -10,7 +10,6 @@ namespace VT
         private FilterMask _color2;
         private bool sorceRedy;
 
-
         public ColorSettings()
         {
             InitializeComponent();
@@ -45,8 +44,8 @@ namespace VT
             this.stratTrackC1CheckBox.Enabled = sorceRedy;
             this.stratTrackC2CheckBox.Enabled = sorceRedy;
 
-            this.radiusC1TxtBox.Text = this._color1.Radius.ToString();
-            this.radiusC2TxtBox.Text = this._color2.Radius.ToString();
+            this.radiusC1TrackBar.Value = this._color1.Radius;
+            this.radiusC2TrackBar.Value = this._color2.Radius;
 
             this.MinWidthC1TxtBox.Text = this._color1.MinPixelSize.Width.ToString();
             this.MinHeightC1TxtBox.Text = this._color1.MinPixelSize.Height.ToString();
@@ -76,26 +75,6 @@ namespace VT
 
         private void radiusC1Btn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int currRadius = int.Parse(radiusC1TxtBox.Text);
-
-                if (currRadius > 255 || currRadius < 0)
-                {
-                    MessageBox.Show("Radius auserhalb die grenzen 0 bis 255.", "Fehler");
-                    return;
-                }
-
-                this._color1.Radius = currRadius;
-
-                ApllyColorsChanges();
-            }
-            catch
-            {
-
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Radius an.", "Fehler");
-            }
-
             try
             {
                 int currMinPixelSizeW = int.Parse(this.MinWidthC1TxtBox.Text);
@@ -132,25 +111,6 @@ namespace VT
 
         private void radiusC2Btn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int currRadius = int.Parse(radiusC2TxtBox.Text);
-
-                if (currRadius > 255 || currRadius < 0)
-                {
-                    MessageBox.Show("Radius auserhalb die grenzen 0 bis 255.", "Fehler");
-                    return;
-                }
-
-                this._color2.Radius = currRadius;
-
-                ApllyColorsChanges();
-            }
-            catch
-            {
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl an.", "Fehler");
-            }
-
             try
             {
                 int currMinPixelSizeW = int.Parse(this.MinWidthC2TxtBox.Text);
@@ -259,6 +219,8 @@ namespace VT
             {
                 this.mainForm.SetTrackingControlColorA(this.stratTrackC1CheckBox.Checked);
             });
+
+            SetColorsView();
         }
 
         private void stratTrackC2CheckBox_CheckedChanged(object sender, EventArgs e)
@@ -267,6 +229,8 @@ namespace VT
             {
                 this.mainForm.SetTrackingControlColorB(this.stratTrackC2CheckBox.Checked);
             });
+
+            SetColorsView();
         }
 
         private void CheckUserInput_KeyPressed(object sender, KeyPressEventArgs e)
@@ -278,6 +242,24 @@ namespace VT
             {
                 e.Handled = true;
             }
+        }
+
+        private void radiusC1TrackBar_Scroll(object sender, EventArgs e)
+        {
+            this._color1.Radius = radiusC1TrackBar.Value;
+
+            SetColorRange(this._color1, this._color1.Radius);
+
+            SetColorsView();
+        }
+
+        private void radiusC2TrackBar_Scroll(object sender, EventArgs e)
+        {
+            this._color2.Radius = radiusC2TrackBar.Value;
+
+            SetColorRange(this._color2, this._color2.Radius);
+
+            SetColorsView();
         }
     }
 }

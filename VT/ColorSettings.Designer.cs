@@ -35,6 +35,8 @@
             okBtn = new Button();
             label2 = new Label();
             Color1GroupBox = new GroupBox();
+            label7 = new Label();
+            radiusC1TrackBar = new TrackBar();
             label4 = new Label();
             label3 = new Label();
             MinHeightC1TxtBox = new TextBox();
@@ -44,13 +46,9 @@
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             radiusC1Btn = new Button();
-            radiusC1TxtBox = new TextBox();
             Color1SetBtn = new Button();
-            trackBar1 = new TrackBar();
-            label7 = new Label();
             label8 = new Label();
             Color2SetBtn = new Button();
-            radiusC2TxtBox = new TextBox();
             radiusC2Btn = new Button();
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
@@ -61,19 +59,19 @@
             label6 = new Label();
             label5 = new Label();
             label9 = new Label();
-            trackBar2 = new TrackBar();
+            radiusC2TrackBar = new TrackBar();
             Color2GroupBox = new GroupBox();
             label10 = new Label();
             label11 = new Label();
             Color1GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)radiusC1TrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)radiusC2TrackBar).BeginInit();
             Color2GroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -108,7 +106,7 @@
             // Color1GroupBox
             // 
             Color1GroupBox.Controls.Add(label7);
-            Color1GroupBox.Controls.Add(trackBar1);
+            Color1GroupBox.Controls.Add(radiusC1TrackBar);
             Color1GroupBox.Controls.Add(label4);
             Color1GroupBox.Controls.Add(label3);
             Color1GroupBox.Controls.Add(MinHeightC1TxtBox);
@@ -119,7 +117,6 @@
             Color1GroupBox.Controls.Add(pictureBox2);
             Color1GroupBox.Controls.Add(pictureBox1);
             Color1GroupBox.Controls.Add(radiusC1Btn);
-            Color1GroupBox.Controls.Add(radiusC1TxtBox);
             Color1GroupBox.Controls.Add(Color1SetBtn);
             Color1GroupBox.Location = new Point(9, 12);
             Color1GroupBox.Name = "Color1GroupBox";
@@ -127,6 +124,26 @@
             Color1GroupBox.TabIndex = 21;
             Color1GroupBox.TabStop = false;
             Color1GroupBox.Text = "Farbe 1";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(157, 31);
+            label7.Name = "label7";
+            label7.Size = new Size(25, 15);
+            label7.TabIndex = 31;
+            label7.Text = "255";
+            // 
+            // radiusC1TrackBar
+            // 
+            radiusC1TrackBar.Location = new Point(126, 31);
+            radiusC1TrackBar.Maximum = 255;
+            radiusC1TrackBar.Name = "radiusC1TrackBar";
+            radiusC1TrackBar.Orientation = Orientation.Vertical;
+            radiusC1TrackBar.Size = new Size(45, 160);
+            radiusC1TrackBar.TabIndex = 10;
+            radiusC1TrackBar.TickFrequency = 10;
+            radiusC1TrackBar.Scroll += radiusC1TrackBar_Scroll;
             // 
             // label4
             // 
@@ -211,14 +228,6 @@
             radiusC1Btn.UseVisualStyleBackColor = true;
             radiusC1Btn.Click += radiusC1Btn_Click;
             // 
-            // radiusC1TxtBox
-            // 
-            radiusC1TxtBox.Location = new Point(85, 260);
-            radiusC1TxtBox.Name = "radiusC1TxtBox";
-            radiusC1TxtBox.Size = new Size(60, 23);
-            radiusC1TxtBox.TabIndex = 21;
-            radiusC1TxtBox.KeyPress += CheckUserInput_KeyPressed;
-            // 
             // Color1SetBtn
             // 
             Color1SetBtn.Location = new Point(20, 197);
@@ -228,25 +237,6 @@
             Color1SetBtn.Text = "Farbe 1 Einstellen";
             Color1SetBtn.UseVisualStyleBackColor = true;
             Color1SetBtn.Click += Color1SetBtn_Click;
-            // 
-            // trackBar1
-            // 
-            trackBar1.Location = new Point(126, 31);
-            trackBar1.Maximum = 255;
-            trackBar1.Name = "trackBar1";
-            trackBar1.Orientation = Orientation.Vertical;
-            trackBar1.Size = new Size(45, 160);
-            trackBar1.TabIndex = 10;
-            trackBar1.TickFrequency = 10;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(157, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(25, 15);
-            label7.TabIndex = 31;
-            label7.Text = "255";
             // 
             // label8
             // 
@@ -267,15 +257,6 @@
             Color2SetBtn.Text = "Farbe 2 Einstellen";
             Color2SetBtn.UseVisualStyleBackColor = true;
             Color2SetBtn.Click += Color2SetBtn_Click;
-            // 
-            // radiusC2TxtBox
-            // 
-            radiusC2TxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            radiusC2TxtBox.Location = new Point(45, 260);
-            radiusC2TxtBox.Name = "radiusC2TxtBox";
-            radiusC2TxtBox.Size = new Size(60, 23);
-            radiusC2TxtBox.TabIndex = 3;
-            radiusC2TxtBox.KeyPress += CheckUserInput_KeyPressed;
             // 
             // radiusC2Btn
             // 
@@ -377,16 +358,17 @@
             label9.TabIndex = 32;
             label9.Text = "Radius";
             // 
-            // trackBar2
+            // radiusC2TrackBar
             // 
-            trackBar2.Location = new Point(33, 31);
-            trackBar2.Maximum = 255;
-            trackBar2.Name = "trackBar2";
-            trackBar2.Orientation = Orientation.Vertical;
-            trackBar2.Size = new Size(45, 160);
-            trackBar2.TabIndex = 33;
-            trackBar2.TickFrequency = 10;
-            trackBar2.TickStyle = TickStyle.TopLeft;
+            radiusC2TrackBar.Location = new Point(33, 31);
+            radiusC2TrackBar.Maximum = 255;
+            radiusC2TrackBar.Name = "radiusC2TrackBar";
+            radiusC2TrackBar.Orientation = Orientation.Vertical;
+            radiusC2TrackBar.Size = new Size(45, 160);
+            radiusC2TrackBar.TabIndex = 33;
+            radiusC2TrackBar.TickFrequency = 10;
+            radiusC2TrackBar.TickStyle = TickStyle.TopLeft;
+            radiusC2TrackBar.Scroll += radiusC2TrackBar_Scroll;
             // 
             // Color2GroupBox
             // 
@@ -395,7 +377,7 @@
             Color2GroupBox.Controls.Add(pictureBox4);
             Color2GroupBox.Controls.Add(label10);
             Color2GroupBox.Controls.Add(label11);
-            Color2GroupBox.Controls.Add(trackBar2);
+            Color2GroupBox.Controls.Add(radiusC2TrackBar);
             Color2GroupBox.Controls.Add(label9);
             Color2GroupBox.Controls.Add(label5);
             Color2GroupBox.Controls.Add(label6);
@@ -403,7 +385,6 @@
             Color2GroupBox.Controls.Add(MinWidthC2TxtBox);
             Color2GroupBox.Controls.Add(stratTrackC2CheckBox);
             Color2GroupBox.Controls.Add(radiusC2Btn);
-            Color2GroupBox.Controls.Add(radiusC2TxtBox);
             Color2GroupBox.Controls.Add(Color2SetBtn);
             Color2GroupBox.Location = new Point(316, 12);
             Color2GroupBox.Name = "Color2GroupBox";
@@ -446,14 +427,14 @@
             Text = "ColorSettings";
             Color1GroupBox.ResumeLayout(false);
             Color1GroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)radiusC1TrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)radiusC2TrackBar).EndInit();
             Color2GroupBox.ResumeLayout(false);
             Color2GroupBox.PerformLayout();
             ResumeLayout(false);
@@ -474,15 +455,13 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Button radiusC1Btn;
-        private TextBox radiusC1TxtBox;
         private Button Color1SetBtn;
         private Label label4;
         private Label label3;
         private Label label7;
-        private TrackBar trackBar1;
+        private TrackBar radiusC1TrackBar;
         private Label label8;
         private Button Color2SetBtn;
-        private TextBox radiusC2TxtBox;
         private Button radiusC2Btn;
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
@@ -493,7 +472,7 @@
         private Label label6;
         private Label label5;
         private Label label9;
-        private TrackBar trackBar2;
+        private TrackBar radiusC2TrackBar;
         private GroupBox Color2GroupBox;
         private Label label10;
         private Label label11;
