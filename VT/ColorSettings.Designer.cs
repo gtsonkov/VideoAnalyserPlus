@@ -63,6 +63,7 @@
             Color2GroupBox = new GroupBox();
             label10 = new Label();
             label11 = new Label();
+            button1 = new Button();
             Color1GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)radiusC1TrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -412,11 +413,22 @@
             label11.TabIndex = 33;
             label11.Text = "255";
             // 
+            // button1
+            // 
+            button1.Location = new Point(219, 153);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 50);
+            button1.TabIndex = 33;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // ColorSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(513, 422);
+            Controls.Add(button1);
             Controls.Add(label8);
             Controls.Add(Color2GroupBox);
             Controls.Add(Color1GroupBox);
@@ -476,5 +488,6 @@
         private GroupBox Color2GroupBox;
         private Label label10;
         private Label label11;
+        private Button button1;
     }
 }

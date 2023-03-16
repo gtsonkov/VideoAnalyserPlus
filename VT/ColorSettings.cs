@@ -1,4 +1,5 @@
 ﻿using Modules;
+using Utilities;
 
 namespace VT
 {
@@ -6,21 +7,21 @@ namespace VT
     {
         private MainForm mainForm;
 
-        private FilterMask _color1;
-        private FilterMask _color2;
+        private FilterMaskRGB _color1;
+        private FilterMaskRGB _color2;
         private bool sorceRedy;
 
         public ColorSettings()
         {
             InitializeComponent();
 
-            this._color1 = new FilterMask();
-            this._color2 = new FilterMask();
+            this._color1 = new FilterMaskRGB();
+            this._color2 = new FilterMaskRGB();
 
             SetPropertysState();
         }
 
-        public ColorSettings(FilterMask color1, FilterMask color2)
+        public ColorSettings(FilterMaskRGB color1, FilterMaskRGB color2)
         {
             InitializeComponent();
 
@@ -176,7 +177,7 @@ namespace VT
             this.pictureBox6.BackColor = Color.FromArgb(this._color2.Red_Max, this._color2.Green_Max, this._color2.Blue_Max);
         }
 
-        private void SetColorRange(FilterMask color, int radius)
+        private void SetColorRange(FilterMaskRGB color, int radius)
         {
             color.BaseColor = color.BaseColor;
 
@@ -260,6 +261,14 @@ namespace VT
             SetColorRange(this._color2, this._color2.Radius);
 
             SetColorsView();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (this._color1 != null && this._color1.BaseColor != null)
+            {
+                var hsl = VpTool.RgbToHsl(this._color1.BaseColor);
+            }
         }
     }
 }

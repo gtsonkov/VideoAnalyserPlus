@@ -9,8 +9,8 @@ namespace VT
 
         internal string _file = string.Empty;
 
-        internal FilterMask color1;
-        internal FilterMask color2;
+        internal FilterMaskRGB color1;
+        internal FilterMaskRGB color2;
 
         private List<Rectangle> objectsColor1;
         private List<Rectangle> objectsColor2;
@@ -27,8 +27,8 @@ namespace VT
         public MainForm()
         {
             InitializeComponent();
-            this.color1 = new FilterMask();
-            this.color2 = new FilterMask();
+            this.color1 = new FilterMaskRGB();
+            this.color2 = new FilterMaskRGB();
         }
 
         public MainForm(object obj)
@@ -69,7 +69,7 @@ namespace VT
         }
 
         //Set colors to tracking
-        internal void SetFilterColors(FilterMask colorA, FilterMask colorB)
+        internal void SetFilterColors(FilterMaskRGB colorA, FilterMaskRGB colorB)
         {
             if (this._player != null)
             {

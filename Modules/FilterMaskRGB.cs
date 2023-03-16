@@ -2,7 +2,7 @@
 
 namespace Modules
 {
-    public class FilterMask
+    public class FilterMaskRGB
     {
         private Resolution minPixelSize;
 
@@ -11,7 +11,7 @@ namespace Modules
 
         private int radius;
 
-        public FilterMask()
+        public FilterMaskRGB()
         {
             this.MinPixelSize = new Resolution(minPixelSizeW,minPixelSizeH);
             this.radius = 0;
