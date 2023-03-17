@@ -265,7 +265,7 @@ namespace VT
         {
             if (this._color1 != null && this._color1.BaseColor != null)
             {
-                var hsl = VpTool.RgbToHsl(this._color1.BaseColor);
+                var hsl = VpTool.RgbToScaledHls(this._color1.BaseColor);
             }
         }
     }

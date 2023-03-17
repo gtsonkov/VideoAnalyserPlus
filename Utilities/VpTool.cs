@@ -1,11 +1,14 @@
-﻿using Modules;
+﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using Modules;
 using System.Drawing;
 
 namespace Utilities
 {
     public static class VpTool
     {
-        public static Color_HSL RgbToHsl(Color rgb)
+        public static Color_HLS_Scalled RgbToScaledHls(Color rgb)
         {
             Color_HSL currenHSL_Color = new Color_HSL();
             currenHSL_Color.BaseColor_RGB = rgb;
@@ -56,7 +59,25 @@ namespace Utilities
                 currenHSL_Color.S = delta / (1 - Math.Abs(2 * currenHSL_Color.L - 1));
             }
 
-            return currenHSL_Color;
+            Color_HLS_Scalled finalHLS = ScalHSLtoEmguHLS(currenHSL_Color);
+
+            return finalHLS;
         }
+
+        private static Color_HLS_Scalled ScalHSLtoEmguHLS (Color_HSL color)
+        {
+            var result = new Color_HLS_Scalled();
+            int scalar = 255;
+
+            //Scal H => original H / 2
+            result.H = (int)Math.Round((color.H /2));
+
+            //Scall L and S => 0 >= L or S <=1 of base 255 (255 = 1; ex. 128 = 0,5);
+            result.L = (int)(Math.Round(color.L * scalar));
+            result.S = (int)(Math.Round(color.S * scalar));
+
+            return result;
+        }
+
     }
 }

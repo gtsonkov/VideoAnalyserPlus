@@ -171,8 +171,8 @@ namespace Modules
 
             if (this.trackColor1 && this.color1 != null)
             {
-                var lower = new ScalarArray(new MCvScalar(1, 1,1));
-                var upper = new ScalarArray(new MCvScalar(180, 255,255));
+                var lower = new ScalarArray(new MCvScalar(140, 50,200));
+                var upper = new ScalarArray(new MCvScalar(180, 220,255));
 
                 color1Objects = TrackCurrentColor(lower, upper, hslImage, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
             }
@@ -227,7 +227,7 @@ namespace Modules
                 }
             }
 
-            //The list of rectangles schoud be sorted to assure that when Click to appier firs the mallest deteckted area
+            //The list of rectangles shoud be sorted to assure, that when user click on of those, to appier firs the smallest deteckted area
             //if there are some nested areas
             var orderedListOfRectangles = rectangles.OrderBy(x=> x.Width * x.Height).ToList();
 
@@ -249,4 +249,4 @@ namespace Modules
             this._isPaused = false;
         }
     }
-} 
+}
