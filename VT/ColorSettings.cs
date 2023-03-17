@@ -94,10 +94,8 @@ namespace VT
                 }
                 catch (Exception ex)
                 {
-
                     throw new ArgumentException(ex.Message);
                 }
-
             }
             catch
             {
