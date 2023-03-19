@@ -48,10 +48,7 @@ namespace VT
             this.radiusC1TrackBar.Value = this._color1.Radius;
             this.radiusC2TrackBar.Value = this._color2.Radius;
 
-            this.MinWidthC1TxtBox.Text = this._color1.MinPixelSize.Width.ToString();
-            this.MinHeightC1TxtBox.Text = this._color1.MinPixelSize.Height.ToString();
-            this.MinWidthC2TxtBox.Text = this._color2.MinPixelSize.Width.ToString();
-            this.MinHeightC2TxtBox.Text = this._color2.MinPixelSize.Height.ToString(); ;
+
         }
 
         private void Color1SetBtn_Click(object sender, EventArgs e)
@@ -60,6 +57,7 @@ namespace VT
             {
                 this._color1.BaseColor = colorDialog_C1.Color;
 
+                SetColorRange(this._color1, this._color1.Radius);
                 SetColorsView();
             }
         }
@@ -68,77 +66,9 @@ namespace VT
         {
             if (colorDialog_C2.ShowDialog() == DialogResult.OK)
             {
-                this._color2.BaseColor = colorDialog_C2.Color;
-
+                SetColorRange(this._color2, this._color2.Radius);
                 SetColorsView();
             }
-        }
-
-        private void radiusC1Btn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int currMinPixelSizeW = int.Parse(this.MinWidthC1TxtBox.Text);
-                int currMinPixelSizeH = int.Parse(this.MinHeightC1TxtBox.Text);
-
-                if (currMinPixelSizeW < 1 || currMinPixelSizeH < 1)
-                {
-                    MessageBox.Show("Pixelzahl muss > 0 sein!", "Fehler");
-                    return;
-                }
-
-                try
-                {
-                    this._color1.MinPixelSize.Width = currMinPixelSizeW;
-                    this._color1.MinPixelSize.Height = currMinPixelSizeH;
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException(ex.Message);
-                }
-            }
-            catch
-            {
-
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Minimum Pixelzahl an.", "Fehler"); ;
-            }
-
-            SetColorRange(this._color1, this._color1.Radius);
-
-            SetColorsView();
-        }
-
-        private void radiusC2Btn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int currMinPixelSizeW = int.Parse(this.MinWidthC2TxtBox.Text);
-                int currMinPixelSizeH = int.Parse(this.MinHeightC2TxtBox.Text);
-
-                if (currMinPixelSizeW < 1 || currMinPixelSizeH < 1)
-                {
-                    MessageBox.Show("Pixelzahl muss > 0 sein!", "Fehler");
-                    return;
-                }
-
-                try
-                {
-                    this._color2.MinPixelSize.Width = currMinPixelSizeW;
-                    this._color2.MinPixelSize.Height = currMinPixelSizeH;
-                }
-                catch (Exception ex)
-                {
-
-                    throw new ArgumentException(ex.Message);
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl für Minimum Pixelzahl an.", "Fehler"); ;
-            }
-
-            SetColorRange(this._color2, this._color2.Radius);
-            SetColorsView();
         }
 
         private void okBtn_Click(object sender, EventArgs e)
@@ -261,12 +191,24 @@ namespace VT
             SetColorsView();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void objectSizeC1TrackBar_Scroll(object sender, EventArgs e)
         {
-            if (this._color1 != null && this._color1.BaseColor != null)
-            {
-                var hsl = VpTool.RgbToScaledHls(this._color1.BaseColor);
-            }
+            SetObjectSizeC1();
+        }
+
+        private void objectSizeC2TrackBar_Scroll(object sender, EventArgs e)
+        {
+            SetObjectSizeC2();
+        }
+
+        private void SetObjectSizeC1()
+        {
+            this._color1.MinObjectSize = this.objectSizeC1TrackBar.Value;
+        }
+
+        private void SetObjectSizeC2()
+        {
+            this._color2.MinObjectSize = this.objectSizeC2TrackBar.Value;
         }
     }
 }

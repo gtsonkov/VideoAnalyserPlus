@@ -4,16 +4,15 @@ namespace Modules
 {
     public class FilterMaskRGB
     {
-        private Resolution minPixelSize;
+        private const int defaultMinObjectSize = 1;
 
-        private const int minPixelSizeW = 1;
-        private const int minPixelSizeH = 1;
+        private int minObjectSize;
 
         private int radius;
 
         public FilterMaskRGB()
         {
-            this.MinPixelSize = new Resolution(minPixelSizeW,minPixelSizeH);
+            this.MinObjectSize = defaultMinObjectSize;
             this.radius = 0;
         }
 
@@ -53,25 +52,15 @@ namespace Modules
         /// <summary>
         /// Minimum pixel size (pixel x pixel). Always > 0
         /// </summary>
-        public Resolution MinPixelSize
+        public int MinObjectSize
         {
             get
             {
-                return this.minPixelSize;
+                return this.minObjectSize;
             }
             set
             {
-                if (value != null)
-                {
-                    if (value.Width > 0 && value.Height > 0)
-                    {
-                        this.minPixelSize = value;
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException("Resolution Width and Height must be bigger than 0");
-                }
+                this.minObjectSize = value;
             }
         }
     }

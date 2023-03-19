@@ -174,7 +174,7 @@ namespace Modules
                 var lower = new ScalarArray(new MCvScalar(140, 50,200));
                 var upper = new ScalarArray(new MCvScalar(180, 220,255));
 
-                color1Objects = TrackCurrentColor(lower, upper, hslImage, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
+                color1Objects = TrackCurrentColor(lower, upper, hslImage, this.color1.MinObjectSize);
             }
 
             List<Rectangle> color2Objects = new List<Rectangle>();
@@ -184,7 +184,7 @@ namespace Modules
                 var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
-               color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinPixelSize.Width, this.color2.MinPixelSize.Height);
+               color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinObjectSize);
             }
 
             List<Rectangle>[] objectsFoundet = new List<Rectangle>[] {color1Objects, color2Objects};
@@ -205,7 +205,7 @@ namespace Modules
             }
         }
 
-        private List<Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int pixelSizeW, int pixelSizeH)
+        private List<Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int minObjectSize)
         {
             Mat mask = new Mat();
 
@@ -221,7 +221,7 @@ namespace Modules
             {
                 Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
 
-                if (rect.Width >= pixelSizeW && rect.Height >= pixelSizeH)
+                if ((rect.Width * rect.Height) >= minObjectSize)
                 {
                     rectangles.Add(rect);
                 }
