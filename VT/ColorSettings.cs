@@ -48,7 +48,8 @@ namespace VT
             this.radiusC1TrackBar.Value = this._color1.Radius;
             this.radiusC2TrackBar.Value = this._color2.Radius;
 
-
+            this.objectSizeC1TrackBar.Value = this._color1.MinObjectSize;
+            this.objectSizeC2TrackBar.Value = this._color2.MinObjectSize;
         }
 
         private void Color1SetBtn_Click(object sender, EventArgs e)

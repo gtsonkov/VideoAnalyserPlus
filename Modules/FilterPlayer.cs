@@ -161,21 +161,22 @@ namespace Modules
 
             List<Rectangle> color1Objects = new List<Rectangle>();
 
-            //if (this.trackColor1 && this.color1 != null)
-            //{
-            //    var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
-            //    var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
-            //
-            //    color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinPixelSize.Width, this.color1.MinPixelSize.Height);
-            //}
-
             if (this.trackColor1 && this.color1 != null)
             {
-                var lower = new ScalarArray(new MCvScalar(140, 50,200));
-                var upper = new ScalarArray(new MCvScalar(180, 220,255));
-
-                color1Objects = TrackCurrentColor(lower, upper, hslImage, this.color1.MinObjectSize);
+                var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
+                var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
+            
+                color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinObjectSize);
             }
+
+            //HLS filter test! 
+            //if (this.trackColor1 && this.color1 != null)
+            //{
+            //    var lower = new ScalarArray(new MCvScalar(140, 50,200));
+            //    var upper = new ScalarArray(new MCvScalar(180, 220,255));
+            //
+            //    color1Objects = TrackCurrentColor(lower, upper, hslImage, this.color1.MinObjectSize);
+            //}
 
             List<Rectangle> color2Objects = new List<Rectangle>();
 
