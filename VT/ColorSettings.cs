@@ -60,6 +60,7 @@ namespace VT
 
                 SetColorRange(this._color1, this._color1.Radius);
                 SetColorsView();
+                ApllyColorsChanges();
             }
         }
 
@@ -67,8 +68,11 @@ namespace VT
         {
             if (colorDialog_C2.ShowDialog() == DialogResult.OK)
             {
+                this._color2.BaseColor = colorDialog_C2.Color;
+
                 SetColorRange(this._color2, this._color2.Radius);
                 SetColorsView();
+                ApllyColorsChanges();
             }
         }
 

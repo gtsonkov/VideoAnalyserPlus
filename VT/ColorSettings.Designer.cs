@@ -120,7 +120,7 @@
             // objectSizeC1TrackBar
             // 
             objectSizeC1TrackBar.Location = new Point(6, 297);
-            objectSizeC1TrackBar.Maximum = 50;
+            objectSizeC1TrackBar.Maximum = 100;
             objectSizeC1TrackBar.Minimum = 1;
             objectSizeC1TrackBar.Name = "objectSizeC1TrackBar";
             objectSizeC1TrackBar.Size = new Size(176, 45);
@@ -307,7 +307,7 @@
             // objectSizeC2TrackBar
             // 
             objectSizeC2TrackBar.Location = new Point(6, 297);
-            objectSizeC2TrackBar.Maximum = 50;
+            objectSizeC2TrackBar.Maximum = 100;
             objectSizeC2TrackBar.Minimum = 1;
             objectSizeC2TrackBar.Name = "objectSizeC2TrackBar";
             objectSizeC2TrackBar.RightToLeft = RightToLeft.No;
