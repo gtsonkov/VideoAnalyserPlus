@@ -50,9 +50,7 @@ namespace VT
                 Color penColor = Color.FromArgb(0, 255, 0);
                 var pen = new Pen(penColor, 3);
 
-                pic.DrawRectangles(pen, objectsColor1
-                                        .Where(x => x.Width >= this.color1.MinPixelSize.Width
-                                        && x.Height >= this.color1.MinPixelSize.Height).ToArray());
+                pic.DrawRectangles(pen, objectsColor1.ToArray());
             }
 
             if (objectsColor2 != null && objectsColor2.Count() > 0)
@@ -60,9 +58,7 @@ namespace VT
                 Color penColor = Color.FromArgb(255, 0, 255);
                 var pen = new Pen(penColor, 3);
 
-                pic.DrawRectangles(pen, objectsColor2
-                                                       .Where(x => x.Width >= this.color2.MinPixelSize.Width
-                                                       && x.Height >= this.color2.MinPixelSize.Height).ToArray());
+                pic.DrawRectangles(pen, objectsColor2.ToArray());
             }
 
             this.screenBox1.Image = frame;
@@ -225,7 +221,11 @@ namespace VT
         {
             if (this.objectsColor1 != null)
             {
-                foreach (Rectangle rect in this.objectsColor1)
+                //The list of rectangles shoud be sorted to assure, that when user click on of those, to appier firs the smallest deteckted area
+                //if there are some nested areas
+                var orderedListOfRectangles = this.objectsColor1.OrderBy(x => x.Width * x.Height).ToList();
+
+                foreach (Rectangle rect in orderedListOfRectangles)
                 {
                     if (rect.Contains(e.Location))
                     {
@@ -237,9 +237,13 @@ namespace VT
                 }
             }
 
-            if (this.objectsColor1 != null)
+            if (this.objectsColor2 != null)
             {
-                foreach (Rectangle rect in this.objectsColor2)
+                //The list of rectangles shoud be sorted to assure, that when user click on of those, to appier firs the smallest deteckted area
+                //if there are some nested areas
+                var orderedListOfRectangles = this.objectsColor2.OrderBy(x => x.Width * x.Height).ToList();
+
+                foreach (Rectangle rect in orderedListOfRectangles)
                 {
                     if (rect.Contains(e.Location))
                     {

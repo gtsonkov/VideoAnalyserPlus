@@ -228,11 +228,7 @@ namespace Modules
                 }
             }
 
-            //The list of rectangles shoud be sorted to assure, that when user click on of those, to appier firs the smallest deteckted area
-            //if there are some nested areas
-            var orderedListOfRectangles = rectangles.OrderBy(x=> x.Width * x.Height).ToList();
-
-           return orderedListOfRectangles;
+           return rectangles;
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
