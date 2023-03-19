@@ -60,7 +60,7 @@ namespace VT
 
                 SetColorRange(this._color1, this._color1.Radius);
                 SetColorsView();
-                ApllyColorsChanges();
+                ApllyColorsChanges_Color1();
             }
         }
 
@@ -72,7 +72,7 @@ namespace VT
 
                 SetColorRange(this._color2, this._color2.Radius);
                 SetColorsView();
-                ApllyColorsChanges();
+                ApllyColorsChanges_Color2();
             }
         }
 
@@ -84,19 +84,26 @@ namespace VT
                 return;
             }
 
-            ApllyColorsChanges();
+            ApllyColorsChanges_Color1();
+            ApllyColorsChanges_Color2();
 
             this.Close();
         }
 
-        private void ApllyColorsChanges()
+        private void ApllyColorsChanges_Color1()
         {
             Task.Factory.StartNew(() =>
             {
-                this.mainForm.SetFilterColors(this._color1, this._color2);
+                this.mainForm.SetFilterColor_A(this._color1);
             });
+        }
 
-            SetColorsView();
+        private void ApllyColorsChanges_Color2()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                this.mainForm.SetFilterColor_B(this._color2);
+            });
         }
 
         private void SetColorsView()

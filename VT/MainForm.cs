@@ -65,14 +65,20 @@ namespace VT
         }
 
         //Set colors to tracking
-        internal void SetFilterColors(FilterMaskRGB colorA, FilterMaskRGB colorB)
+        internal void SetFilterColor_A(FilterMaskRGB color)
         {
             if (this._player != null)
             {
-                this.color1 = colorA;
-                this.color2 = colorB;
-
+                this.color1 = color;
                 this._player.FilterColor_A = this.color1;
+            }
+        }
+
+        internal void SetFilterColor_B(FilterMaskRGB color)
+        {
+            if (this._player != null)
+            {
+                this.color2 = color;
                 this._player.FilterColor_B = this.color2;
             }
         }
