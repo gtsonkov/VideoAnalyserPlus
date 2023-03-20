@@ -6,6 +6,7 @@ namespace VT
     public partial class MainForm : Form, IStreamable
     {
         private FilterPlayer _player;
+        private Bitmap _unfliteredFrame;
 
         internal string _file = string.Empty;
 
@@ -42,6 +43,9 @@ namespace VT
             this.objectsColor1 = detectedAreas[0];
 
             this.objectsColor2 = detectedAreas[1];
+
+            //Make a Copy of the original frame befor drawing the recs
+            this._unfliteredFrame = (Bitmap) frame.Clone();
 
             Graphics pic = Graphics.FromImage(frame);
 
@@ -236,7 +240,7 @@ namespace VT
                     if (rect.Contains(e.Location))
                     {
                         // Create a new form with a zoomed-in view of the rectangle
-                        ShowSelected zoomForm = new ShowSelected(this.screenBox1.Image, rect);
+                        ShowSelected zoomForm = new ShowSelected(this._unfliteredFrame, rect);
                         zoomForm.Show();
                         break;
                     }
@@ -254,7 +258,7 @@ namespace VT
                     if (rect.Contains(e.Location))
                     {
                         // Create a new form with a zoomed-in view of the rectangle
-                        ShowSelected zoomForm = new ShowSelected(this.screenBox1.Image, rect);
+                        ShowSelected zoomForm = new ShowSelected(this._unfliteredFrame, rect);
                         zoomForm.Show();
                         break;
                     }

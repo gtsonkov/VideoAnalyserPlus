@@ -56,6 +56,10 @@
             objectSizeC2TrackBar = new TrackBar();
             label10 = new Label();
             label11 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label12 = new Label();
             Color1GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)objectSizeC1TrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)radiusC1TrackBar).BeginInit();
@@ -91,6 +95,8 @@
             // 
             // Color1GroupBox
             // 
+            Color1GroupBox.Controls.Add(label5);
+            Color1GroupBox.Controls.Add(label4);
             Color1GroupBox.Controls.Add(label2);
             Color1GroupBox.Controls.Add(objectSizeC1TrackBar);
             Color1GroupBox.Controls.Add(label7);
@@ -120,7 +126,7 @@
             // objectSizeC1TrackBar
             // 
             objectSizeC1TrackBar.Location = new Point(6, 297);
-            objectSizeC1TrackBar.Maximum = 100;
+            objectSizeC1TrackBar.Maximum = 10000;
             objectSizeC1TrackBar.Minimum = 1;
             objectSizeC1TrackBar.Name = "objectSizeC1TrackBar";
             objectSizeC1TrackBar.Size = new Size(176, 45);
@@ -276,6 +282,8 @@
             // 
             // Color2GroupBox
             // 
+            Color2GroupBox.Controls.Add(label6);
+            Color2GroupBox.Controls.Add(label12);
             Color2GroupBox.Controls.Add(label3);
             Color2GroupBox.Controls.Add(objectSizeC2TrackBar);
             Color2GroupBox.Controls.Add(pictureBox6);
@@ -307,7 +315,7 @@
             // objectSizeC2TrackBar
             // 
             objectSizeC2TrackBar.Location = new Point(6, 297);
-            objectSizeC2TrackBar.Maximum = 100;
+            objectSizeC2TrackBar.Maximum = 10000;
             objectSizeC2TrackBar.Minimum = 1;
             objectSizeC2TrackBar.Name = "objectSizeC2TrackBar";
             objectSizeC2TrackBar.RightToLeft = RightToLeft.No;
@@ -333,6 +341,42 @@
             label11.Size = new Size(25, 15);
             label11.TabIndex = 33;
             label11.Text = "255";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(6, 327);
+            label4.Name = "label4";
+            label4.Size = new Size(33, 15);
+            label4.TabIndex = 34;
+            label4.Text = "Klein";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(138, 327);
+            label5.Name = "label5";
+            label5.Size = new Size(36, 15);
+            label5.TabIndex = 35;
+            label5.Text = "Gross";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(137, 327);
+            label6.Name = "label6";
+            label6.Size = new Size(36, 15);
+            label6.TabIndex = 37;
+            label6.Text = "Gross";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(5, 327);
+            label12.Name = "label12";
+            label12.Size = new Size(33, 15);
+            label12.TabIndex = 36;
+            label12.Text = "Klein";
             // 
             // ColorSettings
             // 
@@ -392,5 +436,9 @@
         private TrackBar objectSizeC1TrackBar;
         private Label label3;
         private TrackBar objectSizeC2TrackBar;
+        private Label label5;
+        private Label label4;
+        private Label label6;
+        private Label label12;
     }
 }

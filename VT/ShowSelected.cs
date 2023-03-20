@@ -28,5 +28,10 @@
         {
             this.pictureBox.Image = null;
         }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
