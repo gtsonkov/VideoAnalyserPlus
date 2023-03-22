@@ -1,4 +1,5 @@
 ﻿using Modules;
+using System.Windows.Forms;
 using Utilities;
 
 namespace VT
@@ -10,6 +11,9 @@ namespace VT
         private FilterMaskRGB _color1;
         private FilterMaskRGB _color2;
         private bool sorceRedy;
+
+        private Pen pen1Sample;
+        private Pen pen2Sample;
 
         public ColorSettings()
         {
@@ -30,9 +34,12 @@ namespace VT
             this._color1 = color1;
             this._color2 = color2;
 
+            SetPropertysState();
+
             SetColorsView();
 
-            SetPropertysState();
+            DrawRectangeSampleColor1();
+            DrawRectangeSampleColor2();
         }
 
         private void SetPropertysState()
@@ -50,6 +57,9 @@ namespace VT
 
             this.objectSizeC1TrackBar.Value = this._color1.MinObjectSize;
             this.objectSizeC2TrackBar.Value = this._color2.MinObjectSize;
+
+            this.pen1Sample = this.mainForm.GetPen_Color1();
+            this.pen2Sample = this.mainForm.GetPen_Color2();
         }
 
         private void Color1SetBtn_Click(object sender, EventArgs e)
@@ -221,6 +231,65 @@ namespace VT
         private void SetObjectSizeC2()
         {
             this._color2.MinObjectSize = this.objectSizeC2TrackBar.Value;
+        }
+
+        private void DrawRectangeSampleColor1()
+        {
+            Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            Graphics graphic = Graphics.FromImage(bmp);
+
+            //Test data
+            graphic.DrawRectangle(pen1Sample, 11, 11, 30, 30);
+            RectangleC1PicBox.Image = bmp;
+        }
+
+        private void DrawRectangeSampleColor2()
+        {
+            Bitmap bmp = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+
+            Graphics graphic = Graphics.FromImage(bmp);
+
+            //Test data
+            graphic.DrawRectangle(pen2Sample, 11, 11, 30, 30);
+
+            RectangleC2PicBox.Image = bmp;
+        }
+
+        private void ColorRectangleColor1_Click(object sender, EventArgs e)
+        {
+            if (colorDialog_Rec1.ShowDialog() == DialogResult.OK)
+            {
+                var color = colorDialog_Rec1.Color;
+                this.mainForm.SetPenForColor1(color);
+
+                DrawRectangeSampleColor1();
+            }
+        }
+
+        private void ColorRectangleColor2_Click(object sender, EventArgs e)
+        {
+            if (colorDialog_Rec2.ShowDialog() == DialogResult.OK)
+            {
+                var color = colorDialog_Rec2.Color;
+                this.mainForm.SetPenForColor2(color);
+
+                DrawRectangeSampleColor2();
+            }
+        }
+
+        private void reck1BorderTrackBar_Scroll(object sender, EventArgs e)
+        {
+            this.mainForm.SetPenForColor1(this.reck1BorderTrackBar.Value);
+
+            DrawRectangeSampleColor1();
+        }
+
+        private void reck2BorderTrackBar_Scroll(object sender, EventArgs e)
+        {
+            this.mainForm.SetPenForColor2(this.reck2BorderTrackBar.Value);
+
+            DrawRectangeSampleColor2();
         }
     }
 }

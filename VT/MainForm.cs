@@ -39,8 +39,13 @@ namespace VT
             this.color1 = new FilterMaskRGB();
             this.color2 = new FilterMaskRGB();
 
+<<<<<<< HEAD
             SetPenColor1(ConstantData.DefaultColor_A, ConstantData.DefaultBorderRectangles);
             SetPenColor2(ConstantData.DefaultColor_B, ConstantData.DefaultBorderRectangles);
+=======
+            SetPenForColor1(ConstantData.DefaultColor_A, ConstantData.DefaultBorderRectangles);
+            SetPenForColor2(ConstantData.DefaultColor_B, ConstantData.DefaultBorderRectangles);
+>>>>>>> 15a5b0621fb496e8d2cbb20e70d3abb8578fde0c
         }
 
         public MainForm(object obj)
@@ -61,18 +66,12 @@ namespace VT
 
             if (objectsColor1 != null && objectsColor1.Count() > 0)
             {
-                Color penColor = Color.FromArgb(0, 255, 0);
-                var pen = new Pen(penColor, 3);
-
-                pic.DrawRectangles(pen, objectsColor1.ToArray());
+                pic.DrawRectangles(this.penColor1, objectsColor1.ToArray());
             }
 
             if (objectsColor2 != null && objectsColor2.Count() > 0)
             {
-                Color penColor = Color.FromArgb(255, 0, 255);
-                var pen = new Pen(penColor, 3);
-
-                pic.DrawRectangles(pen, objectsColor2.ToArray());
+                pic.DrawRectangles(this.penColor2, objectsColor2.ToArray());
             }
 
             this.screenBox1.Image = frame;
@@ -292,14 +291,133 @@ namespace VT
             AdjustPlayerScreenResolution();
         }
 
-        private void SetPenColor1(Color color, int border)
+        internal void SetPenForColor1(Color color, int border)
         {
-            this.penColor1 = new Pen(color, border);
+            if (color == null)
+            {
+                MessageBox.Show("Bitte wähen Sie zu erst eine Farbe für das Rechteck.", "Warnung");
+            }
+            else
+            {
+                int currentBorderWidth = border;
+
+                if (currentBorderWidth <= 0)
+                {
+                    var dialog = MessageBox.Show(ConstantData.Message_RectangleBorderWigth_ZeroOrNegative
+                                                  ,ConstantData.Message_Tittle_Warning
+                                                  ,MessageBoxButtons.YesNo);
+
+                    if (dialog != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+
+                this.penColor1 = new Pen(color, currentBorderWidth);
+            }
         }
 
-        private void SetPenColor2(Color color, int border)
+        internal void SetPenForColor1(Color color)
         {
-            this.penColor2 = new Pen(color, border);
+            if (color == null)
+            {
+                return;
+            }
+
+            if (this.penColor1 == null)
+            {
+                this.penColor1 = new Pen(color, ConstantData.DefaultBorderRectangles);
+            }
+            else
+            {
+                this.penColor1.Color = color;
+            }
         }
+<<<<<<< HEAD
+=======
+
+        internal void SetPenForColor1(int border)
+        {
+            if (this.penColor1 == null)
+            {
+                MessageBox.Show("Bitte wähen Sie zu erst eine Farbe für das Rechteck.", "Warnung");
+            }
+            else
+            {
+                if (border > 0)
+                {
+                    this.penColor1.Width = border;
+                }
+            }
+        }
+
+        internal void SetPenForColor2(Color color, int border)
+        {
+            if (color == null)
+            {
+                MessageBox.Show("Bitte wähen Sie zu erst eine Farbe für das Rechteck.", "Warnung");
+            }
+            else
+            {
+                int currentBorderWidth = border;
+
+                if (currentBorderWidth <= 0)
+                {
+                    var dialog = MessageBox.Show(ConstantData.Message_RectangleBorderWigth_ZeroOrNegative
+                                                ,ConstantData.Message_Tittle_Warning
+                                                ,MessageBoxButtons.YesNo);
+
+                    if (dialog != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+
+                this.penColor2 = new Pen(color, currentBorderWidth);
+            }
+        }
+
+        internal void SetPenForColor2(Color color)
+        {
+            if (color == null)
+            {
+                return;
+            }
+
+            if (this.penColor2 == null)
+            {
+                this.penColor2 = new Pen(color, ConstantData.DefaultBorderRectangles);
+            }
+            else
+            {
+                this.penColor2.Color = color;
+            }
+        }
+
+        internal void SetPenForColor2(int border)
+        {
+            if (this.penColor2 == null)
+            {
+                MessageBox.Show("Bitte wähen Sie zu erst eine Farbe für das Rechteck.", "Warnung");
+            }
+            else
+            {
+                if (border > 0)
+                {
+                    this.penColor2.Width = border;
+                }
+            }
+        }
+
+        internal Pen GetPen_Color1()
+        {
+            return this.penColor1;
+        }
+
+        internal Pen GetPen_Color2()
+        {
+            return this.penColor2;
+        }
+>>>>>>> 15a5b0621fb496e8d2cbb20e70d3abb8578fde0c
     }
 }
