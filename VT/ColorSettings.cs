@@ -238,13 +238,27 @@ namespace VT
             if (colorDialog_Rec1.ShowDialog() == DialogResult.OK)
             {
                 var color = colorDialog_Rec1.Color;
-
+                this.mainForm.SetPenForColor1(color);
             }
         }
 
         private void ColorRectangleColor2_Click(object sender, EventArgs e)
         {
+            if (colorDialog_Rec2.ShowDialog() == DialogResult.OK)
+            {
+                var color = colorDialog_Rec2.Color;
+                this.mainForm.SetPenForColor2(color);
+            }
+        }
 
+        private void reck1BorderTrackBar_Scroll(object sender, EventArgs e)
+        {
+            this.mainForm.SetPenForColor1(this.reck1BorderTrackBar.Value);
+        }
+
+        private void reck2BorderTrackBar_Scroll(object sender, EventArgs e)
+        {
+            this.mainForm.SetPenForColor2(this.reck2BorderTrackBar.Value);
         }
     }
 }
