@@ -16,6 +16,9 @@ namespace VT
         private List<Rectangle> objectsColor1;
         private List<Rectangle> objectsColor2;
 
+        private Pen penColor1;
+        private Pen penColor2;
+
         internal bool trackColor1;
         internal bool trackColor2;
         internal bool sorceRedy;
@@ -276,6 +279,16 @@ namespace VT
         private void AdjustResolutionBtn_Click(object sender, EventArgs e)
         {
             AdjustPlayerScreenResolution();
+        }
+
+        private void SetPenColor1(Color color, int border)
+        {
+            this.penColor1 = new Pen(color, border);
+        }
+
+        private void SetPenColor2(Color color, int border)
+        {
+            this.penColor2 = new Pen(color, border);
         }
     }
 }
