@@ -58,7 +58,7 @@
             radiusC2TrackBar = new TrackBar();
             Color2GroupBox = new GroupBox();
             reck2BorderTrackBar = new TrackBar();
-            pictureBox7 = new PictureBox();
+            RectangleC2PicBox = new PictureBox();
             ColorRectangleColor2 = new Button();
             label6 = new Label();
             label12 = new Label();
@@ -82,7 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)radiusC2TrackBar).BeginInit();
             Color2GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)reck2BorderTrackBar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)RectangleC2PicBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)objectSizeC2TrackBar).BeginInit();
             SuspendLayout();
             // 
@@ -141,11 +141,12 @@
             // 
             // RectangleC1PicBox
             // 
+            RectangleC1PicBox.BorderStyle = BorderStyle.FixedSingle;
             RectangleC1PicBox.Location = new Point(116, 376);
-            RectangleC1PicBox.MaximumSize = new Size(54, 54);
-            RectangleC1PicBox.MinimumSize = new Size(54, 54);
+            RectangleC1PicBox.MaximumSize = new Size(55, 55);
+            RectangleC1PicBox.MinimumSize = new Size(55, 55);
             RectangleC1PicBox.Name = "RectangleC1PicBox";
-            RectangleC1PicBox.Size = new Size(54, 54);
+            RectangleC1PicBox.Size = new Size(55, 55);
             RectangleC1PicBox.TabIndex = 39;
             RectangleC1PicBox.TabStop = false;
             // 
@@ -347,7 +348,7 @@
             // Color2GroupBox
             // 
             Color2GroupBox.Controls.Add(reck2BorderTrackBar);
-            Color2GroupBox.Controls.Add(pictureBox7);
+            Color2GroupBox.Controls.Add(RectangleC2PicBox);
             Color2GroupBox.Controls.Add(ColorRectangleColor2);
             Color2GroupBox.Controls.Add(label6);
             Color2GroupBox.Controls.Add(label12);
@@ -379,15 +380,16 @@
             reck2BorderTrackBar.TabIndex = 41;
             reck2BorderTrackBar.Scroll += reck2BorderTrackBar_Scroll;
             // 
-            // pictureBox7
+            // RectangleC2PicBox
             // 
-            pictureBox7.Location = new Point(16, 376);
-            pictureBox7.MaximumSize = new Size(54, 54);
-            pictureBox7.MinimumSize = new Size(54, 54);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(54, 54);
-            pictureBox7.TabIndex = 40;
-            pictureBox7.TabStop = false;
+            RectangleC2PicBox.BorderStyle = BorderStyle.FixedSingle;
+            RectangleC2PicBox.Location = new Point(16, 376);
+            RectangleC2PicBox.MaximumSize = new Size(55, 55);
+            RectangleC2PicBox.MinimumSize = new Size(55, 55);
+            RectangleC2PicBox.Name = "RectangleC2PicBox";
+            RectangleC2PicBox.Size = new Size(55, 55);
+            RectangleC2PicBox.TabIndex = 40;
+            RectangleC2PicBox.TabStop = false;
             // 
             // ColorRectangleColor2
             // 
@@ -484,7 +486,7 @@
             Color2GroupBox.ResumeLayout(false);
             Color2GroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)reck2BorderTrackBar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)RectangleC2PicBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)objectSizeC2TrackBar).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -524,7 +526,7 @@
         private Label label12;
         private PictureBox RectangleC1PicBox;
         private Button ColorRectangleColor1;
-        private PictureBox pictureBox7;
+        private PictureBox RectangleC2PicBox;
         private Button ColorRectangleColor2;
         private ColorDialog colorDialog_Rec1;
         private ColorDialog colorDialog_Rec2;

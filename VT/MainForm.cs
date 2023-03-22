@@ -394,5 +394,15 @@ namespace VT
                 }
             }
         }
+
+        internal Pen GetPen_Color1()
+        {
+            return this.penColor1;
+        }
+
+        internal Pen GetPen_Color2()
+        {
+            return this.penColor2;
+        }
     }
 }
