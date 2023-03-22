@@ -222,5 +222,29 @@ namespace VT
         {
             this._color2.MinObjectSize = this.objectSizeC2TrackBar.Value;
         }
+
+        private void DrawRectangeSampleColor1()
+        {
+
+        }
+
+        private void DrawRectangeSampleColor2()
+        {
+
+        }
+
+        private void ColorRectangleColor1_Click(object sender, EventArgs e)
+        {
+            if (colorDialog_Rec1.ShowDialog() == DialogResult.OK)
+            {
+                var color = colorDialog_Rec1.Color;
+
+            }
+        }
+
+        private void ColorRectangleColor2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

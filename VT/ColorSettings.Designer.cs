@@ -34,6 +34,10 @@
             label1 = new Label();
             okBtn = new Button();
             Color1GroupBox = new GroupBox();
+            RectangleC1PicBox = new PictureBox();
+            ColorRectangleColor1 = new Button();
+            label5 = new Label();
+            label4 = new Label();
             label2 = new Label();
             objectSizeC1TrackBar = new TrackBar();
             label7 = new Label();
@@ -52,15 +56,20 @@
             label9 = new Label();
             radiusC2TrackBar = new TrackBar();
             Color2GroupBox = new GroupBox();
+            pictureBox7 = new PictureBox();
+            ColorRectangleColor2 = new Button();
+            label6 = new Label();
+            label12 = new Label();
             label3 = new Label();
             objectSizeC2TrackBar = new TrackBar();
             label10 = new Label();
             label11 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label12 = new Label();
+            colorDialog_Rec1 = new ColorDialog();
+            colorDialog_Rec2 = new ColorDialog();
+            reck1BorderTrackBar = new TrackBar();
+            trackBar1 = new TrackBar();
             Color1GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)RectangleC1PicBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)objectSizeC1TrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)radiusC1TrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -71,7 +80,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)radiusC2TrackBar).BeginInit();
             Color2GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)objectSizeC2TrackBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)reck1BorderTrackBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -85,7 +97,7 @@
             // 
             // okBtn
             // 
-            okBtn.Location = new Point(204, 366);
+            okBtn.Location = new Point(204, 454);
             okBtn.Name = "okBtn";
             okBtn.Size = new Size(104, 45);
             okBtn.TabIndex = 7;
@@ -95,6 +107,9 @@
             // 
             // Color1GroupBox
             // 
+            Color1GroupBox.Controls.Add(reck1BorderTrackBar);
+            Color1GroupBox.Controls.Add(RectangleC1PicBox);
+            Color1GroupBox.Controls.Add(ColorRectangleColor1);
             Color1GroupBox.Controls.Add(label5);
             Color1GroupBox.Controls.Add(label4);
             Color1GroupBox.Controls.Add(label2);
@@ -109,10 +124,48 @@
             Color1GroupBox.Controls.Add(Color1SetBtn);
             Color1GroupBox.Location = new Point(9, 12);
             Color1GroupBox.Name = "Color1GroupBox";
-            Color1GroupBox.Size = new Size(188, 398);
+            Color1GroupBox.Size = new Size(188, 487);
             Color1GroupBox.TabIndex = 21;
             Color1GroupBox.TabStop = false;
             Color1GroupBox.Text = "Farbe 1";
+            // 
+            // RectangleC1PicBox
+            // 
+            RectangleC1PicBox.Location = new Point(116, 376);
+            RectangleC1PicBox.MaximumSize = new Size(54, 54);
+            RectangleC1PicBox.MinimumSize = new Size(54, 54);
+            RectangleC1PicBox.Name = "RectangleC1PicBox";
+            RectangleC1PicBox.Size = new Size(54, 54);
+            RectangleC1PicBox.TabIndex = 39;
+            RectangleC1PicBox.TabStop = false;
+            // 
+            // ColorRectangleColor1
+            // 
+            ColorRectangleColor1.Location = new Point(6, 397);
+            ColorRectangleColor1.Name = "ColorRectangleColor1";
+            ColorRectangleColor1.Size = new Size(97, 33);
+            ColorRectangleColor1.TabIndex = 38;
+            ColorRectangleColor1.Text = "Farbe Rechteck";
+            ColorRectangleColor1.UseVisualStyleBackColor = true;
+            ColorRectangleColor1.Click += ColorRectangleColor1_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(138, 327);
+            label5.Name = "label5";
+            label5.Size = new Size(36, 15);
+            label5.TabIndex = 35;
+            label5.Text = "Gross";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(6, 327);
+            label4.Name = "label4";
+            label4.Size = new Size(33, 15);
+            label4.TabIndex = 34;
+            label4.Text = "Klein";
             // 
             // label2
             // 
@@ -157,11 +210,11 @@
             // stratTrackC1CheckBox
             // 
             stratTrackC1CheckBox.AutoSize = true;
-            stratTrackC1CheckBox.Location = new Point(20, 359);
+            stratTrackC1CheckBox.Location = new Point(6, 359);
             stratTrackC1CheckBox.Name = "stratTrackC1CheckBox";
-            stratTrackC1CheckBox.Size = new Size(94, 19);
+            stratTrackC1CheckBox.Size = new Size(97, 19);
             stratTrackC1CheckBox.TabIndex = 26;
-            stratTrackC1CheckBox.Text = "StratTracking";
+            stratTrackC1CheckBox.Text = "Strat Tracking";
             stratTrackC1CheckBox.UseVisualStyleBackColor = true;
             stratTrackC1CheckBox.CheckedChanged += stratTrackC1CheckBox_CheckedChanged;
             // 
@@ -251,8 +304,9 @@
             stratTrackC2CheckBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             stratTrackC2CheckBox.AutoSize = true;
             stratTrackC2CheckBox.CheckAlign = ContentAlignment.MiddleRight;
-            stratTrackC2CheckBox.Location = new Point(73, 359);
+            stratTrackC2CheckBox.Location = new Point(85, 359);
             stratTrackC2CheckBox.Name = "stratTrackC2CheckBox";
+            stratTrackC2CheckBox.RightToLeft = RightToLeft.No;
             stratTrackC2CheckBox.Size = new Size(97, 19);
             stratTrackC2CheckBox.TabIndex = 15;
             stratTrackC2CheckBox.Text = "Strat Tracking";
@@ -282,6 +336,9 @@
             // 
             // Color2GroupBox
             // 
+            Color2GroupBox.Controls.Add(trackBar1);
+            Color2GroupBox.Controls.Add(pictureBox7);
+            Color2GroupBox.Controls.Add(ColorRectangleColor2);
             Color2GroupBox.Controls.Add(label6);
             Color2GroupBox.Controls.Add(label12);
             Color2GroupBox.Controls.Add(label3);
@@ -298,10 +355,48 @@
             Color2GroupBox.Location = new Point(316, 12);
             Color2GroupBox.Name = "Color2GroupBox";
             Color2GroupBox.RightToLeft = RightToLeft.Yes;
-            Color2GroupBox.Size = new Size(188, 398);
+            Color2GroupBox.Size = new Size(188, 487);
             Color2GroupBox.TabIndex = 22;
             Color2GroupBox.TabStop = false;
             Color2GroupBox.Text = "Farbe 2";
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Location = new Point(16, 376);
+            pictureBox7.MaximumSize = new Size(54, 54);
+            pictureBox7.MinimumSize = new Size(54, 54);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(54, 54);
+            pictureBox7.TabIndex = 40;
+            pictureBox7.TabStop = false;
+            // 
+            // ColorRectangleColor2
+            // 
+            ColorRectangleColor2.Location = new Point(85, 397);
+            ColorRectangleColor2.Name = "ColorRectangleColor2";
+            ColorRectangleColor2.Size = new Size(97, 33);
+            ColorRectangleColor2.TabIndex = 40;
+            ColorRectangleColor2.Text = "Farbe Rechteck";
+            ColorRectangleColor2.UseVisualStyleBackColor = true;
+            ColorRectangleColor2.Click += ColorRectangleColor2_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(137, 327);
+            label6.Name = "label6";
+            label6.Size = new Size(36, 15);
+            label6.TabIndex = 37;
+            label6.Text = "Gross";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(5, 327);
+            label12.Name = "label12";
+            label12.Size = new Size(33, 15);
+            label12.TabIndex = 36;
+            label12.Text = "Klein";
             // 
             // label3
             // 
@@ -342,47 +437,26 @@
             label11.TabIndex = 33;
             label11.Text = "255";
             // 
-            // label4
+            // reck1BorderTrackBar
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(6, 327);
-            label4.Name = "label4";
-            label4.Size = new Size(33, 15);
-            label4.TabIndex = 34;
-            label4.Text = "Klein";
+            reck1BorderTrackBar.Location = new Point(78, 436);
+            reck1BorderTrackBar.Name = "reck1BorderTrackBar";
+            reck1BorderTrackBar.Size = new Size(104, 45);
+            reck1BorderTrackBar.TabIndex = 40;
             // 
-            // label5
+            // trackBar1
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(138, 327);
-            label5.Name = "label5";
-            label5.Size = new Size(36, 15);
-            label5.TabIndex = 35;
-            label5.Text = "Gross";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(137, 327);
-            label6.Name = "label6";
-            label6.Size = new Size(36, 15);
-            label6.TabIndex = 37;
-            label6.Text = "Gross";
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(5, 327);
-            label12.Name = "label12";
-            label12.Size = new Size(33, 15);
-            label12.TabIndex = 36;
-            label12.Text = "Klein";
+            trackBar1.Location = new Point(14, 436);
+            trackBar1.Name = "trackBar1";
+            trackBar1.RightToLeft = RightToLeft.No;
+            trackBar1.Size = new Size(104, 45);
+            trackBar1.TabIndex = 41;
             // 
             // ColorSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(513, 422);
+            ClientSize = new Size(513, 511);
             Controls.Add(label8);
             Controls.Add(Color2GroupBox);
             Controls.Add(Color1GroupBox);
@@ -392,6 +466,7 @@
             Text = "ColorSettings";
             Color1GroupBox.ResumeLayout(false);
             Color1GroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)RectangleC1PicBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)objectSizeC1TrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)radiusC1TrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -403,7 +478,10 @@
             ((System.ComponentModel.ISupportInitialize)radiusC2TrackBar).EndInit();
             Color2GroupBox.ResumeLayout(false);
             Color2GroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)objectSizeC2TrackBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)reck1BorderTrackBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -440,5 +518,13 @@
         private Label label4;
         private Label label6;
         private Label label12;
+        private PictureBox RectangleC1PicBox;
+        private Button ColorRectangleColor1;
+        private PictureBox pictureBox7;
+        private Button ColorRectangleColor2;
+        private ColorDialog colorDialog_Rec1;
+        private ColorDialog colorDialog_Rec2;
+        private TrackBar reck1BorderTrackBar;
+        private TrackBar trackBar1;
     }
 }

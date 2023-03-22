@@ -102,7 +102,6 @@
             sorceToolStripMenuItem.Name = "sorceToolStripMenuItem";
             sorceToolStripMenuItem.Size = new Size(48, 20);
             sorceToolStripMenuItem.Text = "Sorce";
-            sorceToolStripMenuItem.Click += sorceToolStripMenuItem_Click;
             // 
             // kameraToolStripMenuItem
             // 
