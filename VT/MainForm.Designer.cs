@@ -102,18 +102,19 @@
             sorceToolStripMenuItem.Name = "sorceToolStripMenuItem";
             sorceToolStripMenuItem.Size = new Size(48, 20);
             sorceToolStripMenuItem.Text = "Sorce";
+            sorceToolStripMenuItem.Click += sorceToolStripMenuItem_Click;
             // 
             // kameraToolStripMenuItem
             // 
             kameraToolStripMenuItem.Name = "kameraToolStripMenuItem";
-            kameraToolStripMenuItem.Size = new Size(130, 22);
+            kameraToolStripMenuItem.Size = new Size(180, 22);
             kameraToolStripMenuItem.Text = "Kamera";
             kameraToolStripMenuItem.Click += kameraToolStripMenuItem_Click;
             // 
             // videodateiToolStripMenuItem
             // 
             videodateiToolStripMenuItem.Name = "videodateiToolStripMenuItem";
-            videodateiToolStripMenuItem.Size = new Size(130, 22);
+            videodateiToolStripMenuItem.Size = new Size(180, 22);
             videodateiToolStripMenuItem.Text = "Videodatei";
             videodateiToolStripMenuItem.Click += videodateiToolStripMenuItem_Click;
             // 

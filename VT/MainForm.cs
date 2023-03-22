@@ -1,5 +1,6 @@
 ﻿using Modules;
 using Modules.Interfaces;
+using Utilities;
 
 namespace VT
 {
@@ -33,6 +34,9 @@ namespace VT
             InitializeComponent();
             this.color1 = new FilterMaskRGB();
             this.color2 = new FilterMaskRGB();
+
+            SetPenColor1(ConstantData.DefaultColor_A,ConstantData.DefaultBorderRectangles);
+            SetPenColor2(ConstantData.DefaultColor_B,ConstantData.DefaultBorderRectangles);
         }
 
         public MainForm(object obj)
@@ -48,7 +52,7 @@ namespace VT
             this.objectsColor2 = detectedAreas[1];
 
             //Make a Copy of the original frame befor drawing the recs
-            this._unfliteredFrame = (Bitmap) frame.Clone();
+            this._unfliteredFrame = (Bitmap)frame.Clone();
 
             Graphics pic = Graphics.FromImage(frame);
 
@@ -289,6 +293,11 @@ namespace VT
         private void SetPenColor2(Color color, int border)
         {
             this.penColor2 = new Pen(color, border);
+        }
+
+        private void sorceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
