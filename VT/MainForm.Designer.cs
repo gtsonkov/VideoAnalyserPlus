@@ -50,6 +50,7 @@
             screenBox1.Location = new Point(1, 26);
             screenBox1.Name = "screenBox1";
             screenBox1.Size = new Size(814, 454);
+            screenBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             screenBox1.TabIndex = 0;
             screenBox1.TabStop = false;
             screenBox1.MouseClick += screenBox1_MouseClick;
@@ -102,19 +103,18 @@
             sorceToolStripMenuItem.Name = "sorceToolStripMenuItem";
             sorceToolStripMenuItem.Size = new Size(48, 20);
             sorceToolStripMenuItem.Text = "Sorce";
-            sorceToolStripMenuItem.Click += sorceToolStripMenuItem_Click;
             // 
             // kameraToolStripMenuItem
             // 
             kameraToolStripMenuItem.Name = "kameraToolStripMenuItem";
-            kameraToolStripMenuItem.Size = new Size(180, 22);
+            kameraToolStripMenuItem.Size = new Size(130, 22);
             kameraToolStripMenuItem.Text = "Kamera";
             kameraToolStripMenuItem.Click += kameraToolStripMenuItem_Click;
             // 
             // videodateiToolStripMenuItem
             // 
             videodateiToolStripMenuItem.Name = "videodateiToolStripMenuItem";
-            videodateiToolStripMenuItem.Size = new Size(180, 22);
+            videodateiToolStripMenuItem.Size = new Size(130, 22);
             videodateiToolStripMenuItem.Text = "Videodatei";
             videodateiToolStripMenuItem.Click += videodateiToolStripMenuItem_Click;
             // 

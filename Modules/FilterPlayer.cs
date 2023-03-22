@@ -156,8 +156,8 @@ namespace Modules
 
             Mat filteredFrame = this._frame.Clone();
 
-            Mat hslImage = new Mat();
-            CvInvoke.CvtColor(filteredFrame, hslImage, ColorConversion.Bgr2Hls);
+            //Mat hslImage = new Mat();
+            //CvInvoke.CvtColor(filteredFrame, hslImage, ColorConversion.Bgr2Hls);
 
             List<Rectangle> color1Objects = new List<Rectangle>();
 

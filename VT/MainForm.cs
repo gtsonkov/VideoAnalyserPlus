@@ -1,5 +1,6 @@
 ﻿using Modules;
 using Modules.Interfaces;
+using System.Runtime.CompilerServices;
 using Utilities;
 
 namespace VT
@@ -24,7 +25,10 @@ namespace VT
         internal bool trackColor2;
         internal bool sorceRedy;
 
-        private const int toolbarWight = 100;
+        private const int toolbarHeight = 100;
+        private const int BordersHeight = 21;
+        private const int BordersWidth = 18;
+
         private bool _isPaused;
         private int defaultWide = 812;
         private int defaultHeight = 575;
@@ -35,8 +39,8 @@ namespace VT
             this.color1 = new FilterMaskRGB();
             this.color2 = new FilterMaskRGB();
 
-            SetPenColor1(ConstantData.DefaultColor_A,ConstantData.DefaultBorderRectangles);
-            SetPenColor2(ConstantData.DefaultColor_B,ConstantData.DefaultBorderRectangles);
+            SetPenColor1(ConstantData.DefaultColor_A, ConstantData.DefaultBorderRectangles);
+            SetPenColor2(ConstantData.DefaultColor_B, ConstantData.DefaultBorderRectangles);
         }
 
         public MainForm(object obj)
@@ -48,7 +52,6 @@ namespace VT
         public void DisplayFrame(Bitmap frame, List<Rectangle>[] detectedAreas)
         {
             this.objectsColor1 = detectedAreas[0];
-
             this.objectsColor2 = detectedAreas[1];
 
             //Make a Copy of the original frame befor drawing the recs
@@ -241,9 +244,13 @@ namespace VT
                 //The list of rectangles shoud be sorted to assure, that when user click on of those, to appier firs the smallest deteckted area
                 //if there are some nested areas
                 var orderedListOfRectangles = this.objectsColor1.OrderBy(x => x.Width * x.Height).ToList();
-
+                var sizeH = this.screenBox1.Height;
+                var sizeW = this.screenBox1.Width;
                 foreach (Rectangle rect in orderedListOfRectangles)
                 {
+                    //var recta = rect;
+                    //recta.X += 21;
+                    //recta.Y += 18;
                     if (rect.Contains(e.Location))
                     {
                         // Create a new form with a zoomed-in view of the rectangle
@@ -276,8 +283,8 @@ namespace VT
         private void AdjustPlayerScreenResolution()
         {
             //Set the Image box size to the sorce size
-            this.Height = (this._player.Resolution.Height) + toolbarWight;
-            this.Width = this._player.Resolution.Width;
+            this.Height = (this._player.Resolution.Height) + toolbarHeight + BordersHeight;
+            this.Width = this._player.Resolution.Width + BordersWidth;
         }
 
         private void AdjustResolutionBtn_Click(object sender, EventArgs e)
@@ -293,11 +300,6 @@ namespace VT
         private void SetPenColor2(Color color, int border)
         {
             this.penColor2 = new Pen(color, border);
-        }
-
-        private void sorceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
