@@ -39,13 +39,20 @@ namespace VT
             this.color1 = new FilterMaskRGB();
             this.color2 = new FilterMaskRGB();
 
-<<<<<<< HEAD
             SetPenColor1(ConstantData.DefaultColor_A, ConstantData.DefaultBorderRectangles);
             SetPenColor2(ConstantData.DefaultColor_B, ConstantData.DefaultBorderRectangles);
-=======
             SetPenForColor1(ConstantData.DefaultColor_A, ConstantData.DefaultBorderRectangles);
             SetPenForColor2(ConstantData.DefaultColor_B, ConstantData.DefaultBorderRectangles);
->>>>>>> 15a5b0621fb496e8d2cbb20e70d3abb8578fde0c
+        }
+
+        private void SetPenColor2(Color defaultColor_B, int defaultBorderRectangles)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetPenColor1(Color defaultColor_A, int defaultBorderRectangles)
+        {
+            throw new NotImplementedException();
         }
 
         public MainForm(object obj)
@@ -333,8 +340,6 @@ namespace VT
                 this.penColor1.Color = color;
             }
         }
-<<<<<<< HEAD
-=======
 
         internal void SetPenForColor1(int border)
         {
@@ -418,6 +423,5 @@ namespace VT
         {
             return this.penColor2;
         }
->>>>>>> 15a5b0621fb496e8d2cbb20e70d3abb8578fde0c
     }
 }
