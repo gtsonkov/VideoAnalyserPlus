@@ -17,8 +17,8 @@
             Bitmap currPic = new Bitmap(this._frame);
 
             this.pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            this.Width = currPic.Width;
-            this.Height = currPic.Height;
+            this.Width = _frameBounds.Width;
+            this.Height = _frameBounds.Height;
 
             this.pictureBox.Image = currPic.Clone(this._frameBounds, currPic.PixelFormat);
             currPic.Dispose();

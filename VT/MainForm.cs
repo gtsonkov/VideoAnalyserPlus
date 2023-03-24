@@ -8,7 +8,7 @@ namespace VT
     public partial class MainForm : Form, IStreamable
     {
         private FilterPlayer _player;
-        private Bitmap _unfliteredFrame;
+        private Bitmap _unfilteredFrame;
 
         internal string _file = string.Empty;
 
@@ -17,7 +17,6 @@ namespace VT
 
         private List<Rectangle> objectsColor1;
         private List<Rectangle> objectsColor2;
-
         private Pen penColor1;
         private Pen penColor2;
 
@@ -47,12 +46,12 @@ namespace VT
 
         private void SetPenColor2(Color defaultColor_B, int defaultBorderRectangles)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void SetPenColor1(Color defaultColor_A, int defaultBorderRectangles)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public MainForm(object obj)
@@ -67,7 +66,7 @@ namespace VT
             this.objectsColor2 = detectedAreas[1];
 
             //Make a Copy of the original frame befor drawing the recs
-            this._unfliteredFrame = (Bitmap)frame.Clone();
+            this._unfilteredFrame = (Bitmap)frame.Clone();
 
             Graphics pic = Graphics.FromImage(frame);
 
@@ -250,17 +249,13 @@ namespace VT
                 //The list of rectangles shoud be sorted to assure, that when user click on of those, to appier firs the smallest deteckted area
                 //if there are some nested areas
                 var orderedListOfRectangles = this.objectsColor1.OrderBy(x => x.Width * x.Height).ToList();
-                var sizeH = this.screenBox1.Height;
-                var sizeW = this.screenBox1.Width;
+
                 foreach (Rectangle rect in orderedListOfRectangles)
                 {
-                    //var recta = rect;
-                    //recta.X += 21;
-                    //recta.Y += 18;
                     if (rect.Contains(e.Location))
                     {
                         // Create a new form with a zoomed-in view of the rectangle
-                        ShowSelected zoomForm = new ShowSelected(this._unfliteredFrame, rect);
+                        ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame, rect);
                         zoomForm.Show();
                         break;
                     }
@@ -278,7 +273,7 @@ namespace VT
                     if (rect.Contains(e.Location))
                     {
                         // Create a new form with a zoomed-in view of the rectangle
-                        ShowSelected zoomForm = new ShowSelected(this._unfliteredFrame, rect);
+                        ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame, rect);
                         zoomForm.Show();
                         break;
                     }
@@ -311,8 +306,8 @@ namespace VT
                 if (currentBorderWidth <= 0)
                 {
                     var dialog = MessageBox.Show(ConstantData.Message_RectangleBorderWigth_ZeroOrNegative
-                                                  ,ConstantData.Message_Tittle_Warning
-                                                  ,MessageBoxButtons.YesNo);
+                                                  , ConstantData.Message_Tittle_Warning
+                                                  , MessageBoxButtons.YesNo);
 
                     if (dialog != DialogResult.Yes)
                     {
@@ -369,8 +364,8 @@ namespace VT
                 if (currentBorderWidth <= 0)
                 {
                     var dialog = MessageBox.Show(ConstantData.Message_RectangleBorderWigth_ZeroOrNegative
-                                                ,ConstantData.Message_Tittle_Warning
-                                                ,MessageBoxButtons.YesNo);
+                                                , ConstantData.Message_Tittle_Warning
+                                                , MessageBoxButtons.YesNo);
 
                     if (dialog != DialogResult.Yes)
                     {
