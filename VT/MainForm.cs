@@ -1,4 +1,5 @@
-﻿using Modules;
+﻿using Emgu.CV;
+using Modules;
 using Modules.Interfaces;
 using Utilities;
 
@@ -122,7 +123,7 @@ namespace VT
         }
 
         //Create Player including capture device
-        internal void SetPlayer(CaptureDevice device, IStreamable form)
+        internal void SetPayerWithCaptureDivece(CaptureDevice device, IStreamable form)
         {
             if (device == null || form == null)
             {
@@ -135,6 +136,24 @@ namespace VT
             this.sorceRedy = true;
         }
 
+        internal void SetPayerWithVideoFile(VideoCapture device, IStreamable form)
+        {
+            if (device == null || form == null)
+            {
+                throw new ArgumentNullException("Device und form can not be null.");
+            }
+
+            this._player = new FilterPlayer(device, form);
+
+            //The sorce is set and redy to use
+            this.sorceRedy = true;
+        }
+
+        internal void DisposePreviosSorce()
+        {
+            this.SorceChange();
+        }
+        
         private void PlayBtn_Click(object sender, EventArgs e)
         {
             //If paused, just cotinue playing
@@ -176,7 +195,7 @@ namespace VT
         }
 
         //If sorce chenge, stop playing current sorce first
-        internal void SorceChange()
+        private void SorceChange()
         {
             this.StopPlaying();
         }

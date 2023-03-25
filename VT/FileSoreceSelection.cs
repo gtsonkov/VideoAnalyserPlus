@@ -1,8 +1,12 @@
-﻿namespace VT
+﻿using Emgu.CV;
+using Modules;
+
+namespace VT
 {
     public partial class FileSoreceSelection : Form
     {
         private string filePath = string.Empty;
+        private VideoCapture selectedDevice;
 
         public FileSoreceSelection()
         {
@@ -17,7 +21,15 @@
             var mainForm = (MainForm)Application.OpenForms["MainForm"];
             mainForm._file = this.filePath;
 
-            //To Do: If video sorce selected, remove existing CaptureDevice in mainForm
+            if (this.filePath != string.Empty)
+            {
+
+                this.selectedDevice = new VideoCapture(this.filePath);
+
+                mainForm.DisposePreviosSorce();
+
+                mainForm.SetPayerWithVideoFile(this.selectedDevice, mainForm);
+            }
 
             this.Close();
         }

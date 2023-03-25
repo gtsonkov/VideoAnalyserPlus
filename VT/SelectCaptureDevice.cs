@@ -60,13 +60,9 @@ namespace VT
 
                 var mainForm = (MainForm)Application.OpenForms["MainForm"];
 
-                mainForm.SetPlayer(this.selectedDevice, mainForm);
+                mainForm.DisposePreviosSorce();
 
-                if (mainForm._file != string.Empty)
-                {
-                    mainForm.SorceChange();
-                    mainForm._file = string.Empty;
-                }
+                mainForm.SetPayerWithCaptureDivece(this.selectedDevice, mainForm);
 
                 this.Close();
             }

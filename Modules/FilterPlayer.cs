@@ -12,6 +12,7 @@ namespace Modules
         private VideoCapture _capture;
         private IStreamable _streamFrame;
         private CaptureDevice currCaptureDevice;
+        private VideoCapture currVideoCapture;
         private Mat _frame;
 
         private FilterMaskRGB color1;
@@ -35,6 +36,19 @@ namespace Modules
             this._capture = currCaptureDevice.VideoSorce;
         }
 
+        public FilterPlayer(VideoCapture currCaptureDevice, IStreamable stream)
+        {
+            if (currCaptureDevice == null)
+            {
+                throw new ArgumentNullException("Capture device can not be null.");
+            }
+
+            this.currVideoCapture = currCaptureDevice;
+            this._streamFrame = stream;
+
+            this._capture = currVideoCapture;
+        }
+
         public void Pause()
         {
             this._capture.Pause();
@@ -54,7 +68,17 @@ namespace Modules
         {
             get
             {
-                return this.currCaptureDevice.Resolution;
+                if (currCaptureDevice != null)
+                {
+                    return this.currCaptureDevice.Resolution;
+                }
+                else
+                {
+                    int w = currVideoCapture.Width;
+                    int h = currVideoCapture.Height;
+                    var res = new Resolution(w,h);
+                    return res;
+                }
             }
         }
 
@@ -92,20 +116,9 @@ namespace Modules
                 return;
             }
 
-            if (this.currCaptureDevice == null)
+            if (this.currCaptureDevice == null && this.currVideoCapture == null)
             {
                 throw new ArgumentNullException("Bitte eine Quelle festliegen (Kamera oder Videodatei.)", "Warnung");
-            }
-            else
-            {
-                try
-                {
-                    this._capture = this.currCaptureDevice.VideoSorce;
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException(ex.Message);
-                }
             }
 
             this._frame = new Mat();
