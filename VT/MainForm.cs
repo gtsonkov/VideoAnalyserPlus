@@ -32,6 +32,8 @@ namespace VT
         private int defaultWide = 812;
         private int defaultHeight = 575;
 
+        private bool fullscreen = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -153,7 +155,7 @@ namespace VT
         {
             this.SorceChange();
         }
-        
+
         private void PlayBtn_Click(object sender, EventArgs e)
         {
             //If paused, just cotinue playing
@@ -262,17 +264,34 @@ namespace VT
 
         private void screenBox1_MouseClick(object sender, MouseEventArgs e)
         {
+            var currentSorceResolution = this._player.Resolution;
+
+            float scaleFactorX = (float)screenBox1.Width / currentSorceResolution.Width;
+            float scaleFactorY = (float)screenBox1.Height / currentSorceResolution.Height;
+
+            Point imagePoint = new Point((int)(e.X / scaleFactorX), (int)(e.Y / scaleFactorY));
+
             if (this.objectsColor1 != null)
             {
                 //The list of rectangles shoud be sorted to assure, that when user click on of those, to appier firs the smallest deteckted area
                 //if there are some nested areas
                 var orderedListOfRectangles = this.objectsColor1.OrderBy(x => x.Width * x.Height).ToList();
 
-                foreach (Rectangle rect in orderedListOfRectangles)
+                //foreach (Rectangle rect in orderedListOfRectangles)
+                //{
+                //    if (rect.Contains(e.Location))
+                //    {
+                //        // Create a new form with a zoomed-in view of the rectangle
+                //        ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame, rect);
+                //        zoomForm.Show();
+                //        break;
+                //    }
+                //}
+
+                foreach (var rect in orderedListOfRectangles)
                 {
-                    if (rect.Contains(e.Location))
+                    if (rect.Contains(imagePoint))
                     {
-                        // Create a new form with a zoomed-in view of the rectangle
                         ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame, rect);
                         zoomForm.Show();
                         break;
@@ -288,7 +307,7 @@ namespace VT
 
                 foreach (Rectangle rect in orderedListOfRectangles)
                 {
-                    if (rect.Contains(e.Location))
+                    if (rect.Contains(imagePoint))
                     {
                         // Create a new form with a zoomed-in view of the rectangle
                         ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame, rect);
