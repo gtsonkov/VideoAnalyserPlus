@@ -277,17 +277,6 @@ namespace VT
                 //if there are some nested areas
                 var orderedListOfRectangles = this.objectsColor1.OrderBy(x => x.Width * x.Height).ToList();
 
-                //foreach (Rectangle rect in orderedListOfRectangles)
-                //{
-                //    if (rect.Contains(e.Location))
-                //    {
-                //        // Create a new form with a zoomed-in view of the rectangle
-                //        ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame, rect);
-                //        zoomForm.Show();
-                //        break;
-                //    }
-                //}
-
                 foreach (var rect in orderedListOfRectangles)
                 {
                     if (rect.Contains(imagePoint))
