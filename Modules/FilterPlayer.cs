@@ -244,11 +244,6 @@ namespace Modules
            return rectangles;
         }
 
-        private void StopBtn_Click(object sender, EventArgs e)
-        {
-            StopPlaying();
-        }
-
         private void StopPlaying()
         {
             if (this._capture != null)
