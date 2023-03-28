@@ -55,7 +55,7 @@
             refreshBtn.TabIndex = 1;
             refreshBtn.Text = "Aktualisieren";
             refreshBtn.UseVisualStyleBackColor = true;
-            refreshBtn.Click += refreshBtn_Click;
+            refreshBtn.Click += RefreshBtn_Click;
             // 
             // OkBtn
             // 

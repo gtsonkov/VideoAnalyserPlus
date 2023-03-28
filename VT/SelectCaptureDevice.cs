@@ -7,7 +7,6 @@ namespace VT
 {
     public partial class SelectCaptureDevice : Form
     {
-        private List<string> captureDevices;
         private IDsDeviceWrapper[] devices;
         private Resolution resulution;
         private CaptureDevice selectedDevice;
@@ -15,42 +14,42 @@ namespace VT
         public SelectCaptureDevice()
         {
             InitializeComponent();
-            this.captureDevices = new List<string>();
-            FillDropDevicesDownMenu();
-
-            this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
+            this.Load += async (sender, e) => { await RefreshDeviceListAsync(); };
         }
 
-        private void FillDropDevicesDownMenu()
+        private async void RefreshBtn_Click(object sender, EventArgs e)
         {
+            await RefreshDeviceListAsync();
+        }
+
+        private void UpdateDeviceListUI(List<string> captureDevices)
+        {
+            this.deviceList.Items.Clear();
+
             if (captureDevices.Count > 0)
             {
-                deviceList.Items.AddRange(this.captureDevices.ToArray());
+                this.deviceList.Items.AddRange(captureDevices.ToArray());
             }
             else
             {
                 MessageBox.Show("Keine Aufnahmegerät gefunden!");
             }
-        }
-
-        private async void refreshBtn_Click(object sender, EventArgs e)
-        {
-            this.deviceList.Items.Clear();
-            this.captureDevices.Clear();
-            await (GetCaptureDevices());
-            FillDropDevicesDownMenu();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
         }
 
-        private async Task GetCaptureDevices()
+        private async Task RefreshDeviceListAsync()
+        {
+            List<string> captureDevices = await FetchCaptureDevicesAsync();
+            UpdateDeviceListUI(captureDevices);
+        }
+
+        private async Task<List<string>> FetchCaptureDevicesAsync()
         {
             this.devices = DsDeviceWrapper.GetDevices().ToArray();
 
-            foreach (var device in this.devices)
-            {
-                this.captureDevices.Add(device.Name);
-            }
+            List<string> deviceNames = devices.Select(device => device.Name).ToList();
+            return deviceNames;
         }
 
         private void OkBtn_Click(object sender, EventArgs e)
@@ -72,10 +71,10 @@ namespace VT
         {
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
 
-            if (this.devices != null)
+            if (this.devices != null && devices.Count() > 0)
             {
                 int deviceIndex = this.deviceList.SelectedIndex;
-                await(LoadSelectedDevice(deviceIndex));
+                await (LoadSelectedDevice(deviceIndex));
                 await (LoadResolutionsToComboMenu());
             }
         }
@@ -97,7 +96,7 @@ namespace VT
 
                 if (item.FrameRate != null && item.FrameRate > 0)
                 {
-                    stringBuilder.Append(item.FrameRate.ToString() +"fps");
+                    stringBuilder.Append(item.FrameRate.ToString() + "fps");
                 }
                 else
                 {
