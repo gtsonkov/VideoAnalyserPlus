@@ -27,6 +27,7 @@
         private void ShowSelected_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.pictureBox.Image = null;
+            this.pictureBox.Dispose();
         }
     }
 }
