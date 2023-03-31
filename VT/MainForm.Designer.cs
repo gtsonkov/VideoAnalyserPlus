@@ -159,7 +159,7 @@
             MinimumSize = new Size(390, 390);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "VideoPlayerForm";
+            Text = "Video Analyser Plus";
             FormClosing += VideoPlayerForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)screenBox1).EndInit();
             menuStrip1.ResumeLayout(false);

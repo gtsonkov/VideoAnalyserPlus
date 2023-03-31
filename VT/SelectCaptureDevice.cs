@@ -92,6 +92,15 @@ namespace VT
                 stringBuilder.Append(item.Width.ToString());
                 stringBuilder.Append("x");
                 stringBuilder.Append(item.Height.ToString());
+                stringBuilder.Append(" /");
+                if (item.FrameRate != null && item.FrameRate > 0)
+                {
+                    stringBuilder.Append(item.FrameRate.ToString() +"fps");
+                }
+                else
+                {
+                    stringBuilder.Append("NaN");
+                }
 
                 resolutions.Add(stringBuilder.ToString());
             }
@@ -118,7 +127,8 @@ namespace VT
         {
             try
             {
-                this.selectedDevice.SetResolution(resolutionsComboBox.SelectedItem.ToString());
+                var selectedResolution = this.selectedDevice.SupportedResolutions[this.resolutionsComboBox.SelectedIndex];
+                this.selectedDevice.SetResolution(selectedResolution);
             }
             catch (Exception ex)
             {

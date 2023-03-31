@@ -95,10 +95,10 @@ namespace Modules
             this.Resolution = resolution;
         }
 
-        public void SetResolution(string resolution)
-        {
-            this.Resolution = GetResolution(resolution);
-        }
+        //public void SetResolution(string resolution)
+        //{
+        //    this.Resolution = GetResolution(resolution);
+        //}
 
         private void SetCurrentResolution()
         {
@@ -139,7 +139,8 @@ namespace Modules
                         pins.Add(pin[0]);
                     }
 
-                    var AvailableResolutions = new List<string>();
+                    //var AvailableResolutions = new List<string>();
+                    List<Resolution> temp = new List<Resolution>();
 
                     foreach (var pRaw2 in pins)
                     {
@@ -150,32 +151,29 @@ namespace Modules
                         AMMediaType[] mediaTypes = new AMMediaType[1];
                         while (mediaTypeEnum.Next(1, mediaTypes, fetched) == 0 && mediaTypes[0] != null)
                         {
+                           
                             Marshal.PtrToStructure(mediaTypes[0].formatPtr, v);
 
                             if (v.BmiHeader.Size != 0 && v.BmiHeader.BitCount != 0)
                             {
                                 if (v.BmiHeader.BitCount > bitCount)
                                 {
-                                    AvailableResolutions.Clear();
                                     bitCount = v.BmiHeader.BitCount;
                                 }
 
-                                AvailableResolutions.Add(v.BmiHeader.Width + "x" + v.BmiHeader.Height);
+                                int frameRate = (v.AvgTimePerFrame > 0) ? Convert.ToInt32(1e7 / v.AvgTimePerFrame) : 0;
+
+                                Resolution currResolution = new Resolution(v.BmiHeader.Width, v.BmiHeader.Height);
+
+                                if (frameRate > 0.1)
+                                {
+                                    currResolution.FrameRate = frameRate;
+                                }
+                                
+                                temp.Add(currResolution);
                             }
 
                             DsUtils.FreeAMMediaType(mediaTypes[0]);
-                        }
-                    }
-
-                    List<Resolution> temp = new List<Resolution>();
-
-                    foreach (var element in AvailableResolutions)
-                    {
-                        var r = GetResolution(element);
-
-                        if (!(temp.Any(x => r.Width == x.Width && r.Height == x.Height)))
-                        {
-                            temp.Add(r);
                         }
                     }
 
