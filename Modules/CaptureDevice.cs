@@ -187,24 +187,5 @@ namespace Modules
 
             return new List<Resolution>();
         }
-
-        private Resolution GetResolution(string value)
-        {
-            try
-            {
-                if (value != null && value != string.Empty)
-                {
-                    var temp = value.Split("x").Select(x => int.Parse(x)).ToArray();
-
-                    return new Resolution(temp[0], temp[1]);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new ArgumentException(ex.Message);
-            }
-
-            return null;
-        }
     }
 }
