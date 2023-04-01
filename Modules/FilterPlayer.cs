@@ -76,7 +76,7 @@ namespace Modules
                 {
                     int w = currVideoCapture.Width;
                     int h = currVideoCapture.Height;
-                    var res = new Resolution(w,h);
+                    var res = new Resolution(w, h);
                     return res;
                 }
             }
@@ -178,8 +178,8 @@ namespace Modules
             {
                 var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
-            
-                color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinObjectSize);
+
+                color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinObjectSize).ToList();
             }
 
             //HLS filter test! 
@@ -198,10 +198,10 @@ namespace Modules
                 var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
-               color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinObjectSize);
+                color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinObjectSize).ToList();
             }
 
-            List<Rectangle>[] objectsFoundet = new List<Rectangle>[] {color1Objects, color2Objects};
+            List<Rectangle>[] objectsFoundet = new List<Rectangle>[] { color1Objects, color2Objects };
 
             this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame), objectsFoundet);
         }
@@ -219,29 +219,36 @@ namespace Modules
             }
         }
 
-        private List<Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int minObjectSize)
+        private IEnumerable<Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int minObjectSize)
         {
             Mat mask = new Mat();
 
             CvInvoke.InRange(rgb, lower, upper, mask);
 
             VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+
             Mat hierarchy = new Mat();
+
             CvInvoke.FindContours(mask, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
 
-            List<Rectangle> rectangles = new List<Rectangle>();
+            return BoundingRectangles(contours, minObjectSize);
+        }
 
-            for (int i = 0; i < contours.Size; i++)
+        private IEnumerable<Rectangle> BoundingRectangles(VectorOfVectorOfPoint vectors, int minObjectSize)
+        {
+            HashSet<Rectangle> rects = new HashSet<Rectangle>();
+
+            for (int i = 0; i < vectors.Size; i++)
             {
-                Rectangle rect = CvInvoke.BoundingRectangle(contours[i]);
+                Rectangle rect = CvInvoke.BoundingRectangle(vectors[i]);
 
                 if ((rect.Width * rect.Height) >= minObjectSize)
                 {
-                    rectangles.Add(rect);
+                    rects.Add(rect);
                 }
             }
 
-           return rectangles;
+            return rects;
         }
 
         private void StopPlaying()

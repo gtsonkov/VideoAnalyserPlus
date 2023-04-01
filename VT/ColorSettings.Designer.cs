@@ -469,7 +469,7 @@
             Controls.Add(okBtn);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ColorSettings";
-            Text = "ColorSettings";
+            Text = "Prozesseinstellungen";
             Color1GroupBox.ResumeLayout(false);
             Color1GroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)reck1BorderTrackBar).EndInit();

@@ -82,7 +82,16 @@ namespace VT
                 pic.DrawRectangles(this.penColor2, objectsColor2.ToArray());
             }
 
-            this.screenBox1.Image = frame;
+            try
+            {
+                this.screenBox1.Image = frame;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            
         }
 
         //Set colors to tracking
@@ -173,8 +182,6 @@ namespace VT
             }
             else
             {
-                //Strat video form capture device
-
                 if (this._player != null)
                 {
                     try
