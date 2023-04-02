@@ -60,6 +60,7 @@ namespace VT
         {
             InitializeComponent();
             this._file = obj.ToString() as string;
+
         }
 
         public void DisplayFrame(Bitmap frame, List<Rectangle>[] detectedAreas)
