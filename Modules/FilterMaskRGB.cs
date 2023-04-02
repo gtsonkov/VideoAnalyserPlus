@@ -33,7 +33,10 @@ namespace Modules
                 if (value >= 0) 
                 {
                     this.radius = value;
+                    return;
                 }
+
+                throw new ArgumentOutOfRangeException("Radius shoud cannot have negative value");
             }
         }
 
