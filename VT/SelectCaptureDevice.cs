@@ -127,7 +127,8 @@ namespace VT
         {
             try
             {
-                var selectedResolution = this.selectedDevice.SupportedResolutions[this.resolutionsComboBox.SelectedIndex];
+                var selectedResolution = this.selectedDevice.SupportedResolutions.ToList()
+                                                [this.resolutionsComboBox.SelectedIndex];
                 this.selectedDevice.SetResolution(selectedResolution);
             }
             catch (Exception ex)

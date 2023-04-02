@@ -12,7 +12,7 @@ namespace Modules
         private DsDevice captureDevice;
 
         private string? deviceName;
-        List<Resolution> supportedResolutions;
+        HashSet<Resolution> supportedResolutions;
 
         public CaptureDevice(DsDevice sorce, string deviceName, int position)
         {
@@ -28,7 +28,7 @@ namespace Modules
 
             this.captureDevice = sorce;
             this.DeviceName = deviceName;
-            this.supportedResolutions = GetSupportedResolutions();
+            this.supportedResolutions = GetSupportedResolutions().ToHashSet();
 
             if (position >= 0)
             {
@@ -69,7 +69,7 @@ namespace Modules
             }
         }
 
-        public List<Resolution> SupportedResolutions
+        public IEnumerable<Resolution> SupportedResolutions
         {
             get
             {
@@ -109,7 +109,7 @@ namespace Modules
             }
         }
 
-        private List<Resolution> GetSupportedResolutions()
+        private IEnumerable<Resolution> GetSupportedResolutions()
         {
             try
             {
@@ -140,7 +140,7 @@ namespace Modules
                     }
 
                     //var AvailableResolutions = new List<string>();
-                    List<Resolution> temp = new List<Resolution>();
+                    HashSet<Resolution> temp = new HashSet<Resolution>();
 
                     foreach (var pRaw2 in pins)
                     {
@@ -185,7 +185,7 @@ namespace Modules
                 throw new ArgumentException(ex.Message);
             }
 
-            return new List<Resolution>();
+            return new HashSet<Resolution>();
         }
     }
 }
