@@ -1,5 +1,6 @@
 ﻿using DirectShowLib;
 using Modules;
+using Modules.Interfaces;
 using System.Text;
 
 namespace VT
@@ -114,7 +115,9 @@ namespace VT
             string deviceName = this.deviceList.SelectedItem.ToString();
             DsDevice capture = devices[deviceIndex];
 
-            this.selectedDevice = new CaptureDevice(capture, deviceName, deviceIndex);
+            IDsDeviceWrapper currentCapture = new DsDeviceWrapper(capture,deviceName);
+
+            this.selectedDevice = new CaptureDevice(currentCapture, deviceName, deviceIndex);
 
             if (this.resulution == null)
             {

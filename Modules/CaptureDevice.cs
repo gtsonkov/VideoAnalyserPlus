@@ -1,6 +1,7 @@
 ﻿using DirectShowLib;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
+using Modules.Interfaces;
 using System.Runtime.InteropServices;
 
 namespace Modules
@@ -14,7 +15,7 @@ namespace Modules
         private string? deviceName;
         HashSet<Resolution> supportedResolutions;
 
-        public CaptureDevice(DsDevice sorce, string deviceName, int position)
+        public CaptureDevice(IDsDeviceWrapper sorce, string deviceName, int position)
         {
             if (sorce == null || deviceName == string.Empty)
             {
@@ -26,7 +27,7 @@ namespace Modules
                 throw new InvalidOperationException("Device position can not be negative value.");
             }
 
-            this.captureDevice = sorce;
+            this.captureDevice = sorce.Device;
             this.DeviceName = deviceName;
             this.supportedResolutions = GetSupportedResolutions().ToHashSet();
 
@@ -95,11 +96,6 @@ namespace Modules
             this.Resolution = resolution;
         }
 
-        //public void SetResolution(string resolution)
-        //{
-        //    this.Resolution = GetResolution(resolution);
-        //}
-
         private void SetCurrentResolution()
         {
             if (this.currentSorce != null && currentResolution != null)
@@ -139,7 +135,6 @@ namespace Modules
                         pins.Add(pin[0]);
                     }
 
-                    //var AvailableResolutions = new List<string>();
                     HashSet<Resolution> temp = new HashSet<Resolution>();
 
                     foreach (var pRaw2 in pins)
