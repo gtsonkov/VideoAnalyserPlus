@@ -6,9 +6,12 @@ namespace Modules.Tests
 {
     public class CaptureDeviceTests
     {
+        private Mock<IDsDeviceWrapper> _deviceWrapperMock;
+
         [SetUp]
         public void Setup()
         {
+            this._deviceWrapperMock = new Mock<IDsDeviceWrapper>();
         }
 
         [Test]
@@ -21,8 +24,7 @@ namespace Modules.Tests
         [Test]
         public void CaptureDevice_Constructor_EmptyDeviceName_ThrowsException()
         {
-            var mockDsDevice = new Mock<IDsDeviceWrapper>();
-            Assert.Throws<ArgumentNullException>(() => new CaptureDevice(mockDsDevice.Object, string.Empty, 0));
+            Assert.Throws<ArgumentNullException>(() => new CaptureDevice(_deviceWrapperMock.Object, string.Empty, 0));
         }
     }
 }

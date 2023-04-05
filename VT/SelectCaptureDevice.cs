@@ -115,7 +115,7 @@ namespace VT
             string deviceName = this.deviceList.SelectedItem.ToString();
             DsDevice capture = devices[deviceIndex];
 
-            IDsDeviceWrapper currentCapture = new DsDeviceWrapper(capture,deviceName);
+            IDsDeviceWrapper currentCapture = new DsDeviceWrapper(capture);
 
             this.selectedDevice = new CaptureDevice(currentCapture, deviceName, deviceIndex);
 
