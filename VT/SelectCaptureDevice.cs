@@ -1,5 +1,6 @@
 ﻿using DirectShowLib;
 using Modules;
+using Modules.Wrappers;
 using Modules.Interfaces;
 using System.Text;
 

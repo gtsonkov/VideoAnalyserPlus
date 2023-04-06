@@ -1,7 +1,7 @@
 ﻿using DirectShowLib;
 using Modules.Interfaces;
 
-namespace Modules
+namespace Modules.Wrappers
 {
     public class DsDeviceWrapper : IDsDeviceWrapper
     {
@@ -9,18 +9,18 @@ namespace Modules
 
         public DsDeviceWrapper(DsDevice device)
         {
-                this.Device = device;
+            Device = device;
         }
 
         public DsDevice Device
         {
-            get 
-            { 
-                return _device; 
-            }
-            private set 
+            get
             {
-                if (_device != null) 
+                return _device;
+            }
+            private set
+            {
+                if (_device != null)
                 {
                     _device = value;
                 }
