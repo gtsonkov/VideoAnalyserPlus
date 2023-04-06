@@ -16,19 +16,34 @@ namespace Modules.Wrappers
         {
             get
             {
-                return _device;
+                return this._device;
             }
             private set
             {
-                if (_device != null)
+                if (value != null)
                 {
-                    _device = value;
+                    this._device = value;
                 }
                 else
                 {
                     throw new InvalidOperationException("Device cannot be null");
                 }
             }
+        }
+
+        public IEnumerable<DsDeviceWrapper> GetDevices() 
+        {
+            DsDevice[] devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+
+            HashSet<DsDeviceWrapper> result = new HashSet<DsDeviceWrapper>();
+
+            foreach (DsDevice device in devices) 
+            {
+                DsDeviceWrapper currDevice = new DsDeviceWrapper(device);
+                result.Add(currDevice);
+            }
+
+            return result;
         }
     }
 }

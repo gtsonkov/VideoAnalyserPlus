@@ -31,17 +31,14 @@ namespace Modules
             this.DeviceName = deviceName;
             this.supportedResolutions = GetSupportedResolutions().ToHashSet();
 
-            if (position >= 0)
+            try
             {
-                try
-                {
-                    this.VideoSorce = new VideoCapture(position);
-                }
-                catch (Exception ex)
-                {
+                this.VideoSorce = new VideoCapture(position);
+            }
+            catch (Exception ex)
+            {
 
-                    throw new ArgumentException(ex.Message);
-                }
+                throw new ArgumentException(ex.Message);
             }
         }
 
@@ -146,7 +143,7 @@ namespace Modules
                         AMMediaType[] mediaTypes = new AMMediaType[1];
                         while (mediaTypeEnum.Next(1, mediaTypes, fetched) == 0 && mediaTypes[0] != null)
                         {
-                           
+
                             Marshal.PtrToStructure(mediaTypes[0].formatPtr, v);
 
                             if (v.BmiHeader.Size != 0 && v.BmiHeader.BitCount != 0)
@@ -164,7 +161,7 @@ namespace Modules
                                 {
                                     currResolution.FrameRate = frameRate;
                                 }
-                                
+
                                 temp.Add(currResolution);
                             }
 

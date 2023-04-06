@@ -8,12 +8,13 @@ namespace Modules.Tests
         private Mock<IDsDeviceWrapper> _deviceWrapperMock;
         private CaptureDevice _device;
         private string originName = "Device01";
+        private int postion = 0;
 
         [SetUp]
         public void Setup()
         {
             this._deviceWrapperMock = new Mock<IDsDeviceWrapper>();
-           //this._device = new CaptureDevice(this._deviceWrapperMock.Object,this.originName,0);
+           this._device = new CaptureDevice(this._deviceWrapperMock.Object,this.originName,postion);
         }
 
         [Test]
