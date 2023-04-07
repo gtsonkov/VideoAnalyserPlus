@@ -9,7 +9,7 @@ namespace VT
     public partial class SelectCaptureDevice : Form
     {
         private List<string> captureDevices;
-        private DsDevice[]? devices;
+        private IDsDeviceWrapper[] devices;
         private Resolution resulution;
         private CaptureDevice selectedDevice;
 
@@ -47,7 +47,7 @@ namespace VT
 
         private async Task GetCaptureDevices()
         {
-            this.devices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+            this.devices = DsDeviceWrapper.GetDevices().ToArray();
 
             foreach (var device in this.devices)
             {
@@ -114,11 +114,8 @@ namespace VT
         private async Task LoadSelectedDevice(int deviceIndex)
         {
             string deviceName = this.deviceList.SelectedItem.ToString();
-            DsDevice capture = devices[deviceIndex];
 
-            IDsDeviceWrapper currentCapture = new DsDeviceWrapper(capture);
-
-            this.selectedDevice = new CaptureDevice(currentCapture, deviceName, deviceIndex);
+            this.selectedDevice = new CaptureDevice(devices[deviceIndex], deviceName, deviceIndex);
 
             if (this.resulution == null)
             {
