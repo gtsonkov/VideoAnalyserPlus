@@ -1,7 +1,6 @@
-﻿using DirectShowLib;
-using Modules;
-using Modules.Wrappers;
+﻿using Modules;
 using Modules.Interfaces;
+using Modules.Wrappers;
 using System.Text;
 
 namespace VT

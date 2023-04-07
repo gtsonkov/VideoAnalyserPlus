@@ -1,7 +1,4 @@
-﻿using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
-using Modules;
+﻿using Modules;
 using System.Drawing;
 
 namespace Utilities

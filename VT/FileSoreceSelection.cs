@@ -1,5 +1,4 @@
 ﻿using Emgu.CV;
-using Modules;
 
 namespace VT
 {
