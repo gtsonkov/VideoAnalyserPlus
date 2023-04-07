@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Modules
+﻿namespace Modules
 {
     public class Color_HLS_Scalled
     {
