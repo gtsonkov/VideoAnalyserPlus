@@ -37,7 +37,6 @@ namespace Modules
             }
             catch (Exception ex)
             {
-
                 throw new ArgumentException(ex.Message);
             }
         }

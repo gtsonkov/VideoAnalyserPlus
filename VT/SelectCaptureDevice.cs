@@ -16,7 +16,6 @@ namespace VT
         {
             InitializeComponent();
             this.captureDevices = new List<string>();
-            GetCaptureDevices();
             FillDropDevicesDownMenu();
 
             this.OkBtn.Enabled = this.deviceList.SelectedIndex >= 0;
@@ -90,10 +89,12 @@ namespace VT
             foreach (var item in this.selectedDevice.SupportedResolutions)
             {
                 StringBuilder stringBuilder = new StringBuilder();
+
                 stringBuilder.Append(item.Width.ToString());
                 stringBuilder.Append("x");
                 stringBuilder.Append(item.Height.ToString());
                 stringBuilder.Append(" /");
+
                 if (item.FrameRate != null && item.FrameRate > 0)
                 {
                     stringBuilder.Append(item.FrameRate.ToString() +"fps");
