@@ -23,7 +23,6 @@ namespace Modules.Tests
             Assert.Throws<ArgumentNullException>(() => new CaptureDevice(null, "someName", 1));
         }
     
-
         //[Test]
         //public void CaptureDevice_Constructor_EmptyDeviceName_ThrowsException()
         //{
