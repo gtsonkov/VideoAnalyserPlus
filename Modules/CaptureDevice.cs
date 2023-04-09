@@ -26,21 +26,19 @@ namespace Modules
             {
                 throw new InvalidOperationException("Device position can not be negative value.");
             }
+
             this.supportedResolutions = GetSupportedResolutions().ToHashSet();
 
-            try
-            {
-                this.VideoSorce = new VideoCapture(position);
-            }
-            catch (Exception ex)
-            {
-                throw new ArgumentException(ex.Message);
-            }
+            this.VideoSorce = new VideoCapture(position);
         }
 
         public CaptureDevice(IDsDeviceWrapper sorce, string deviceName, VideoCapture capture)
         {
-            
+            this.SetSorce(sorce);
+
+            this.DeviceName = deviceName;
+
+            this.VideoSorce = capture;
         }
 
         public VideoCapture VideoSorce
@@ -52,7 +50,15 @@ namespace Modules
 
             private set
             {
-                this.currentSorce = value;
+                try
+                {
+                    this.currentSorce = value;
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException(ex.Message);
+                }
+
             }
         }
 
@@ -64,7 +70,7 @@ namespace Modules
             }
             private set
             {
-                if (string.IsNullOrEmpty(this.deviceName)) 
+                if (string.IsNullOrEmpty(this.deviceName))
                 {
                     throw new ArgumentNullException("Value can not be null or empty.");
                 }
@@ -188,7 +194,7 @@ namespace Modules
 
         private void SetSorce(IDsDeviceWrapper Sorce)
         {
-            if (sorce == null)
+            if (Sorce == null)
             {
                 throw new ArgumentNullException("Sorce can not be null.");
             }
