@@ -10,13 +10,13 @@ namespace Modules.Tests
         private Mock<VideoCapture> _capture;
         private CaptureDevice _device;
         private string originName = "Device01";
-        private int position = 0;
+        private int postion = 0;
 
         [SetUp]
         public void Setup()
         {
             this._deviceWrapperMock = new Mock<IDsDeviceWrapper>();
-            this._capture = new Mock<VideoCapture>(position);
+            this._capture = new Mock<VideoCapture>(1);
             this._device = new CaptureDevice(this._deviceWrapperMock.Object, this.originName, this._capture.Object);
         }
 
