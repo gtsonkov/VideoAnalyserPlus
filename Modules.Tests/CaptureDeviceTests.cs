@@ -21,6 +21,58 @@ namespace Modules.Tests
         }
 
         [Test]
+        public void CaptureDevice_Constructor_PositivePosition()
+        {
+            // Arrange
+            IDsDeviceWrapper sorce = new Mock<IDsDeviceWrapper>().Object;
+            string deviceName = "Test Device";
+            int position = 1;
+
+            // Act
+            CaptureDevice captureDevice = new CaptureDevice(sorce, deviceName, position);
+
+            // Assert
+            Assert.AreEqual(deviceName, captureDevice.DeviceName);
+            Assert.IsNotNull(captureDevice.VideoSorce);
+        }
+
+        [Test]
+        public void CaptureDevice_Constructor_ZeroPosition()
+        {
+            // Arrange
+            IDsDeviceWrapper sorce = new Mock<IDsDeviceWrapper>().Object;
+            string deviceName = "Test Device";
+            int position = 0;
+
+            // Act and Assert
+            Assert.Throws<InvalidOperationException>(() => new CaptureDevice(sorce, deviceName, position));
+        }
+
+        [Test]
+        public void CaptureDevice_Constructor_NegativePosition()
+        {
+            // Arrange
+            IDsDeviceWrapper sorce = new Mock<IDsDeviceWrapper>().Object;
+            string deviceName = "Test Device";
+            int position = -1;
+
+            // Act and Assert
+            Assert.Throws<InvalidOperationException>(() => new CaptureDevice(sorce, deviceName, position));
+        }
+
+        [Test]
+        public void CaptureDevice_Constructor_NullSorce()
+        {
+            // Arrange
+            IDsDeviceWrapper sorce = null;
+            string deviceName = "Test Device";
+            int position = 1;
+
+            // Act and Assert
+            Assert.Throws<ArgumentNullException>(() => new CaptureDevice(sorce, deviceName, position));
+        }
+
+        [Test]
         public void CaptureDevice_Constructor_NullSource_ThrowsException()
         {
             Assert.Throws<ArgumentNullException>(() => new CaptureDevice(null, "someName", 1));

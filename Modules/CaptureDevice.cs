@@ -2,6 +2,7 @@
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Modules.Interfaces;
+
 using System.Runtime.InteropServices;
 
 namespace Modules
@@ -70,10 +71,11 @@ namespace Modules
             }
             private set
             {
-                if (string.IsNullOrEmpty(this.deviceName))
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("Value can not be null or empty.");
                 }
+                string temp = value;
 
                 this.deviceName = value;
             }
@@ -105,6 +107,7 @@ namespace Modules
             this.Resolution = resolution;
         }
 
+        //Sets the current resolution of the video source
         private void SetCurrentResolution()
         {
             if (this.currentSorce != null && currentResolution != null)
