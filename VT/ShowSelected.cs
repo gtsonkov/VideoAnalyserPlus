@@ -17,8 +17,8 @@
             Bitmap currPic = new Bitmap(this._frame);
 
             this.pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            this.Width = _frameBounds.Width;
-            this.Height = _frameBounds.Height;
+            //this.Width = _frameBounds.Width;
+            //this.Height = _frameBounds.Height;
 
             this.pictureBox.Image = currPic.Clone(this._frameBounds, currPic.PixelFormat);
             currPic.Dispose();
@@ -27,6 +27,11 @@
         private void ShowSelected_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.pictureBox.Image = null;
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
