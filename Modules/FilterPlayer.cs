@@ -11,7 +11,7 @@ namespace Modules
     {
         private VideoCapture _capture;
         private IStreamable _streamFrame;
-        private CaptureDevice currCaptureDevice;
+        private ICaptureDevice currCaptureDevice;
         private VideoCapture currVideoCapture;
         private Mat _frame;
 
@@ -23,7 +23,7 @@ namespace Modules
 
         private bool _isPaused;
 
-        public FilterPlayer(CaptureDevice currCaptureDevice, IStreamable stream)
+        public FilterPlayer(ICaptureDevice currCaptureDevice, IStreamable stream)
         {
             if (currCaptureDevice == null)
             {

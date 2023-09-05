@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Modules
 {
-    public class CaptureDevice
+    public class CaptureDevice : ICaptureDevice
     {
         private VideoCapture? currentSorce;
         private Resolution? currentResolution;

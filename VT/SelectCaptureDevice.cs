@@ -9,7 +9,7 @@ namespace VT
     {
         private IDsDeviceWrapper[] devices;
         private Resolution resulution;
-        private CaptureDevice selectedDevice;
+        private ICaptureDevice selectedDevice;
 
         public SelectCaptureDevice()
         {

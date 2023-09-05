@@ -135,7 +135,7 @@ namespace VT
         }
 
         //Create Player including capture device
-        internal void SetPayerWithCaptureDivece(CaptureDevice device, IStreamable form)
+        internal void SetPayerWithCaptureDivece(ICaptureDevice device, IStreamable form)
         {
             if (device == null || form == null)
             {
