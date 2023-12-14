@@ -5,10 +5,10 @@ namespace Modules.Interfaces
     public interface ICaptureDevice
     {
         string DeviceName { get; }
-        Resolution Resolution { get; }
-        IEnumerable<Resolution> SupportedResolutions { get; }
+        IResolution Resolution { get; }
+        IEnumerable<IResolution> SupportedResolutions { get; }
         VideoCapture VideoSorce { get; }
 
-        void SetResolution(Resolution resolution);
+        void SetResolution(IResolution resolution);
     }
 }

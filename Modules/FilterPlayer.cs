@@ -64,7 +64,7 @@ namespace Modules
         }
 
         //Return resolution from curren capture
-        public Resolution Resolution
+        public IResolution Resolution
         {
             get
             {

@@ -1,6 +1,8 @@
-﻿namespace Modules
+﻿using Modules.Interfaces;
+
+namespace Modules
 {
-    public class Resolution
+    public class Resolution : IResolution
     {
         public int Width { get; set; }
 

@@ -10,11 +10,11 @@ namespace Modules
     public class CaptureDevice : ICaptureDevice
     {
         private VideoCapture? currentSorce;
-        private Resolution? currentResolution;
+        private IResolution? currentResolution;
         private DsDevice captureDevice;
 
         private string? deviceName;
-        HashSet<Resolution> supportedResolutions;
+        HashSet<IResolution> supportedResolutions;
 
         public CaptureDevice(IDsDeviceWrapper sorce, string deviceName, int position)
         {
@@ -81,7 +81,7 @@ namespace Modules
             }
         }
 
-        public IEnumerable<Resolution> SupportedResolutions
+        public IEnumerable<IResolution> SupportedResolutions
         {
             get
             {
@@ -89,7 +89,7 @@ namespace Modules
             }
         }
 
-        public Resolution Resolution
+        public IResolution Resolution
         {
             get
             {
@@ -102,7 +102,7 @@ namespace Modules
             }
         }
 
-        public void SetResolution(Resolution resolution)
+        public void SetResolution(IResolution resolution)
         {
             this.Resolution = resolution;
         }
@@ -117,7 +117,7 @@ namespace Modules
             }
         }
 
-        private IEnumerable<Resolution> GetSupportedResolutions()
+        private IEnumerable<IResolution> GetSupportedResolutions()
         {
             try
             {

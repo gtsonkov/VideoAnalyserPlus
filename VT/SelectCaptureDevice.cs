@@ -8,7 +8,7 @@ namespace VT
     public partial class SelectCaptureDevice : Form
     {
         private IDsDeviceWrapper[] devices;
-        private Resolution resulution;
+        private IResolution resulution;
         private ICaptureDevice selectedDevice;
 
         public SelectCaptureDevice()
@@ -22,7 +22,7 @@ namespace VT
             await RefreshDeviceListAsync();
         }
 
-        private void UpdateDeviceListUI(List<string> captureDevices)
+        private void UpdateDeviceListUI(ICollection<string> captureDevices)
         {
             this.deviceList.Items.Clear();
 
@@ -40,11 +40,10 @@ namespace VT
 
         private async Task RefreshDeviceListAsync()
         {
-            List<string> captureDevices = await FetchCaptureDevicesAsync();
-            UpdateDeviceListUI(captureDevices);
+            List<string> captureDevices = ((List<string>) await FetchCaptureDevicesAsync());
         }
 
-        private async Task<List<string>> FetchCaptureDevicesAsync()
+        private async Task<ICollection<string>> FetchCaptureDevicesAsync()
         {
             this.devices = DsDeviceWrapper.GetDevices().ToArray();
 
