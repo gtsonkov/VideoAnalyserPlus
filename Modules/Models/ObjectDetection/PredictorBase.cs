@@ -9,7 +9,7 @@ namespace Modules.Models.ObjectDetection
     {
         private readonly InferenceSession session;
         private readonly ModeMetaData metaData;
-        private List<OnnxLabel> Labels;
+        private List<OnnxLabel> labels;
         private bool applyFilter;
         private bool disposed;
 
@@ -26,7 +26,7 @@ namespace Modules.Models.ObjectDetection
                 throw new ArgumentException(ex.Message);
             }
 
-            this.Labels = metaData.Labels;
+            this.labels = metaData.Labels;
         }
 
         public string? ModelPath { get; private set; }
@@ -94,7 +94,7 @@ namespace Modules.Models.ObjectDetection
                     for (int classIndex = 0; classIndex < numClasses; classIndex++)
                     {
                         var score = output[offset + 4 + classIndex];
-                        var currentLabel = new Label(Labels[classIndex].Name);
+                        var currentLabel = new Label(labels[classIndex].Name);
                         predictions.Add(new DetectionArea((int)minX
                                                          , (int)minY
                                                          , (int)(maxX - minX)
