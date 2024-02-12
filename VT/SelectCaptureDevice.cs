@@ -41,6 +41,7 @@ namespace VT
         private async Task RefreshDeviceListAsync()
         {
             List<string> captureDevices = ((List<string>) await FetchCaptureDevicesAsync());
+            UpdateDeviceListUI(captureDevices);
         }
 
         private async Task<ICollection<string>> FetchCaptureDevicesAsync()
