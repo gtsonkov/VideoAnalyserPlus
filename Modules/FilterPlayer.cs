@@ -3,7 +3,10 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Modules.Interfaces;
+using SixLabors.ImageSharp;
 using System.Drawing;
+using YoloDotNet;
+using YoloDotNet.Extensions;
 
 namespace Modules
 {
@@ -172,7 +175,7 @@ namespace Modules
             //Mat hslImage = new Mat();
             //CvInvoke.CvtColor(filteredFrame, hslImage, ColorConversion.Bgr2Hls);
 
-            List<Rectangle> color1Objects = new List<Rectangle>();
+            List<System.Drawing.Rectangle> color1Objects = new List<System.Drawing.Rectangle>();
 
             if (this.trackColor1 && this.color1 != null)
             {
@@ -191,7 +194,7 @@ namespace Modules
             //    color1Objects = TrackCurrentColor(lower, upper, hslImage, this.color1.MinObjectSize);
             //}
 
-            List<Rectangle> color2Objects = new List<Rectangle>();
+            List<System.Drawing.Rectangle> color2Objects = new List<System.Drawing.Rectangle>();
 
             if (this.trackColor2 && this.color2 != null)
             {
@@ -201,7 +204,24 @@ namespace Modules
                 color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinObjectSize).ToList();
             }
 
-            List<Rectangle>[] objectsFoundet = new List<Rectangle>[] { color1Objects, color2Objects };
+            List<System.Drawing.Rectangle>[] objectsFoundet = new List<System.Drawing.Rectangle>[] { color1Objects, color2Objects };
+
+            //YOLO dot Net
+            //var path = @"./RAW_Data/Test.txt";
+            //string text = File.ReadAllText(path);
+            //using var yolo = new Yolo(@"./RAW_Data/Model_Data_v1.onnx",false);
+            //Bitmap bitmap = (BitmapExtension.ToBitmap(this._frame));
+            //using MemoryStream memoryStream = new MemoryStream();
+            //bitmap.Save(memoryStream, bitmap.RawFormat);
+            //
+            //memoryStream.Position = 0;
+            //using var image = SixLabors.ImageSharp.Image.Load(memoryStream);
+            //
+            //var results = yolo.RunClassification(image, 5);
+            //image.Draw(results);
+            //image.SaveAsBmp(memoryStream);
+            //memoryStream.Position = 0;
+            //bitmap = new Bitmap(memoryStream);
 
             this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame), objectsFoundet);
         }
@@ -219,7 +239,7 @@ namespace Modules
             }
         }
 
-        private IEnumerable<Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int minObjectSize)
+        private IEnumerable<System.Drawing.Rectangle> TrackCurrentColor(IInputArray lower, IInputArray upper, Mat rgb, int minObjectSize)
         {
             Mat mask = new Mat();
 
@@ -234,13 +254,13 @@ namespace Modules
             return BoundingRectangles(contours, minObjectSize);
         }
 
-        private IEnumerable<Rectangle> BoundingRectangles(VectorOfVectorOfPoint vectors, int minObjectSize)
+        private IEnumerable<System.Drawing.Rectangle> BoundingRectangles(VectorOfVectorOfPoint vectors, int minObjectSize)
         {
-            HashSet<Rectangle> rects = new HashSet<Rectangle>();
+            HashSet<System.Drawing.Rectangle> rects = new HashSet<System.Drawing.Rectangle>();
 
             for (int i = 0; i < vectors.Size; i++)
             {
-                Rectangle rect = CvInvoke.BoundingRectangle(vectors[i]);
+                System.Drawing.Rectangle rect = CvInvoke.BoundingRectangle(vectors[i]);
 
                 if ((rect.Width * rect.Height) >= minObjectSize)
                 {
