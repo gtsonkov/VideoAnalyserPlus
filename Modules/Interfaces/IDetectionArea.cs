@@ -11,5 +11,11 @@ namespace Modules.Interfaces
         int Width { get; set; }
         int X { get; set; }
         int Y { get; set; }
+
+        public Rectangle GetRectangle { get; }
+
+        public bool Contains(int x, int y);
+
+        public bool Contains(Point point);
     }
 }

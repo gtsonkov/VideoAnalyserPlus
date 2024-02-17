@@ -1,6 +1,7 @@
 ﻿using Emgu.CV;
 using Modules;
 using Modules.Interfaces;
+using Modules.Models;
 using System.Drawing;
 using Utilities;
 using static Emgu.CV.DepthAI.NNetPacket;
@@ -18,8 +19,8 @@ namespace VT
         internal FilterMaskRGB color1;
         internal FilterMaskRGB color2;
 
-        private List<Rectangle> objectsColor1;
-        private List<Rectangle> objectsColor2;
+        private List<IDetectionArea> objectsColor1;
+        private List<IDetectionArea> objectsColor2;
         private Pen penColor1;
         private Pen penColor2;
 
@@ -66,7 +67,7 @@ namespace VT
 
         }
 
-        public void DisplayFrame(Bitmap frame, List<Rectangle>[] detectedAreas)
+        public void DisplayFrame(Bitmap frame, List<IDetectionArea>[] detectedAreas)
         {
             this.objectsColor1 = detectedAreas[0];
             this.objectsColor2 = detectedAreas[1];
@@ -78,11 +79,11 @@ namespace VT
 
             if (objectsColor1 != null && objectsColor1.Count() > 0)
             {
-                pic.DrawRectangles(this.penColor1, objectsColor1.ToArray());
+                //pic.DrawRectangles(this.penColor1, objectsColor1.ToArray());
             }
             if (objectsColor2 != null && objectsColor2.Count() > 0)
             {
-                pic.DrawRectangles(this.penColor2, objectsColor2.ToArray());
+                //pic.DrawRectangles(this.penColor2, objectsColor2.ToArray());
             }
 
             try
@@ -291,7 +292,7 @@ namespace VT
                 {
                     if (rect.Contains(imagePoint))
                     {
-                        ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame, rect);
+                        ShowSelected zoomForm = new ShowSelected(this._unfilteredFrame,(DetectionArea)rect);
                         zoomForm.Show();
                         break;
                     }
@@ -304,7 +305,7 @@ namespace VT
                 //if there are some nested areas
                 var orderedListOfRectangles = this.objectsColor2.OrderBy(x => x.Width * x.Height).ToList();
 
-                foreach (Rectangle rect in orderedListOfRectangles)
+                foreach (DetectionArea rect in orderedListOfRectangles)
                 {
                     if (rect.Contains(imagePoint))
                     {

@@ -133,5 +133,17 @@ namespace Modules.Models
         }
 
         public string Label { get; set; }
+
+        public Rectangle GetRectangle { get;}
+
+        public bool Contains(int x, int y)
+        {
+            return this.rectangle.Contains(x, y);
+        }
+
+        public bool Contains(Point point)
+        {
+            return this.rectangle.Contains(point);
+        }
     }
 }

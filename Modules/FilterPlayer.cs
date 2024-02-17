@@ -3,6 +3,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Modules.Interfaces;
+using Modules.Models;
 using SixLabors.ImageSharp;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -176,14 +177,14 @@ namespace Modules
             //Mat hslImage = new Mat();
             //CvInvoke.CvtColor(filteredFrame, hslImage, ColorConversion.Bgr2Hls);
 
-            List<System.Drawing.Rectangle> color1Objects = new List<System.Drawing.Rectangle>();
+            List<IDetectionArea> color1Objects = new List<IDetectionArea>();
 
             if (this.trackColor1 && this.color1 != null)
             {
                 var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
 
-                color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinObjectSize).ToList();
+               //color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinObjectSize).ToList();
             }
 
             //HLS filter test! 
@@ -195,14 +196,14 @@ namespace Modules
             //    color1Objects = TrackCurrentColor(lower, upper, hslImage, this.color1.MinObjectSize);
             //}
 
-            List<System.Drawing.Rectangle> color2Objects = new List<System.Drawing.Rectangle>();
+            List<IDetectionArea> color2Objects = new List<IDetectionArea>();
 
             if (this.trackColor2 && this.color2 != null)
             {
                 var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
 
-                color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinObjectSize).ToList();
+                //color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinObjectSize).ToList();
             }
 
             //YOLO dot Net Test
@@ -217,18 +218,19 @@ namespace Modules
             
             var results = yolo.RunObjectDetection(image);
 
-            color1Objects = new List<System.Drawing.Rectangle>();
+            color1Objects = new List<IDetectionArea>();
 
             foreach ( var detection in results ) 
             {
-                var currentObject = new System.Drawing.Rectangle(detection.Rectangle.Location.X,
+                var currentObject = new DetectionArea(detection.Rectangle.Location.X,
                                                                  detection.Rectangle.Location.Y,
                                                                  detection.Rectangle.Width,
-                                                                 detection.Rectangle.Height);
+                                                                 detection.Rectangle.Height,
+                                                                 detection.Label.Name);
                 color1Objects.Add(currentObject);
             }
 
-            List<System.Drawing.Rectangle>[] objectsFoundet = new List<System.Drawing.Rectangle>[] { color1Objects, color2Objects };
+            List<IDetectionArea>[] objectsFoundet = new List<IDetectionArea>[] { color1Objects, color2Objects };
 
             this._streamFrame.DisplayFrame(bitmap, objectsFoundet);
         }

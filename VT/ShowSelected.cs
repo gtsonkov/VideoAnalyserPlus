@@ -1,11 +1,14 @@
-﻿namespace VT
+﻿using Modules.Interfaces;
+using Modules.Models;
+
+namespace VT
 {
     public partial class ShowSelected : Form
     {
         Image _frame;
-        Rectangle _frameBounds;
+        IDetectionArea _frameBounds;
 
-        public ShowSelected(Image frame, Rectangle area)
+        public ShowSelected(Image frame, DetectionArea area)
         {
             InitializeComponent();
             this._frame = frame;
@@ -20,7 +23,7 @@
             //this.Width = _frameBounds.Width;
             //this.Height = _frameBounds.Height;
 
-            this.pictureBox.Image = currPic.Clone(this._frameBounds, currPic.PixelFormat);
+            this.pictureBox.Image = currPic.Clone(this._frameBounds.GetRectangle, currPic.PixelFormat);
             currPic.Dispose();
         }
 
@@ -28,6 +31,11 @@
         {
             this.pictureBox.Image = null;
             this.pictureBox.Dispose();
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
