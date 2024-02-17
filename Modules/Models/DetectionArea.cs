@@ -132,7 +132,13 @@ namespace Modules.Models
             }
         }
 
-        public Rectangle GetRectangle { get; }
+        public Rectangle GetRectangle 
+        {
+            get 
+            {
+                return this.rectangle;
+            }
+        }
 
         public ILabel Label { get; }
 

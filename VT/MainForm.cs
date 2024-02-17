@@ -4,8 +4,6 @@ using Modules.Interfaces;
 using Modules.Models;
 using System.Drawing;
 using Utilities;
-using static Emgu.CV.DepthAI.NNetPacket;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace VT
 {
@@ -72,14 +70,9 @@ namespace VT
             this.objectsColor1 = detectedAreas[0];
             this.objectsColor2 = detectedAreas[1];
 
-            //Make a Copy of the original frame befor drawing the recs
-            this._unfilteredFrame = (Bitmap)frame.Clone();
-
-            Graphics pic = Graphics.FromImage(frame);
-
             if (objectsColor1 != null && objectsColor1.Count() > 0)
             {
-                //pic.DrawRectangles(this.penColor1, objectsColor1.ToArray());
+                MarkDetectedObjects(this.penColor1, objectsColor1, frame);
             }
             if (objectsColor2 != null && objectsColor2.Count() > 0)
             {
@@ -94,8 +87,21 @@ namespace VT
             {
 
             }
+        }
 
-            
+        private void MarkDetectedObjects(Pen penColor1, List<IDetectionArea> objects, Bitmap frame)
+        {
+            //Make a Copy of the original frame befor drawing the recs
+            this._unfilteredFrame = (Bitmap)frame.Clone();
+
+            Graphics pic = Graphics.FromImage(frame);
+
+            foreach (IDetectionArea area in objects)
+            {
+                pic.DrawRectangle(this.penColor1, area.GetRectangle);
+
+                pic.DrawString(area.Label.Name, new System.Drawing.Font("Arial", 12,FontStyle.Bold), new SolidBrush(Color.GreenYellow), new PointF(area.X, area.Y - 20));
+            }
         }
 
         //Set colors to tracking
