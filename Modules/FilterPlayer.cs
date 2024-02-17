@@ -5,6 +5,7 @@ using Emgu.CV.Util;
 using Modules.Interfaces;
 using SixLabors.ImageSharp;
 using System.Drawing;
+using System.Drawing.Imaging;
 using YoloDotNet;
 using YoloDotNet.Extensions;
 
@@ -204,26 +205,32 @@ namespace Modules
                 color2Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color2.MinObjectSize).ToList();
             }
 
+            //YOLO dot Net Test
+            
+            using var yolo = new Yolo(@"./RAW_Data/yolov8s.onnx", false);
+            var bitmap = this._frame.ToBitmap();
+            using MemoryStream memoryStream = new MemoryStream();
+            bitmap.Save(memoryStream,ImageFormat.Png);
+            
+            memoryStream.Position = 0;
+            using var image = SixLabors.ImageSharp.Image.Load(memoryStream);
+            
+            var results = yolo.RunObjectDetection(image);
+
+            color1Objects = new List<System.Drawing.Rectangle>();
+
+            foreach ( var detection in results ) 
+            {
+                var currentObject = new System.Drawing.Rectangle(detection.Rectangle.Location.X,
+                                                                 detection.Rectangle.Location.Y,
+                                                                 detection.Rectangle.Width,
+                                                                 detection.Rectangle.Height);
+                color1Objects.Add(currentObject);
+            }
+
             List<System.Drawing.Rectangle>[] objectsFoundet = new List<System.Drawing.Rectangle>[] { color1Objects, color2Objects };
 
-            //YOLO dot Net
-            //var path = @"./RAW_Data/Test.txt";
-            //string text = File.ReadAllText(path);
-            //using var yolo = new Yolo(@"./RAW_Data/Model_Data_v1.onnx",false);
-            //Bitmap bitmap = (BitmapExtension.ToBitmap(this._frame));
-            //using MemoryStream memoryStream = new MemoryStream();
-            //bitmap.Save(memoryStream, bitmap.RawFormat);
-            //
-            //memoryStream.Position = 0;
-            //using var image = SixLabors.ImageSharp.Image.Load(memoryStream);
-            //
-            //var results = yolo.RunClassification(image, 5);
-            //image.Draw(results);
-            //image.SaveAsBmp(memoryStream);
-            //memoryStream.Position = 0;
-            //bitmap = new Bitmap(memoryStream);
-
-            this._streamFrame.DisplayFrame(BitmapExtension.ToBitmap(this._frame), objectsFoundet);
+            this._streamFrame.DisplayFrame(bitmap, objectsFoundet);
         }
 
         public void Dispose()

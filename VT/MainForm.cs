@@ -1,7 +1,10 @@
 ﻿using Emgu.CV;
 using Modules;
 using Modules.Interfaces;
+using System.Drawing;
 using Utilities;
+using static Emgu.CV.DepthAI.NNetPacket;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace VT
 {
@@ -77,7 +80,6 @@ namespace VT
             {
                 pic.DrawRectangles(this.penColor1, objectsColor1.ToArray());
             }
-
             if (objectsColor2 != null && objectsColor2.Count() > 0)
             {
                 pic.DrawRectangles(this.penColor2, objectsColor2.ToArray());
