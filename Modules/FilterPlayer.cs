@@ -222,11 +222,11 @@ namespace Modules
 
             foreach ( var detection in results ) 
             {
-                var currentObject = new DetectionArea(detection.Rectangle.Location.X,
-                                                                 detection.Rectangle.Location.Y,
-                                                                 detection.Rectangle.Width,
-                                                                 detection.Rectangle.Height,
-                                                                 detection.Label.Name);
+                var currentObject = new DetectionArea(detection.Rectangle.Location.X
+                                                                 , detection.Rectangle.Location.Y
+                                                                 , detection.Rectangle.Width
+                                                                 , detection.Rectangle.Height
+                                                                 , new Label(detection.Label.Name, detection.Label.Color));
                 color1Objects.Add(currentObject);
             }
 

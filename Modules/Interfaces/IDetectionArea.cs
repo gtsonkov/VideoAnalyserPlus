@@ -5,7 +5,7 @@ namespace Modules.Interfaces
     public interface IDetectionArea
     {
         int Height { get; set; }
-        string Label { get; set; }
+        ILabel Label { get;}
         int PixelSize { get; }
         Size Size { get; set; }
         int Width { get; set; }

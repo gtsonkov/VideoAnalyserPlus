@@ -7,13 +7,13 @@ namespace Modules.Models
     {
         private Rectangle rectangle;
 
-        public DetectionArea(int x, int y, int width, int height, string label)
+        public DetectionArea(int x, int y, int width, int height, Label label)
         {
             this.rectangle = new Rectangle(x, y, width, height);
             this.Label = label;
         }
 
-        public DetectionArea(string label)
+        public DetectionArea(Label label)
         {
             this.rectangle = new Rectangle();
             this.Label = label;
@@ -132,9 +132,9 @@ namespace Modules.Models
             }
         }
 
-        public string Label { get; set; }
+        public Rectangle GetRectangle { get; }
 
-        public Rectangle GetRectangle { get;}
+        public ILabel Label { get; }
 
         public bool Contains(int x, int y)
         {
