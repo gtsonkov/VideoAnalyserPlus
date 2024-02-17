@@ -1,4 +1,4 @@
-﻿namespace Modules
+﻿namespace Modules.Models
 {
     public class FileSorce
     {

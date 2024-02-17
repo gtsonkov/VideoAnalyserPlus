@@ -1,6 +1,6 @@
 ﻿using Modules.Interfaces;
 
-namespace Modules
+namespace Modules.Models
 {
     public class Resolution : IResolution
     {
@@ -12,15 +12,15 @@ namespace Modules
 
         public Resolution(int width, int height)
         {
-            this.Width = width;
-            this.Height = height;
+            Width = width;
+            Height = height;
         }
 
         public Resolution(int width, int height, int? frameRate)
         {
-            this.Width = width;
-            this.Height = height;
-            this.FrameRate = frameRate;
+            Width = width;
+            Height = height;
+            FrameRate = frameRate;
         }
     }
 }

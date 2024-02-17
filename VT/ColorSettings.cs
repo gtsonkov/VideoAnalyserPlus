@@ -1,4 +1,4 @@
-﻿using Modules;
+﻿using Modules.Models;
 
 namespace VT
 {

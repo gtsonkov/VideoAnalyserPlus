@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Modules
+namespace Modules.Models
 {
     public class FilterMaskHSL
     {
@@ -12,8 +12,8 @@ namespace Modules
 
         public FilterMaskHSL()
         {
-            this.MinObjectSize = defaultMinObjectSize;
-            this.radius = 0;
+            MinObjectSize = defaultMinObjectSize;
+            radius = 0;
         }
 
         public Color BaseColor { get; set; }
@@ -25,14 +25,14 @@ namespace Modules
         {
             get
             {
-                return this.radius;
+                return radius;
             }
 
             set
             {
                 if (value >= 0)
                 {
-                    this.radius = value;
+                    radius = value;
                 }
             }
         }
@@ -56,11 +56,11 @@ namespace Modules
         {
             get
             {
-                return this.minObjectSize;
+                return minObjectSize;
             }
             set
             {
-                this.minObjectSize = value;
+                minObjectSize = value;
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Modules
+namespace Modules.Models
 {
     public class FilterMaskRGB
     {
@@ -12,8 +12,8 @@ namespace Modules
 
         public FilterMaskRGB()
         {
-            this.MinObjectSize = defaultMinObjectSize;
-            this.radius = 0;
+            MinObjectSize = defaultMinObjectSize;
+            radius = 0;
         }
 
         public Color BaseColor { get; set; }
@@ -21,18 +21,18 @@ namespace Modules
         /// <summary>
         /// Radius of colors. Can not be negative
         /// </summary>
-        public int Radius 
+        public int Radius
         {
-            get 
+            get
             {
-                return this.radius;
+                return radius;
             }
-            
+
             set
             {
-                if (value >= 0) 
+                if (value >= 0)
                 {
-                    this.radius = value;
+                    radius = value;
                     return;
                 }
 
@@ -59,11 +59,11 @@ namespace Modules
         {
             get
             {
-                return this.minObjectSize;
+                return minObjectSize;
             }
             set
             {
-                this.minObjectSize = value;
+                minObjectSize = value;
             }
         }
     }

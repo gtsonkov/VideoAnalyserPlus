@@ -1,6 +1,7 @@
 using Modules.Interfaces;
 using Moq;
 using Emgu.CV;
+using Modules.Models;
 
 namespace Modules.Tests
 {

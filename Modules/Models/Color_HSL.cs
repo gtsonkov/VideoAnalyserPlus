@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Modules
+namespace Modules.Models
 {
     public class Color_HSL
     {

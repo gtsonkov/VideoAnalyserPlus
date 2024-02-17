@@ -18,16 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="RAW_Data\Model_Data_v1.onnx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="RAW_Data\Test.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="RAW_Data\test_model.onnx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="RAW_Data\yolov8s.onnx">
+    <None Update="RAW_Data\yolov4.onnx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

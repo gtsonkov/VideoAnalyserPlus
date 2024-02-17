@@ -2,10 +2,9 @@
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Modules.Interfaces;
-
 using System.Runtime.InteropServices;
 
-namespace Modules
+namespace Modules.Models
 {
     public class CaptureDevice : ICaptureDevice
     {
@@ -19,41 +18,41 @@ namespace Modules
         public CaptureDevice(IDsDeviceWrapper sorce, string deviceName, int position)
         {
 
-            this.SetSorce(sorce);
+            SetSorce(sorce);
 
-            this.DeviceName = deviceName;
+            DeviceName = deviceName;
 
             if (position < 0)
             {
                 throw new InvalidOperationException("Device position can not be negative value.");
             }
 
-            this.supportedResolutions = GetSupportedResolutions().ToHashSet();
+            supportedResolutions = GetSupportedResolutions().ToHashSet();
 
-            this.VideoSorce = new VideoCapture(position);
+            VideoSorce = new VideoCapture(position);
         }
 
         public CaptureDevice(IDsDeviceWrapper sorce, string deviceName, VideoCapture capture)
         {
-            this.SetSorce(sorce);
+            SetSorce(sorce);
 
-            this.DeviceName = deviceName;
+            DeviceName = deviceName;
 
-            this.VideoSorce = capture;
+            VideoSorce = capture;
         }
 
         public VideoCapture VideoSorce
         {
             get
             {
-                return this.currentSorce;
+                return currentSorce;
             }
 
             private set
             {
                 try
                 {
-                    this.currentSorce = value;
+                    currentSorce = value;
                 }
                 catch (Exception ex)
                 {
@@ -67,7 +66,7 @@ namespace Modules
         {
             get
             {
-                return this.deviceName;
+                return deviceName;
             }
             private set
             {
@@ -77,7 +76,7 @@ namespace Modules
                 }
                 string temp = value;
 
-                this.deviceName = value;
+                deviceName = value;
             }
         }
 
@@ -85,7 +84,7 @@ namespace Modules
         {
             get
             {
-                return this.supportedResolutions;
+                return supportedResolutions;
             }
         }
 
@@ -93,27 +92,27 @@ namespace Modules
         {
             get
             {
-                return this.currentResolution;
+                return currentResolution;
             }
             private set
             {
-                this.currentResolution = value;
+                currentResolution = value;
                 SetCurrentResolution();
             }
         }
 
         public void SetResolution(IResolution resolution)
         {
-            this.Resolution = resolution;
+            Resolution = resolution;
         }
 
         //Sets the current resolution of the video source
         private void SetCurrentResolution()
         {
-            if (this.currentSorce != null && currentResolution != null)
+            if (currentSorce != null && currentResolution != null)
             {
-                this.currentSorce.Set(CapProp.FrameWidth, this.currentResolution.Width);
-                this.currentSorce.Set(CapProp.FrameHeight, this.currentResolution.Height);
+                currentSorce.Set(CapProp.FrameWidth, currentResolution.Width);
+                currentSorce.Set(CapProp.FrameHeight, currentResolution.Height);
             }
         }
 
@@ -124,9 +123,9 @@ namespace Modules
                 int hr = 0;
                 int bitCount = 0;
 
-                if (this.captureDevice != null)
+                if (captureDevice != null)
                 {
-                    var vidDev = this.captureDevice;
+                    var vidDev = captureDevice;
 
                     IBaseFilter sourceFilter = null;
 
@@ -138,7 +137,7 @@ namespace Modules
 
                     hr = sourceFilter.EnumPins(out var ppEnum);
 
-                    IntPtr fetched = IntPtr.Zero;
+                    nint fetched = nint.Zero;
 
                     IPin[] pin = new IPin[1];
 
@@ -168,7 +167,7 @@ namespace Modules
                                     bitCount = v.BmiHeader.BitCount;
                                 }
 
-                                int frameRate = (v.AvgTimePerFrame > 0) ? Convert.ToInt32(1e7 / v.AvgTimePerFrame) : 0;
+                                int frameRate = v.AvgTimePerFrame > 0 ? Convert.ToInt32(1e7 / v.AvgTimePerFrame) : 0;
 
                                 Resolution currResolution = new Resolution(v.BmiHeader.Width, v.BmiHeader.Height);
 
@@ -202,7 +201,7 @@ namespace Modules
                 throw new ArgumentNullException("Sorce can not be null.");
             }
 
-            this.captureDevice = Sorce.Device;
+            captureDevice = Sorce.Device;
         }
     }
 }
