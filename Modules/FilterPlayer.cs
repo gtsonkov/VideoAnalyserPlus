@@ -4,11 +4,8 @@ using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Modules.Interfaces;
 using Modules.Models;
-using SixLabors.ImageSharp;
-using System.Drawing;
 using System.Drawing.Imaging;
 using YoloDotNet;
-using YoloDotNet.Extensions;
 
 namespace Modules
 {
@@ -208,7 +205,7 @@ namespace Modules
 
             //YOLO dot Net Test
             
-            using var yolo = new Yolo(@"./RAW_Data/yolov8s.onnx", false);
+            using var yolo = new Yolo(@"./RAW_Data/yolov4.onnx", false);
             var bitmap = this._frame.ToBitmap();
             using MemoryStream memoryStream = new MemoryStream();
             bitmap.Save(memoryStream,ImageFormat.Png);
@@ -222,10 +219,10 @@ namespace Modules
 
             foreach ( var detection in results ) 
             {
-                var currentObject = new DetectionArea(detection.Rectangle.Location.X
-                                                                 , detection.Rectangle.Location.Y
-                                                                 , detection.Rectangle.Width
-                                                                 , detection.Rectangle.Height
+                var currentObject = new DetectionArea(detection.BoundingBox.Location.X
+                                                                 , detection.BoundingBox.Location.Y
+                                                                 , detection.BoundingBox.Width
+                                                                 , detection.BoundingBox.Height
                                                                  , new Label(detection.Label.Name, detection.Label.Color));
                 color1Objects.Add(currentObject);
             }
