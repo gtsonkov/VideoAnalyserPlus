@@ -18,6 +18,7 @@ namespace Modules.Models.ObjectDetection
         }
 
         public string? ModelPath { get; private set; }
+
         public OnnxModel CurrentModel { get; protected set; }
 
         public void Dispose()
