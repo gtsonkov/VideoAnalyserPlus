@@ -2,8 +2,8 @@
 {
     public interface IResolution
     {
-        int? FrameRate { get; set; }
-        int Height { get; set; }
-        int Width { get; set; }
+        public int? FrameRate { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
     }
 }

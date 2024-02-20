@@ -4,13 +4,13 @@ namespace Modules.Interfaces
 {
     public interface IDetectionArea
     {
-        int Height { get; set; }
-        ILabel Label { get;}
-        int PixelSize { get; }
-        Size Size { get; set; }
-        int Width { get; set; }
-        int X { get; set; }
-        int Y { get; set; }
+        public int Height { get; set; }
+        public ILabel Label { get;}
+        public int PixelSize { get; }
+        public Size Size { get; set; }
+        public int Width { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public Rectangle GetRectangle { get; }
 
