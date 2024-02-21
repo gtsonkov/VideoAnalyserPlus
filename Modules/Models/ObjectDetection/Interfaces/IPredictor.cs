@@ -7,6 +7,7 @@ namespace Modules.Models.ObjectDetection.Interfaces
     {
         public string? ModelPath { get;}
 
-        public IEnumerable<DetectionArea> GetObjects(DenseTensor<float> output, Image fram);
+        public IEnumerable<DetectionArea> 
+            ExtractPredictions(DenseTensor<float> output, Image frame);
     }
 }

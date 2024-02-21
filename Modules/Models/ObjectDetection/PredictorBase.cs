@@ -41,7 +41,7 @@ namespace Modules.Models.ObjectDetection
             }
         }
 
-        public IEnumerable<DetectionArea> GetObjects(DenseTensor<float> output, Image frame)
+        public IEnumerable<DetectionArea> ExtractPredictions(DenseTensor<float> output, Image frame)
         {
             var predictions = new List<DetectionArea>();
 

@@ -2,8 +2,8 @@
 {
     public class Predictor : PredictorBase
     {
-        public Predictor(string path) 
-            : base(path)
+        public Predictor(string path, string[] labels) 
+            : base(path, labels)
         {
 
         }
