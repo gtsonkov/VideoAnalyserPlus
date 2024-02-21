@@ -1,4 +1,5 @@
-﻿using SixLabors.ImageSharp;
+﻿using Microsoft.ML.OnnxRuntime.Tensors;
+using SixLabors.ImageSharp;
 
 namespace Modules.Models.ObjectDetection.Interfaces
 {
@@ -6,6 +7,6 @@ namespace Modules.Models.ObjectDetection.Interfaces
     {
         public string? ModelPath { get;}
 
-        public IEnumerable<DetectionArea> GetObjects(Image frame);
+        public IEnumerable<DetectionArea> GetObjects(DenseTensor<float> output, Image fram);
     }
 }
