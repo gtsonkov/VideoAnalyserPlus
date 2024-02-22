@@ -82,15 +82,23 @@ namespace Modules.Models.ObjectDetection
                     {
                         var score = output[offset + 4 + classIndex];
                         predictions.Add(new DetectionArea((int)minX
-                                                         ,(int)minY
-                                                         ,(int)(maxX - minX)
-                                                         ,(int)(maxY - minY)
-                                                         ,new Label(Labels[classIndex])));
+                                                         , (int)minY
+                                                         , (int)(maxX - minX)
+                                                         , (int)(maxY - minY)
+                                                         , new Label(Labels[classIndex])));
                     }
                 }
             }
 
             return predictions;
+        }
+
+        public virtual IEnumerable<DetectionArea> ExtractPredictions (Image frame
+                                                                      , DenseTensor<float> output
+                                                                      , bool useFilter
+                                                                      , object[]? filters)
+        {
+            throw new NotImplementedException();
         }
 
         private float LimitToRange(float min, float max, float x)
@@ -107,6 +115,11 @@ namespace Modules.Models.ObjectDetection
             {
                 return x;
             }
+        }
+
+        private DetectionArea ValidateArea(DetectionArea currentArea)
+        {
+            throw new NotImplementedException();
         }
     }
 }
