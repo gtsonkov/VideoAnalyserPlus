@@ -10,6 +10,7 @@ namespace Modules.Models.ObjectDetection
     {
         private readonly InferenceSession session;
         private readonly ModeMetalData metaData;
+        private DenseTensor<float> tensor;
         protected string[] Labels;
 
         public PredictorBase(string path, string[] labels)
@@ -41,7 +42,9 @@ namespace Modules.Models.ObjectDetection
             }
         }
 
-        public IEnumerable<DetectionArea> ExtractPredictions(DenseTensor<float> output, Image frame)
+        public abstract IEnumerable<DetectionArea> GetPredictions();
+
+        protected IEnumerable<DetectionArea> ExtractPredictions(Tensor<float> output, Image frame)
         {
             var predictions = new List<DetectionArea>();
 
@@ -90,7 +93,7 @@ namespace Modules.Models.ObjectDetection
                 }
             }
 
-            return predictions;
+            return predictions.ToList();
         }
 
         public virtual IEnumerable<DetectionArea> ExtractPredictions (Image frame

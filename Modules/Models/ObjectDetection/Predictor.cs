@@ -1,4 +1,5 @@
-﻿namespace Modules.Models.ObjectDetection
+﻿
+namespace Modules.Models.ObjectDetection
 {
     public class Predictor : PredictorBase
     {
@@ -6,6 +7,11 @@
             : base(path, labels)
         {
 
+        }
+
+        public override IEnumerable<DetectionArea> GetPredictions()
+        {
+            throw new NotImplementedException();
         }
     }
 }

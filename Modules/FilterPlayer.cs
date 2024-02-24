@@ -205,7 +205,7 @@ namespace Modules
 
             //YOLO dot Net Test
             
-            using var yolo = new Yolo(@"./RAW_Data/yolov4.onnx", false);
+            using var yolo = new Yolo(@"./RAW_Data/yolov8s.onnx", false);
             var bitmap = this._frame.ToBitmap();
             using MemoryStream memoryStream = new MemoryStream();
             bitmap.Save(memoryStream,ImageFormat.Png);
