@@ -2,6 +2,7 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
+using Modules.Core.Interfaces;
 using Modules.Interfaces;
 using Modules.Models;
 using System.Drawing.Imaging;
