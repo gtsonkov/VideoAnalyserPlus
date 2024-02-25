@@ -25,7 +25,7 @@ namespace Modules.Models.ObjectDetection
                 throw new ArgumentException(ex.Message);
             }
 
-            this.Labels = labels;
+            this.Labels = objects;
         }
 
         public string? ModelPath { get; private set; }
