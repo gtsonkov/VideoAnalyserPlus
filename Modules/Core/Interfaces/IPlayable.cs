@@ -1,4 +1,4 @@
-﻿namespace Modules.Interfaces
+﻿namespace Modules.Core.Interfaces
 {
     public interface IPlayable
     {

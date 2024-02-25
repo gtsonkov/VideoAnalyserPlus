@@ -7,7 +7,7 @@ using Modules.Models;
 using System.Drawing.Imaging;
 using YoloDotNet;
 
-namespace Modules
+namespace Modules.Core
 {
     public class FilterPlayer : IPlayable
     {
@@ -33,9 +33,9 @@ namespace Modules
             }
 
             this.currCaptureDevice = currCaptureDevice;
-            this._streamFrame = stream;
+            _streamFrame = stream;
 
-            this._capture = currCaptureDevice.VideoSorce;
+            _capture = currCaptureDevice.VideoSorce;
         }
 
         public FilterPlayer(VideoCapture currCaptureDevice, IStreamable stream)
@@ -45,23 +45,23 @@ namespace Modules
                 throw new ArgumentNullException("Capture device can not be null.");
             }
 
-            this.currVideoCapture = currCaptureDevice;
-            this._streamFrame = stream;
+            currVideoCapture = currCaptureDevice;
+            _streamFrame = stream;
 
-            this._capture = currVideoCapture;
+            _capture = currVideoCapture;
         }
 
         public void Pause()
         {
-            this._capture.Pause();
-            this._isPaused = true;
+            _capture.Pause();
+            _isPaused = true;
         }
 
         public IStreamable SetStream
         {
             set
             {
-                this._streamFrame = value;
+                _streamFrame = value;
             }
         }
 
@@ -72,7 +72,7 @@ namespace Modules
             {
                 if (currCaptureDevice != null)
                 {
-                    return this.currCaptureDevice.Resolution;
+                    return currCaptureDevice.Resolution;
                 }
                 else
                 {
@@ -88,11 +88,11 @@ namespace Modules
         {
             get
             {
-                return this.trackColor1;
+                return trackColor1;
             }
             set
             {
-                this.trackColor1 = value;
+                trackColor1 = value;
             }
         }
 
@@ -100,45 +100,45 @@ namespace Modules
         {
             get
             {
-                return this.trackColor2;
+                return trackColor2;
             }
             set
             {
-                this.trackColor2 = value;
+                trackColor2 = value;
             }
         }
 
         //Strat playing
         public async void Play()
         {
-            if (this._isPaused)
+            if (_isPaused)
             {
-                this._capture.Start();
-                this._isPaused = false;
+                _capture.Start();
+                _isPaused = false;
                 return;
             }
 
-            if (this.currCaptureDevice == null && this.currVideoCapture == null)
+            if (currCaptureDevice == null && currVideoCapture == null)
             {
                 throw new ArgumentNullException("Bitte eine Quelle festliegen (Kamera oder Videodatei.)", "Warnung");
             }
 
-            this._frame = new Mat();
+            _frame = new Mat();
 
-            this._capture.ImageGrabbed -= ProcessFrameEventHandler;
-            this._capture.ImageGrabbed += ProcessFrameEventHandler;
-            this._capture.Start();
+            _capture.ImageGrabbed -= ProcessFrameEventHandler;
+            _capture.ImageGrabbed += ProcessFrameEventHandler;
+            _capture.Start();
         }
 
         public FilterMaskRGB FilterColor_A
         {
             get
             {
-                return this.color1;
+                return color1;
             }
             set
             {
-                this.color1 = value;
+                color1 = value;
             }
         }
 
@@ -146,42 +146,42 @@ namespace Modules
         {
             get
             {
-                return this.color2;
+                return color2;
             }
             set
             {
-                this.color2 = value;
+                color2 = value;
             }
         }
 
         public void Stop()
         {
             StopPlaying();
-            this._isPaused = false;
+            _isPaused = false;
         }
 
         public async void ProcessFrameEventHandler(object sender, EventArgs e)
         {
-            this._capture.Read(this._frame);
+            _capture.Read(_frame);
 
             if (_frame.IsEmpty)
             {
                 return;
             }
 
-            Mat filteredFrame = this._frame.Clone();
+            Mat filteredFrame = _frame.Clone();
 
             //Mat hslImage = new Mat();
             //CvInvoke.CvtColor(filteredFrame, hslImage, ColorConversion.Bgr2Hls);
 
             List<IDetectionArea> color1Objects = new List<IDetectionArea>();
 
-            if (this.trackColor1 && this.color1 != null)
+            if (trackColor1 && color1 != null)
             {
                 var lower = new ScalarArray(new MCvScalar(color1.Blue_Min, color1.Green_Min, color1.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color1.Blue_Max, color1.Green_Max, color1.Red_Max, 255));
 
-               //color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinObjectSize).ToList();
+                //color1Objects = TrackCurrentColor(lower, upper, filteredFrame, this.color1.MinObjectSize).ToList();
             }
 
             //HLS filter test! 
@@ -195,7 +195,7 @@ namespace Modules
 
             List<IDetectionArea> color2Objects = new List<IDetectionArea>();
 
-            if (this.trackColor2 && this.color2 != null)
+            if (trackColor2 && color2 != null)
             {
                 var lower = new ScalarArray(new MCvScalar(color2.Blue_Min, color2.Green_Min, color2.Red_Min, 255));
                 var upper = new ScalarArray(new MCvScalar(color2.Blue_Max, color2.Green_Max, color2.Red_Max, 255));
@@ -204,20 +204,20 @@ namespace Modules
             }
 
             //YOLO dot Net Test
-            
+
             using var yolo = new Yolo(@"./RAW_Data/yolov8s.onnx", false);
-            var bitmap = this._frame.ToBitmap();
+            var bitmap = _frame.ToBitmap();
             using MemoryStream memoryStream = new MemoryStream();
-            bitmap.Save(memoryStream,ImageFormat.Png);
-            
+            bitmap.Save(memoryStream, ImageFormat.Png);
+
             memoryStream.Position = 0;
             using var image = SixLabors.ImageSharp.Image.Load(memoryStream);
-            
+
             var results = yolo.RunObjectDetection(image);
 
             color1Objects = new List<IDetectionArea>();
 
-            foreach ( var detection in results ) 
+            foreach (var detection in results)
             {
                 var currentObject = new DetectionArea(detection.BoundingBox.Location.X
                                                                  , detection.BoundingBox.Location.Y
@@ -229,19 +229,19 @@ namespace Modules
 
             List<IDetectionArea>[] objectsFoundet = new List<IDetectionArea>[] { color1Objects, color2Objects };
 
-            this._streamFrame.DisplayFrame(bitmap, objectsFoundet);
+            _streamFrame.DisplayFrame(bitmap, objectsFoundet);
         }
 
         public void Dispose()
         {
-            this.Stop();
-            this.currCaptureDevice = null;
-            this._capture.Dispose();
+            Stop();
+            currCaptureDevice = null;
+            _capture.Dispose();
 
-            if (this._frame != null)
+            if (_frame != null)
             {
-                this._frame.Dispose();
-                this._frame = null;
+                _frame.Dispose();
+                _frame = null;
             }
         }
 
@@ -268,7 +268,7 @@ namespace Modules
             {
                 System.Drawing.Rectangle rect = CvInvoke.BoundingRectangle(vectors[i]);
 
-                if ((rect.Width * rect.Height) >= minObjectSize)
+                if (rect.Width * rect.Height >= minObjectSize)
                 {
                     rects.Add(rect);
                 }
@@ -279,12 +279,12 @@ namespace Modules
 
         private void StopPlaying()
         {
-            if (this._capture != null)
+            if (_capture != null)
             {
-                this._capture.Dispose();
+                _capture.Dispose();
             }
 
-            this._isPaused = false;
+            _isPaused = false;
         }
     }
 }

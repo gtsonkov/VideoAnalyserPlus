@@ -1,5 +1,5 @@
 ﻿using Emgu.CV;
-using Modules;
+using Modules.Core;
 using Modules.Interfaces;
 using Modules.Models;
 using System.Drawing;
