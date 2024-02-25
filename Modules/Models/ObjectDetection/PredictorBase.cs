@@ -9,10 +9,10 @@ namespace Modules.Models.ObjectDetection
     {
         private readonly InferenceSession session;
         private readonly ModeMetalData metaData;
-        private DenseTensor<float> tensor;
-        protected string[] Labels;
+        protected string[]? Labels;
+        private bool applyFilter;
 
-        public PredictorBase(string path, string[] labels)
+        public PredictorBase(string path, string[]? labels)
         {
             this.ModelPath = path;
             try
@@ -92,10 +92,61 @@ namespace Modules.Models.ObjectDetection
             return predictions.ToList();
         }
 
-        public virtual IEnumerable<DetectionArea> ExtractPredictions (Image frame
+        public virtual IEnumerable<DetectionArea> ExtractPredictions(Image frame
                                                                       , DenseTensor<float> output
                                                                       , bool useFilter
                                                                       , object[]? filters)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<Tensor<float>> RunInference(Image frame)
+        {
+            Image tempFrame = null;
+
+            if (frame.Width != metaData.InputWidth && frame.Height != metaData.InputHeight)
+            {
+                tempFrame = ChangeFrameDimension(frame);
+            }
+            else
+            {
+                tempFrame = frame;
+            }
+
+            //ONNX data
+            List<NamedOnnxValue> data = new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor(metaData.Name, GetFrameTensor(frame))
+            };
+
+            var values = this.session.Run(data);
+
+            List<Tensor<float>> result = new List<Tensor<float>>();
+
+            for (int i = 0; i > metaData.ModelOutputs.Length; i++)
+            {
+                var currentValue = metaData.ModelOutputs[i];
+
+                if (applyFilter)
+                {
+                    //TO DO: Filter implementation
+                    continue;
+                }
+
+                result.Add(data.FirstOrDefault((d => d.Name == currentValue)).Value as Tensor<float>);
+            }
+
+            return result;
+        }
+
+        private Tensor<float> GetFrameTensor(Image frame)
+        {
+            Tensor<float> output = null;
+
+            throw new NotImplementedException();
+        }
+
+        private Image? ChangeFrameDimension(Image frame)
         {
             throw new NotImplementedException();
         }

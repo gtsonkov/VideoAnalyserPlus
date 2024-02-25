@@ -1,9 +1,8 @@
-﻿
-namespace Modules.Models.ObjectDetection
+﻿namespace Modules.Models.ObjectDetection
 {
-    public class Predictor : PredictorBase
+    public class PredictorV8 : PredictorBase
     {
-        public Predictor(string path, string[] labels) 
+        public PredictorV8(string path, string[] labels) 
             : base(path, labels)
         {
 
