@@ -12,7 +12,7 @@ namespace Modules.Models.ObjectDetection
         protected string[]? Labels;
         private bool applyFilter;
 
-        public PredictorBase(string path, bool apllyFilter, string[]? objects)
+        public PredictorBase(string path, string[]? objects, bool apllyFilter = false)
         {
             this.ModelPath = path;
             try

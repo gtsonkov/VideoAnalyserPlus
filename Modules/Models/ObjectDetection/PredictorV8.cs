@@ -2,8 +2,8 @@
 {
     public class PredictorV8 : PredictorBase
     {
-        public PredictorV8(string path, string[]? objects, bool filter = false) 
-            : base(path, filter, objects)
+        public PredictorV8(string path, string[]? objects, bool filter) 
+            : base(path, objects, filter)
         {
 
         }
