@@ -38,11 +38,13 @@ namespace Modules.Models.ObjectDetection
             }
         }
 
-        public abstract IEnumerable<DetectionArea> GetPredictions();
+        public abstract IEnumerable<DetectionArea> GetPredictions(Image frame);
 
-        protected IEnumerable<DetectionArea> ExtractPredictions(Tensor<float> output, Image frame)
+        protected IEnumerable<DetectionArea> ExtractPredictions(List<Tensor<float>> output, Image frame)
         {
             var predictions = new List<DetectionArea>();
+
+            var currentValue = output[0];
 
             int imageWidth = frame.Width;
             int imageHeight = frame.Height;
@@ -51,20 +53,20 @@ namespace Modules.Models.ObjectDetection
             float widthOffset = (metaData.InputWidth - imageWidth * widthScale) / 2;
             float heightOffset = (metaData.InputHeight - imageHeight * heightScale) / 2;
 
-            float numPredictions = output.Dimensions[1];
+            float numPredictions = currentValue.Dimensions[1];
             int numClasses = metaData.OutputDimentions - 4;
 
-            for (int i = 0; i < output.Dimensions[0]; i++)
+            for (int i = 0; i < currentValue.Dimensions[0]; i++)
             {
                 var currentOffset = i * numPredictions * metaData.OutputDimentions;
                 for (int j = 0; j < numPredictions; j++)
                 {
                     int offset = (int)currentOffset + j * metaData.OutputDimentions;
                     var (centerX, centerY, bboxWidth, bboxHeight) = (
-                        output[offset],
-                        output[offset + 1],
-                        output[offset + 2],
-                        output[offset + 3]);
+                        currentValue[offset],
+                        currentValue[offset + 1],
+                        currentValue[offset + 2],
+                        currentValue[offset + 3]);
 
                     var (minX, minY, maxX, maxY) = (
                         ((centerX - bboxWidth / 2) - widthOffset) / widthScale,
@@ -100,7 +102,7 @@ namespace Modules.Models.ObjectDetection
             throw new NotImplementedException();
         }
 
-        private List<Tensor<float>> RunInference(Image frame)
+        protected List<Tensor<float>> RunInference(Image frame)
         {
             Image tempFrame = null;
 

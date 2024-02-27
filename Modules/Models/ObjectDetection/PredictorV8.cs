@@ -1,4 +1,6 @@
-﻿namespace Modules.Models.ObjectDetection
+﻿using SixLabors.ImageSharp;
+
+namespace Modules.Models.ObjectDetection
 {
     public class PredictorV8 : PredictorBase
     {
@@ -8,9 +10,10 @@
 
         }
 
-        public override IEnumerable<DetectionArea> GetPredictions()
+        public override IEnumerable<DetectionArea> GetPredictions(Image frame)
         {
-            throw new NotImplementedException();
+            var inferens = RunInference(frame);
+            return ExtractPredictions(inferens, frame).ToList();
         }
     }
 }
