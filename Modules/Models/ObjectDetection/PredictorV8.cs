@@ -1,4 +1,5 @@
-﻿using SixLabors.ImageSharp;
+﻿using Microsoft.ML.OnnxRuntime.Tensors;
+using SixLabors.ImageSharp;
 
 namespace Modules.Models.ObjectDetection
 {
@@ -14,6 +15,11 @@ namespace Modules.Models.ObjectDetection
         {
             var inferens = RunInference(frame);
             return ExtractPredictions(inferens, frame).ToList();
+        }
+
+        protected override IEnumerable<DetectionArea> ExtractPredictions(Image frame, DenseTensor<float> output, bool useFilter, object[]? filters)
+        {
+            return base.ExtractPredictions(frame, output, useFilter, filters);
         }
     }
 }

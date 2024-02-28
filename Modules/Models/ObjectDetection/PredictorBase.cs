@@ -52,7 +52,7 @@ namespace Modules.Models.ObjectDetection
 
         public abstract IEnumerable<DetectionArea> GetPredictions(Image frame);
 
-        protected IEnumerable<DetectionArea> ExtractPredictions(List<Tensor<float>> output, Image frame)
+        protected virtual IEnumerable<DetectionArea> ExtractPredictions(List<Tensor<float>> output, Image frame)
         {
             var predictions = new List<DetectionArea>();
 
@@ -107,7 +107,7 @@ namespace Modules.Models.ObjectDetection
             return predictions.ToList();
         }
 
-        public virtual IEnumerable<DetectionArea> ExtractPredictions(Image frame
+        protected virtual IEnumerable<DetectionArea> ExtractPredictions(Image frame
                                                                       , DenseTensor<float> output
                                                                       , bool useFilter
                                                                       , object[]? filters)
