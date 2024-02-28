@@ -1,5 +1,6 @@
 ﻿using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.Win32;
 using Modules.Models.ObjectDetection.Interfaces;
 using SixLabors.ImageSharp;
 
@@ -9,7 +10,7 @@ namespace Modules.Models.ObjectDetection
     {
         private readonly InferenceSession session;
         private readonly ModeMetalData metaData;
-        protected string[]? Labels;
+        private List<OnnxLabel> Labels;
         private bool applyFilter;
 
         public PredictorBase(string path, string[]? objects, bool apllyFilter = false)
@@ -25,7 +26,7 @@ namespace Modules.Models.ObjectDetection
                 throw new ArgumentException(ex.Message);
             }
 
-            this.Labels = objects;
+            this.Labels = metaData.Labels;
         }
 
         public string? ModelPath { get; private set; }
@@ -82,11 +83,12 @@ namespace Modules.Models.ObjectDetection
                     for (int classIndex = 0; classIndex < numClasses; classIndex++)
                     {
                         var score = output[offset + 4 + classIndex];
+                        var currentLabel = new Label(Labels[classIndex].Name);
                         predictions.Add(new DetectionArea((int)minX
                                                          , (int)minY
                                                          , (int)(maxX - minX)
                                                          , (int)(maxY - minY)
-                                                         , new Label(Labels[classIndex])));
+                                                         , currentLabel));
                     }
                 }
             }
