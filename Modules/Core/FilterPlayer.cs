@@ -210,14 +210,14 @@ namespace Modules.Core
             var bitmap = _frame.ToBitmap();
             using MemoryStream memoryStream = new MemoryStream();
             bitmap.Save(memoryStream, ImageFormat.Png);
-
+            
             memoryStream.Position = 0;
             using var image = SixLabors.ImageSharp.Image.Load(memoryStream);
-
+            
             var results = yolo.RunObjectDetection(image);
-
+            
             color1Objects = new List<IDetectionArea>();
-
+            
             foreach (var detection in results)
             {
                 var currentObject = new DetectionArea(detection.BoundingBox.Location.X
