@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace Modules.Models.ObjectDetection
 {
-    public class ModeMetalData
+    public class ModeMetaData
     {
-        public ModeMetalData(InferenceSession session)
+        public ModeMetaData(InferenceSession session)
         {
             this.Name = session.InputMetadata.Keys.FirstOrDefault();
             this.InputWidth = session.InputMetadata[this.Name].Dimensions[3];

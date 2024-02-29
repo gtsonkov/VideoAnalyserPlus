@@ -1,6 +1,5 @@
 ﻿using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
-using Microsoft.Win32;
 using Modules.Models.ObjectDetection.Interfaces;
 using SixLabors.ImageSharp;
 
@@ -9,17 +8,18 @@ namespace Modules.Models.ObjectDetection
     public abstract class PredictorBase : IPredictor, IDisposable
     {
         private readonly InferenceSession session;
-        private readonly ModeMetalData metaData;
+        private readonly ModeMetaData metaData;
         private List<OnnxLabel> Labels;
         private bool applyFilter;
+        private bool disposed;
 
-        public PredictorBase(string path, string[]? objects, bool apllyFilter = false)
+        public PredictorBase(string path, string[]? objects, bool applyFilter = false)
         {
             this.ModelPath = path;
             try
             {
                 this.session = new InferenceSession(this.ModelPath);
-                this.metaData = new ModeMetalData(this.session);
+                this.metaData = new ModeMetaData(this.session);
             }
             catch (Exception ex)
             {
@@ -36,6 +36,19 @@ namespace Modules.Models.ObjectDetection
             if (this.session != null)
             {
                 this.session.Dispose();
+            }
+        }
+
+        protected virtual void Dispose (bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    session?.Dispose();
+                }
+
+                disposed = true;
             }
         }
 
