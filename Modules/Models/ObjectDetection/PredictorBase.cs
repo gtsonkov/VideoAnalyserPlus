@@ -33,10 +33,8 @@ namespace Modules.Models.ObjectDetection
 
         public void Dispose()
         {
-            if (this.session != null)
-            {
-                this.session.Dispose();
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose (bool disposing)
