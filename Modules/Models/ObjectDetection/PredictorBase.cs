@@ -2,7 +2,6 @@
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Modules.Models.ObjectDetection.Interfaces;
 using SixLabors.ImageSharp;
-using YoloDotNet.Models;
 
 namespace Modules.Models.ObjectDetection
 {
@@ -30,9 +29,6 @@ namespace Modules.Models.ObjectDetection
         }
 
         public string? ModelPath { get; private set; }
-
-
-        public OnnxModel? CurrentModel { get; protected set; }
 
         public void Dispose()
         {
